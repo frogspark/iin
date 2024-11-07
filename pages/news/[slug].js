@@ -87,7 +87,7 @@ export default function News(initialData) {
                 <div className="w-full lg:w-[72%] mb-8 lg:mb-0">
                   <div className="w-[95%] lg:w-[80%]">
                     {current.introText && (
-                      <h2 className="font-display text-[5.25vw] lg:text-3xl xl:text-4xl leading-[1.2] lg:leading-[1.2] xl:leading-[1.2] mb-8 lg:mb-12">{current.introText}</h2>
+                        <p className="font-display text-[5.25vw] lg:text-3xl xl:text-4xl leading-[1.2] lg:leading-[1.2] xl:leading-[1.2] mb-8 lg:mb-12">{ current.introText }</p>
                     )}
 
                     <p className="text-base lg:text-lg xl:text-xl leading-none lg:leading-none xl:leading-none mb-6 lg:mb-12"><strong>Posted:</strong> {mainMo} {mainYe}</p>
