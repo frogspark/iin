@@ -16,6 +16,7 @@ import PortableText from 'react-portable-text'
 import Head from 'next/head';
 import LerpImage from '@/components/lerp-image'
 import SanityImage from '@/components/sanity-image'
+import portableTextSerializers from "@/helpers/text-serializers";
 const pageService = new SanityPageService(aboutQuery)
 
 const container = {
@@ -151,6 +152,7 @@ export default function AboutUs(initialData) {
                     <PortableText
                       className="content content--small"
                       content={about.introText}
+                      serializers={portableTextSerializers}
                     />
                   </div>
                 </div>
@@ -159,11 +161,11 @@ export default function AboutUs(initialData) {
               <div className="flex flex-wrap px-5 lg:px-[7.5vw] mb-[5vw] lg:mb-[10vw] pt-6 lg:pt-0">
                 <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
                   <h2 className="text-[11.2vw] leading-none lg:text-[5.5vw] lg:leading-[0.9] xl:leading-[0.9] uppercase text-[#176B75] max-w-[100%] mb-10 lg:mb-10">
-                    <PortableText content={about.firstSectionHeading} />
+                    <PortableText content={about.firstSectionHeading} serializers={portableTextSerializers}/>
                   </h2>
 
                   <div className="mb-[3vw] max-w-[530px] 2xl:max-w-[740px]">
-                    <PortableText content={about.firstSectionText} className="content content--fancy-first" />
+                    <PortableText content={about.firstSectionText} className="content content--fancy-first" serializers={portableTextSerializers}/>
                   </div>
                 </div>
 
@@ -179,10 +181,10 @@ export default function AboutUs(initialData) {
 
               <div className="flex flex-wrap px-5 lg:px-[7.5vw] mb-[5vw] lg:mb-[10vw]">
                 <div className="w-full lg:w-1/2 mb-8 lg:mb-0 lg:order-2">
-                  <h2 className="text-[11.2vw] leading-none lg:text-[5.5vw] lg:leading-[0.9] xl:leading-[0.9] uppercase text-[#FC8200] max-w-[100%] mb-10 lg:mb-10"><PortableText content={about.secondSectionHeading} /></h2>
+                  <h2 className="text-[11.2vw] leading-none lg:text-[5.5vw] lg:leading-[0.9] xl:leading-[0.9] uppercase text-[#FC8200] max-w-[100%] mb-10 lg:mb-10"><PortableText content={about.secondSectionHeading} serializers={portableTextSerializers}/></h2>
 
                   <div className="mb-[3vw] max-w-[530px] 2xl:max-w-[740px]">
-                    <PortableText content={about.secondSectionText} className="content content--fancy-first mb-8 lg:mb-12" />
+                    <PortableText content={about.secondSectionText} className="content content--fancy-first mb-8 lg:mb-12" serializers={portableTextSerializers}/>
                   
                     {about.secondSectionButtonLink && (
                       <Button href={`/news/${about.secondSectionButtonLink.slug.current}`} label="Find Out More" className="w-full lg:w-auto" />
@@ -207,7 +209,7 @@ export default function AboutUs(initialData) {
                     
                     <div className="mb-8 lg:mb-12">
                       <h2 className="text-[12.5vw] leading-none lg:text-[5.5vw] lg:leading-[0.9] xl:text-[5.5vw] xl:leading-[0.9] text-[#EBEA33] max-w-[550px] lg:max-w-[100%] mb-3">
-                        <span className="uppercase block"><PortableText content={about.eventCalendarSectionHeading} /></span>
+                        <span className="uppercase block"><PortableText content={about.eventCalendarSectionHeading} serializers={portableTextSerializers}/></span>
                       </h2>
                       <IconWaveUnderline className="w-full text-[#EBEA33] max-w-[80%] lg:max-w-[75%]"/>
                     </div>
@@ -241,10 +243,10 @@ export default function AboutUs(initialData) {
 
               <div className="flex flex-wrap px-5 lg:px-[7.5vw] mb-[5vw] lg:mb-[10vw]">
                 <div className="w-full lg:w-1/2 mb-8 lg:mb-0 lg:order-2">
-                  <h2 className="text-[11.2vw] leading-none lg:text-[5.5vw] lg:leading-[0.9] xl:leading-[0.9] uppercase text-[#FF5F38] max-w-[100%] mb-10 lg:mb-10 pt-5 lg:pt-0"><PortableText content={about.thirdSectionHeading} /></h2>
+                  <h2 className="text-[11.2vw] leading-none lg:text-[5.5vw] lg:leading-[0.9] xl:leading-[0.9] uppercase text-[#FF5F38] max-w-[100%] mb-10 lg:mb-10 pt-5 lg:pt-0"><PortableText content={about.thirdSectionHeading} serializers={portableTextSerializers}/></h2>
 
                   <div className="mb-[3vw] max-w-[530px] 2xl:max-w-[740px]">
-                    <PortableText content={about.thirdSectionText} className="content content--fancy-first" />
+                    <PortableText content={about.thirdSectionText} className="content content--fancy-first" serializers={portableTextSerializers}/>
                   </div>
                 </div>
 
@@ -300,13 +302,13 @@ export default function AboutUs(initialData) {
                     
                     <div className="mb-8 lg:mb-12">
                       <h2 className="text-[12.5vw] leading-none lg:text-[5.6vw] lg:leading-[0.9] xl:text-[5.6vw] xl:leading-[0.9] text-[#EBEA33] max-w-[550px] lg:max-w-[100%] mb-3">
-                        <span className="uppercase block"><PortableText content={about.ourPeopleSectionHeading } /></span>
+                        <span className="uppercase block"><PortableText content={about.ourPeopleSectionHeading } serializers={portableTextSerializers}/></span>
                       </h2>
                       {/* <IconWaveUnderline className="w-full text-[#EBEA33] max-w-[60%]"/> */}
                     </div>
 
                     <div className="content text-base leading-tight lg:text-lg 2xl:text-2xl lg:leading-snug 2xl:leading-snug lg:max-w-none w-11/12 lg:w-[10/12] mb-8 lg:mb-12">
-                      <PortableText content={about.ourPeopleSectionText} className="content" />
+                      <PortableText content={about.ourPeopleSectionText} className="content" serializers={portableTextSerializers}/>
                     </div>
 
                     <div className="">
@@ -394,7 +396,7 @@ export default function AboutUs(initialData) {
                     <h2 className="text-3xl leading-none lg:text-3xl lg:leading-none xl:text-4xl xl:leading-none max-w-[550px] lg:max-w-[100%] mb-6 lg:mb-4">Key Resources</h2>
                     
                     <div className="text-base leading-tight lg:text-lg 2xl:text-xl lg:leading-snug 2xl:leading-snug max-w-[530px] lg:max-w-none w-11/12 lg:w-[10/12] mb-10 lg:mb-6">
-                      <PortableText content={about.keyResourcesSectionText} className="content" />                      
+                      <PortableText content={about.keyResourcesSectionText} className="content" serializers={portableTextSerializers} />
                     </div>
 
                     <div className="text-base leading-tight lg:text-lg 2xl:text-xl lg:leading-snug 2xl:leading-snug max-w-[530px] lg:max-w-none w-11/12 lg:w-[10/12]">

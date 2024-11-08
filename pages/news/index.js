@@ -10,6 +10,7 @@ import { reveal } from '@/helpers/transitions'
 import { useState } from 'react'
 import PortableText from 'react-portable-text'
 import Head from 'next/head'
+import portableTextSerializers from "@/helpers/text-serializers";
 const pageService = new SanityPageService(newsQuery)
 
 export default function News(initialData) {
@@ -75,7 +76,7 @@ export default function News(initialData) {
                   <div className="w-full lg:w-9/12 mb-[20vw] lg:mb-[15vw] xl:mb-[12vw]">
                     <div className="content font-display text-off-black text-[20px] lg:text-[24px] 2xl:text-[36px] leading-tight lg:leading-tight 2xl:leading-tight text-center">
                       {newsLanding.heroText ? (
-                        <PortableText content={newsLanding.heroText} className="content" />
+                        <PortableText content={newsLanding.heroText} className="content" serializers={portableTextSerializers}/>
                       ) : (
                         <p>Here&apos;s the <em>lowdown</em> on future city centre <em>initiatives</em> and <em>events</em>, as well as the latest on Nottingham&apos;s <em>shops</em> and <em>eateries</em> and other important news.</p>
                       )}
