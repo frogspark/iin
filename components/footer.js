@@ -160,7 +160,7 @@ export default function Footer({ policies, contact }) {
         </p>
         <p className="text-white iin-address mt-2">
           <span className="font-bold mr-2">Address:</span>
-          <br className="sm:none inline"/>
+          <br className="sm:hidden inline"/>
           <span className="text-[#BDB800]">It's in Nottingham, Dryden Street, Nottingham NG1 4FQ</span>
         </p>
       </div>
