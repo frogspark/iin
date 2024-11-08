@@ -56,6 +56,7 @@ export const homeQuery = `{
         y
       },
     },
+    latestNewsPosts[]->,
     "latestNews": *[_type == "news"]{
       title,
       category->{
