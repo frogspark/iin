@@ -83,7 +83,7 @@ export default function Footer({ policies, contact }) {
                 </MouseParallax>
               </div>
             </div>
-            
+
             <div className="w-11/12 lg:w-10/12 text-center text-off-black relative z-[10]">
               <span className="block text-[9.5vw] leading-none md:text-[5vw] md:leading-none xl:text-[4.5vw] xl:leading-none mb-10 lg:mb-16">
                 <span className="uppercase relative">Sign up </span>
@@ -151,6 +151,18 @@ export default function Footer({ policies, contact }) {
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="px-5 my-4 w-full">
+        <p className="text-white iin-phone">
+          <span className="font-bold mr-2">Phone Number:</span>
+          <a href="tel: 0115 988 1441" className="transition-all text-[#BDB800]">0115 988 1441</a>
+        </p>
+        <p className="text-white iin-address mt-2">
+          <span className="font-bold mr-2">Address:</span>
+          <br className="sm:hidden inline"/>
+          <span className="text-[#BDB800]">It&#39;s in Nottingham, Dryden Street, Nottingham NG1 4FQ</span>
+        </p>
       </div>
 
       <nav className="p-5">
