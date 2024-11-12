@@ -20,9 +20,14 @@ var slugify = require('slugify')
 
 export default function News(initialData) {
   const { data: { contact, policies, current }  } = pageService.getPreviewHook(initialData)()
+  console.log(current);
   let mainD = new Date(current.postDate);
   let mainYe = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(mainD);
   let mainMo = new Intl.DateTimeFormat('en', { month: 'short' }).format(mainD);
+
+  let relatedPosts = current.customRelated?.length > 0
+      ? current.customRelated
+      : current.related;
 
   return (
     <Layout>
@@ -177,7 +182,7 @@ export default function News(initialData) {
                   <div className="bg-[#EBE8DF] p-5 lg:p-[2vw] lg:pb-6">
                     <h3 className="text-2xl lg:text-2xl xl:text-3xl block leading-none lg:leading-none xl:leading-none">Related Articles</h3>
 
-                    { current.related.map((e, i) => {
+                    { relatedPosts.map((e, i) => {
                       let width = 'w-full'
                       let imageHeight = 'h-[50vw] lg:h-[15vw]'
 
