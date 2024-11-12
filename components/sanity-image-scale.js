@@ -5,6 +5,25 @@ import SanityImage from '@/components/sanity-image';
 export default function SanityImageScale({ image, p, sizes, alt, q, hoverState}) {
   const ref = useRef(null)
 
+  console.log('IMAGE ALT');
+  console.log(alt);
+  let altText = 'Missing Image Description';
+
+  // check to see if we have been passed an alt value
+  if(alt !== null && alt !== undefined) {
+    altText = alt;
+  }
+  // if not, use the image level alt first
+  else if(image.alt !== null) {
+    altText = image.alt;
+  }
+  // otherwise use the media library level alt
+  else if (image.asset !== null && Object.hasOwn(image.asset, 'altText')) {
+    altText = image.asset.altText
+  }
+
+  console.log(altText);
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end 33%"]
@@ -20,7 +39,7 @@ export default function SanityImageScale({ image, p, sizes, alt, q, hoverState})
             priority={p ? true : false}
             image={image}
             sizes={sizes ? sizes : null}
-            alt={alt ? alt : 'No image description'}
+            alt={ altText }
             quality={q ? q : 80}
             className={`w-full h-full absolute inset-0 object-cover object-center transition-all ease-in-out duration-[1000ms] will-change-transform z-1 ${hoverState ? hoverState : ''}`}
           />

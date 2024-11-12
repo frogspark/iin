@@ -30,6 +30,10 @@ export default function Home(initialData) {
   const x2 = useTransform(scrollYProgress,[0, 1],['-25%', '-100%'],{ clamp: true })
 
   const { data: { contact, policies, home, global }  } = pageService.getPreviewHook(initialData)()
+
+  console.log('HOME');
+  console.log(home);
+
   return (
     <Layout>
       <NextSeo
