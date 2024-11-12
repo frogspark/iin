@@ -53,7 +53,7 @@ export default function Home(initialData) {
       {home.seo?.jsonLd && (
         <Head>
           <script
-            type="applihomeion/ld+json"
+            type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: home.seo.jsonLd }}
             key="product-jsonld"
           />
