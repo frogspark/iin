@@ -31,9 +31,6 @@ export default function Home(initialData) {
 
   const { data: { contact, policies, home, global }  } = pageService.getPreviewHook(initialData)()
 
-  console.log('HOME');
-  console.log(home);
-
   return (
     <Layout>
       <NextSeo

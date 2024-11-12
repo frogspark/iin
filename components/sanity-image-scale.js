@@ -5,8 +5,6 @@ import SanityImage from '@/components/sanity-image';
 export default function SanityImageScale({ image, p, sizes, alt, q, hoverState}) {
   const ref = useRef(null)
 
-  console.log('IMAGE ALT');
-  console.log(alt);
   let altText = 'Missing Image Description';
 
   // check to see if we have been passed an alt value
@@ -21,8 +19,6 @@ export default function SanityImageScale({ image, p, sizes, alt, q, hoverState})
   else if (image.asset !== null && Object.hasOwn(image.asset, 'altText')) {
     altText = image.asset.altText
   }
-
-  console.log(altText);
 
   const { scrollYProgress } = useScroll({
     target: ref,
