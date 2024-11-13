@@ -131,6 +131,11 @@ export default function News(initialData) {
                               return blank ?
                                 <a href={href} target="_blank" rel="noopener">{children}</a>
                                 : <a href={href}>{children}</a>
+                            },
+                            mailToLink: (props) => {
+                              const {email, children} = props;
+                              const link = `mailto:${email}`;
+                              return <a href={ link }>{children}</a>
                             }
                           }}
                         />
