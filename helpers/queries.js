@@ -56,7 +56,8 @@ export const homeQuery = `{
         y
       },
     },
-    "latestNews": *[_type == "news"]{
+    latestNewsPosts[]->,
+    "latestNews": *[_type == "news"] | order(postDate desc) {
       title,
       category->{
         title,
@@ -77,8 +78,9 @@ export const homeQuery = `{
       },
       slug {
         current
-      }
-    },
+      },
+      postDate
+    }[0...12],
     seo {
       ...,
       shareGraphic {

@@ -214,7 +214,9 @@ export default function Home(initialData) {
                 </div>
 
                 <div className="mb-[8vw] lg:mb-[5vw]">
-                  <NewsCarousel items={home.latestNews} />
+                  { home.latestNewsPosts?.length > 0
+                      ? <NewsCarousel items={ home.latestNewsPosts }/>
+                      : <NewsCarousel items={ home.latestNews }/> }
                 </div>
 
                 <div className="lg:text-center px-4 lg:px-0 pb-5 lg:pb-0">
