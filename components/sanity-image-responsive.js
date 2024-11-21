@@ -31,6 +31,24 @@ export default function SanityImageResponsive({ image, className, alt, priority,
     // HREF
     internalHref = `${prefix}${ customLink.internalLink.slug ? customLink.internalLink.slug.current : slugify(customLink.internalLink.title, { lower: true, remove: /[*+~.()'"!:@]/g})}`
   }
+
+  let altText = 'Missing Image Description';
+
+  // check to see if we have been passed an alt value
+  if(alt !== null && alt !== undefined) {
+    altText = alt;
+  }
+  // if not, use the image level alt first
+  else if(image.alt !== null) {
+    altText = image.alt;
+  }
+  // otherwise use the media library level alt
+  else if (image.asset !== null && Object.hasOwn(image.asset, 'altText')) {
+    altText = image.asset.altText
+  }
+
+  console.log('ALT');
+  console.log(altText);
   
 	return !customLink ? (
     <figure className={`image bg-black/10 ${className} relative overflow-hidden ${wrapClass}`}>
@@ -42,7 +60,7 @@ export default function SanityImageResponsive({ image, className, alt, priority,
         width={image?.asset.metadata.dimensions.width / 1.5}
         height={image?.asset.metadata.dimensions.height / 1.5}
         {...(priority ? {priority: true} : {})}
-        alt={image.alt ? image.alt : 'MISSING ALT TEXT'}
+        alt={altText}
         onLoad={event => {
           const target = event.target;
           if (target.src.indexOf('data:image/gif;base64') < 0) {
@@ -69,7 +87,7 @@ export default function SanityImageResponsive({ image, className, alt, priority,
             width={image?.asset.metadata.dimensions.width / 1.5}
             height={image?.asset.metadata.dimensions.height / 1.5}
             {...(priority ? {priority: true} : {})}
-            alt={image.alt ? image.alt : 'MISSING ALT TEXT'}
+            alt={altText}
             onLoad={event => {
               const target = event.target;
               if (target.src.indexOf('data:image/gif;base64') < 0) {
@@ -95,7 +113,7 @@ export default function SanityImageResponsive({ image, className, alt, priority,
             width={image?.asset.metadata.dimensions.width / 1.5}
             height={image?.asset.metadata.dimensions.height / 1.5}
             {...(priority ? {priority: true} : {})}
-            alt={image.alt ? image.alt : 'MISSING ALT TEXT'}
+            alt={altText}
             onLoad={event => {
               const target = event.target;
               if (target.src.indexOf('data:image/gif;base64') < 0) {
