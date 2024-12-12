@@ -24,7 +24,21 @@ export default function SanityImage({ image, className, alt, priority, widthOver
     attributes.objectPosition = `${x * 100}% ${y * 100}%`;
   }
 
-  if (image.alt) { attributes.alt = image.alt } else { attributes.alt = 'MISSING ALT TEXT' }
+  let altText = 'Missing Image Description';
+
+  // check to see if we have been passed an alt value
+  if(alt !== null && alt !== undefined) {
+    altText = alt;
+  }
+  // if not, use the image level alt first
+  else if(image.alt !== null) {
+    altText = image.alt;
+  }
+  // otherwise use the media library level alt
+  else if (image.asset !== null && Object.hasOwn(image.asset, 'altText')) {
+    altText = image.asset.altText
+  }
+
   if (priority) { attributes.priority = true } else { attributes.priority = false }
 
 	return image.vimeoVideo ? (
@@ -45,7 +59,7 @@ export default function SanityImage({ image, className, alt, priority, widthOver
         sizes={sizes ? sizes : `(max-width: 1024px) 100vw,90vw`}
         fill
         quality={quality ? quality : 75}
-        alt={image.alt ? image.alt : 'MISSING ALT TEXT'}
+        alt={ altText }
 
         onLoad={event => {
           const target = event.target;
@@ -67,7 +81,7 @@ export default function SanityImage({ image, className, alt, priority, widthOver
         sizes={sizes ? sizes : `(max-width: 1024px) 100vw,90vw`}
         fill
         quality={quality ? quality : 75}
-        alt={image.alt ? image.alt : 'MISSING ALT TEXT'}
+        alt={ altText }
 
         onLoad={event => {
           const target = event.target;
