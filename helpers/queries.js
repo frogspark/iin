@@ -615,6 +615,7 @@ export const newsSlugQuery = `{
         }
       }
     },
+    customRelated[]->, 
     "related": *[_type == "news" && slug.current != $slug][0..2]{
       title,
       category->{
