@@ -32,7 +32,7 @@ export default function SanityImageResponsive({ image, className, alt, priority,
     internalHref = `${prefix}${ customLink.internalLink.slug ? customLink.internalLink.slug.current : slugify(customLink.internalLink.title, { lower: true, remove: /[*+~.()'"!:@]/g})}`
   }
 
-  let altText = 'Missing Image Description';
+  let altText = 'Missing Image Description. Please add one!';
 
   // check to see if we have been passed an alt value
   if(alt !== null && alt !== undefined) {

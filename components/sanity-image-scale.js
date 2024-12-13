@@ -5,7 +5,7 @@ import SanityImage from '@/components/sanity-image';
 export default function SanityImageScale({ image, p, sizes, alt, q, hoverState}) {
   const ref = useRef(null)
 
-  let altText = 'Missing Image Description';
+  let altText = 'Missing Image Description. Please add one!';
 
   // check to see if we have been passed an alt value
   if(alt !== null && alt !== undefined) {
