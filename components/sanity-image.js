@@ -24,7 +24,7 @@ export default function SanityImage({ image, className, alt, priority, widthOver
     attributes.objectPosition = `${x * 100}% ${y * 100}%`;
   }
 
-  let altText = 'Missing Image Description';
+  let altText = 'Missing Image Description. Please add one!';
 
   // check to see if we have been passed an alt value
   if(alt !== null && alt !== undefined) {
