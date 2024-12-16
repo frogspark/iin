@@ -12,9 +12,9 @@ import NewsTeaser from '@/components/news-teaser'
 import { newsSlugQuery } from '@/helpers/queries'
 import SanityPageService from '@/services/sanityPageService'
 import SanityImageResponsive from '@/components/sanity-image-responsive'
-import PortableText from 'react-portable-text'
 import Blockquote from '@/components/blockquote'
 import Head from 'next/head'
+import CustomPortableText from "@/components/CustomPortableText";
 const pageService = new SanityPageService(newsSlugQuery)
 var slugify = require('slugify')
 
@@ -101,7 +101,7 @@ export default function News(initialData) {
 
                     <div className="mb-6 lg:mb-12">
                       {current.content ? (
-                        <PortableText
+                        <CustomPortableText
                           content={current.content}
                           className="content content--news"
                           serializers={{

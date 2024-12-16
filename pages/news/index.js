@@ -8,7 +8,7 @@ import SanityPageService from '@/services/sanityPageService'
 import Link from 'next/link'
 import { reveal } from '@/helpers/transitions'
 import { useState } from 'react'
-import PortableText from 'react-portable-text'
+import CustomPortableText from "@/components/CustomPortableText";
 import Head from 'next/head'
 const pageService = new SanityPageService(newsQuery)
 
@@ -75,7 +75,7 @@ export default function News(initialData) {
                   <div className="w-full lg:w-9/12 mb-[20vw] lg:mb-[15vw] xl:mb-[12vw]">
                     <div className="content font-display text-off-black text-[20px] lg:text-[24px] 2xl:text-[36px] leading-tight lg:leading-tight 2xl:leading-tight text-center">
                       {newsLanding.heroText ? (
-                        <PortableText content={newsLanding.heroText} className="content" />
+                        <CustomPortableText content={newsLanding.heroText} className="content" />
                       ) : (
                         <p>Here&apos;s the <em>lowdown</em> on future city centre <em>initiatives</em> and <em>events</em>, as well as the latest on Nottingham&apos;s <em>shops</em> and <em>eateries</em> and other important news.</p>
                       )}

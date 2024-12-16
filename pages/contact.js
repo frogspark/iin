@@ -7,7 +7,7 @@ import ImageScale from '@/components/image-scale'
 import { contactQuery } from '@/helpers/queries'
 import SanityPageService from '@/services/sanityPageService'
 import { reveal } from '@/helpers/transitions'
-import PortableText from 'react-portable-text'
+import CustomPortableText from "@/components/CustomPortableText";
 import Head from 'next/head'
 import Form from '@/components/form'
 const pageService = new SanityPageService(contactQuery)
@@ -95,7 +95,7 @@ export default function Contact(initialData) {
                   <div className="flex flex-wrap bg-black/20">
                     <div className="w-full lg:w-1/2 px-5 py-10 lg:p-[7.5vw] order-2 lg:order-1">
                       <div className="content content--no-anchor font-display text-[20px] lg:text-[24px] 2xl:text-[32px] leading-tight lg:leading-tight 2xl:leading-tight mb-12 lg:mb-[5vw]">
-                        <PortableText content={contact.formIntroText} />
+                        <CustomPortableText content={contact.formIntroText} />
                       </div>
 
                       <Form />
