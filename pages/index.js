@@ -13,9 +13,9 @@ import { homeQuery } from '@/helpers/queries'
 import SanityPageService from '@/services/sanityPageService'
 import Button from '@/components/button'
 import { useRef } from 'react'
-import PortableText from 'react-portable-text'
 import SanityImageScale from '@/components/sanity-image-scale'
 import Head from 'next/head'
+import CustomPortableText from "@/components/CustomPortableText";
 const pageService = new SanityPageService(homeQuery)
 
 export default function Home(initialData) {
@@ -85,7 +85,7 @@ export default function Home(initialData) {
                   <div className="w-full lg:w-1/2 mb-16 lg:mb-0">
                     {home.introContentHeading && (
                       <h1 className="text-[9.5vw] leading-none lg:text-[4vw] lg:leading-[0.9] xl:leading-[0.9] uppercase text-[#FF5F38] max-w-[100%] mb-5 lg:mb-[2vw]">
-                        <PortableText
+                        <CustomPortableText
                           content={home.introContentHeading}
                         />
                       </h1>
@@ -95,7 +95,7 @@ export default function Home(initialData) {
                     
                     {home.introContentText && (
                       <div className="content mb-5 lg:mb-[3vw] text-base leading-tight lg:text-lg lg:leading-tight 2xl:text-2xl 2xl:leading-tight max-w-[530px] 2xl:max-w-[740px]">
-                        <PortableText
+                        <CustomPortableText
                           content={home.introContentText}
                         />
                       </div>
@@ -230,7 +230,7 @@ export default function Home(initialData) {
                   <div className="w-full lg:px-0">
                     <span className="text-2xl lg:text-3xl 2xl:text-4xl leading-none lg:leading-none 2xl:leading-none block mb-6 lg:mb-3">What&apos;s on?</span>
                     <h2 className="text-[10.9vw] leading-none lg:text-[5vw] lg:leading-[0.9] xl:text-[5vw] xl:leading-[0.9] mb-8 text-[#EBEA33] max-w-[550px] xl:max-w-[95%]">
-                      <PortableText
+                      <CustomPortableText
                         content={home.whatsOnSectionHeading}
                       />
                       {/* <span className="uppercase block">Nottingham</span>
@@ -238,7 +238,7 @@ export default function Home(initialData) {
                     </h2>
 
                     <div className="content text-base leading-tight lg:text-lg 2xl:text-2xl lg:leading-snug 2xl:leading-snug max-w-[530px] lg:max-w-[530px] w-full lg:w-[10/12] mb-8 lg:mb-[10%]">
-                      <PortableText
+                      <CustomPortableText
                         content={home.whatsOnSectionText}
                       />
                     </div>

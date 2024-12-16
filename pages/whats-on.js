@@ -13,7 +13,7 @@ import { whatsOnQuery } from '@/helpers/queries'
 import SanityPageService from '@/services/sanityPageService'
 import { reveal } from '@/helpers/transitions'
 import Button from '@/components/button'
-import PortableText from 'react-portable-text'
+import CustomPortableText from "@/components/CustomPortableText";
 import SanityImageScale from '@/components/sanity-image-scale'
 import Head from 'next/head'
 import SanityImage from '@/components/sanity-image'
@@ -129,7 +129,7 @@ export default function WhatsOn(initialData) {
                   <div className="flex flex-wrap px-5 lg:px-[5vw] max-w-[1800px] mx-auto mb-5 lg:mb-0">
                     <div className="w-full lg:w-[55%]">
                       <div className="text-off-black mb-3 lg:mb-8 lg:max-w-[90%]">
-                        <PortableText
+                        <CustomPortableText
                           className="content content--whats-on"
                           content={whatsOn.introText}
                         />
@@ -187,7 +187,7 @@ export default function WhatsOn(initialData) {
                       <div className="relative max-w-[85%] 2xl:max-w-[65%] lg:-mt-5">
                         <IconCircle className="w-full text-[#FF5F38] mx-5 lg:mx-[8%] absolute inset-0 lg:translate-x-[-23%] 2xl:translate-x-[-25%] lg:translate-y-[-18%] 2xl:translate-y-[-20%] hidden lg:block" />
 
-                        <h2 className="px-5 text-[6.5vw] leading-none lg:text-[2.5vw] 2xl:text-[2vw] lg:leading-none xl:leading-none 2xl:leading-none mb-[1vw] uppercase text-[#FF5F38] lg:max-w-[90%] 2xl:max-w-[80%]"><PortableText
+                        <h2 className="px-5 text-[6.5vw] leading-none lg:text-[2.5vw] 2xl:text-[2vw] lg:leading-none xl:leading-none 2xl:leading-none mb-[1vw] uppercase text-[#FF5F38] lg:max-w-[90%] 2xl:max-w-[80%]"><CustomPortableText
                           className="whats-on-image-text"
                           content={whatsOn.imageBlocks[0].captionText}
                         /></h2>
@@ -205,7 +205,7 @@ export default function WhatsOn(initialData) {
                           />
                         </div>
 
-                        <h2 className="px-5 lg:px-[10%] text-[6.5vw] leading-none lg:text-[2.5vw] 2xl:text-[2vw] lg:leading-none xl:leading-none 2xl:leading-none mb-3 lg:mb-[1vw] uppercase text-[#437256] max-w-[75%] lg:max-w-none"><PortableText
+                        <h2 className="px-5 lg:px-[10%] text-[6.5vw] leading-none lg:text-[2.5vw] 2xl:text-[2vw] lg:leading-none xl:leading-none 2xl:leading-none mb-3 lg:mb-[1vw] uppercase text-[#437256] max-w-[75%] lg:max-w-none"><CustomPortableText
                             className="whats-on-image-text"
                             content={whatsOn.imageBlocks[1].captionText}
                           /></h2>
@@ -224,7 +224,7 @@ export default function WhatsOn(initialData) {
                         </div>
 
                         <div className="lg:translate-x-[-20px]">
-                          <h2 className="px-5 text-[6.5vw] leading-none lg:text-[2.5vw] 2xl:text-[2vw] lg:leading-none xl:leading-none 2xl:leading-none mb-3 lg:mb-[1vw] uppercase text-[#FC8200] max-w-[80%]"><PortableText
+                          <h2 className="px-5 text-[6.5vw] leading-none lg:text-[2.5vw] 2xl:text-[2vw] lg:leading-none xl:leading-none 2xl:leading-none mb-3 lg:mb-[1vw] uppercase text-[#FC8200] max-w-[80%]"><CustomPortableText
                             className="whats-on-image-text"
                             content={whatsOn.imageBlocks[2].captionText}
                           /></h2>

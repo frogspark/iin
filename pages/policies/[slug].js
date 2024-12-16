@@ -11,7 +11,7 @@ import NewsTeaser from '@/components/news-teaser'
 import { policiesSlugQuery } from '@/helpers/queries'
 import SanityPageService from '@/services/sanityPageService'
 import SanityImageResponsive from '@/components/sanity-image-responsive'
-import PortableText from 'react-portable-text'
+import CustomPortableText from "@/components/CustomPortableText";
 import Blockquote from '@/components/blockquote'
 const pageService = new SanityPageService(policiesSlugQuery)
 
@@ -43,7 +43,7 @@ export default function News(initialData) {
                   <div className="w-[95%] lg:w-[80%]">
                     <div className="mb-6 lg:mb-12">
                       {current.content ? (
-                        <PortableText
+                        <CustomPortableText
                           content={current.content}
                           className="content content--news"
                           serializers={{
