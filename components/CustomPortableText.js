@@ -1,27 +1,25 @@
 import PortableText from "react-portable-text";
 
-const sertializers = {
+const customSerializers = {
 	link: (props) => {
 		const { blank, href, children } = props
-		console.log(props);
 		return blank ?
 				<a href={href} target="_blank" rel="noopener">{children}</a>
 				: <a href={href}>{children}</a>
 	},
 }
 
-const CustomPortableText = ( {content} ) => {
+const CustomPortableText = ( {content, className, serializers} ) => {
+	const mergedSerializers = { ...customSerializers, ...serializers};
+	console.log(mergedSerializers);
+
 	return (
-			<div class="portable-text-wrapper">
-				<PortableText
-						content={content}
-						serializers={ sertializers }
-				/>
-			</div>
+			<PortableText
+					className={className}
+					content={content}
+					serializers={ mergedSerializers }
+			/>
 	)
 }
 
-console.log('prt text');
-console.log(CustomPortableText);
-
-export default CustomPortableText;
+export default CustomPortableText
