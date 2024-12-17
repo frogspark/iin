@@ -46,9 +46,6 @@ export default function SanityImageResponsive({ image, className, alt, priority,
   else if (image.asset !== null && Object.hasOwn(image.asset, 'altText')) {
     altText = image.asset.altText
   }
-
-  console.log('ALT');
-  console.log(altText);
   
 	return !customLink ? (
     <figure className={`image bg-black/10 ${className} relative overflow-hidden ${wrapClass}`}>
