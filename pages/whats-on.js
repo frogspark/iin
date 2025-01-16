@@ -60,7 +60,7 @@ export default function WhatsOn(initialData) {
       {whatsOn.seo?.jsonLd && (
         <Head>
           <script
-            type="appliwhatsOnion/ld+json"
+            type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: whatsOn.seo.jsonLd }}
             key="product-jsonld"
           />
