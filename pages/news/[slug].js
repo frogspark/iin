@@ -52,7 +52,7 @@ export default function News(initialData) {
       {current.seo?.jsonLd && (
         <Head>
           <script
-            type="applicurrention/ld+json"
+            type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: current.seo.jsonLd }}
             key="product-jsonld"
           />
