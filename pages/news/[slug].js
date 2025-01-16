@@ -66,7 +66,7 @@ export default function News(initialData) {
               <div className="w-full selection:text-white selection:bg-[#176B75] pt-[33vw] lg:pt-[15vw] xl:pt-[10vw]">
                 <div className="font-display italic text-base lg:text-xl xl:text-2xl flex justify-center mb-5 lg:mb-12">
                   <div>
-                    <Link href="/news">IIN News</Link><span>&nbsp;/&nbsp;{current.category.title}</span>
+                    <Link href="/news">IIN News</Link><span>&nbsp;/&nbsp;</span><Link href={ `/news/categories/${current.category.slug.current}` }>{current.category.title}</Link>
                   </div>
                 </div>
                 <div className="w-full text-center uppercase px-5 lg:px-[10vw] pb-[3.3vw]">
