@@ -11,7 +11,6 @@ const customSerializers = {
 
 const CustomPortableText = ( {content, className, serializers} ) => {
 	const mergedSerializers = { ...customSerializers, ...serializers};
-	console.log(mergedSerializers);
 
 	return (
 			<PortableText

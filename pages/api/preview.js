@@ -17,6 +17,7 @@ const checkIfSlugIsKnown = (slug) => {
     'home',
     'about',
     'whats-on',
+    'events',
     'news',
     'contact',
     'policies'
