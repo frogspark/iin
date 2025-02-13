@@ -196,7 +196,7 @@ export default function WhatsOn(initialData) {
                   )}
 
                   <div className="w-full h-auto lg:h-[70vw] xl:h-[80vw] 2xl:h-[75vw] overflow-hidden">
-                    {whatsOn.imageBlocks[0] && (
+                    {whatsOn.imageBlocks[1] && (
                       <div className="w-full lg:w-[31vw] 2xl:w-[25vw] relative lg:absolute lg:bottom-[8%] xl:bottom-[15%] lg:left-0 overflow-hidden mb-12 lg:mb-0">
                         <div className="h-[66vw] lg:h-[38vw]  relative overflow-hidden mb-5">
                           <SanityImageScale
