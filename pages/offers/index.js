@@ -3,16 +3,16 @@ import Footer from "@/components/footer";
 import { LazyMotion, domAnimation, m } from "framer-motion";
 import { NextSeo } from "next-seo";
 import NewsTeaser from "@/components/news-teaser";
-import { eventsQuery } from "@/helpers/queries";
+import { newsQuery } from "@/helpers/queries";
 import SanityPageService from "@/services/sanityPageService";
 import Link from "next/link";
 import { reveal } from "@/helpers/transitions";
 import { useState } from "react";
 import CustomPortableText from "@/components/CustomPortableText";
 import Head from "next/head";
-const pageService = new SanityPageService(eventsQuery);
+const pageService = new SanityPageService(newsQuery);
 
-export default function Events(initialData) {
+export default function Offers(initialData) {
   const {
     data: { contact, policies, events },
   } = pageService.getPreviewHook(initialData)();
@@ -33,7 +33,7 @@ export default function Events(initialData) {
             ? newsLanding.seo?.metaTitle
             : newsLanding.title
         }
-        canonical={`https://www.itsinnottingham.com/events/`}
+        canonical={`https://www.itsinnottingham.com/news/`}
         description={
           newsLanding.seo?.metaDesc ? newsLanding.seo?.metaDesc : null
         }

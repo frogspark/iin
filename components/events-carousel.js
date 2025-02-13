@@ -46,7 +46,7 @@ export default function EventsCarousel({ items, offer, initiatives }) {
   }, [emblaApi, onInit, onSelect]);
   return (
     <div className="relative">
-      <button
+      {/* <button
         aria-label="Move Carousel Items Along Backwards"
         onClick={scrollPrev}
         className={`absolute top-[25vw] lg:top-[12vw] 2xl:top-[10vw] left-[5%] z-10 w-[50px] lg:w-[50px] 2xl:w-[75px] h-[50px] lg:h-[50px] 2xl:h-[75px] bg-white flex items-center justify-center rounded-full a11y-focus lg:hover:scale-[1.15]  ${
@@ -64,7 +64,7 @@ export default function EventsCarousel({ items, offer, initiatives }) {
         } transition-all ease-in-out duration-[330ms]`}
       >
         <IconArrow className="w-[30%] block rotate-90" />
-      </button>
+      </button> */}
 
       <div
         className={`embla ${
@@ -89,23 +89,21 @@ export default function EventsCarousel({ items, offer, initiatives }) {
               minute: "2-digit",
               hour12: false,
             });
-
+            console.log("desktop", e);
             return (
               <div className="w-[560px] pr-4" key={i}>
                 <ConditionalWrap
-                  condition={!!e.article?.slug.current || e.slug?.current}
+                  condition={e?.slug?.current}
                   wrap={(children) => (
                     <Link
                       className="block group"
-                      href={`/events/${
-                        initiatives ? e.article.slug.current : e.slug.current
-                      }`}
+                      href={`/events/${e?.slug?.current}`}
                     >
                       {children}
                     </Link>
                   )}
                 >
-                  <div className="w-[560px]   relative overflow-hidden">
+                  <div className="w-[560px] relative overflow-hidden">
                     <img
                       src={e.mobileHeroImage.asset.url}
                       alt={e.mobileHeroImage?.alt}
@@ -121,7 +119,7 @@ export default function EventsCarousel({ items, offer, initiatives }) {
                       <div className="flex justify-between">
                         <div className="flex gap-2 h-6">
                           <svg
-                            class="fill-[#6a6a6a]"
+                            className="fill-[#6a6a6a]"
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 448 512"
                           >
@@ -133,7 +131,7 @@ export default function EventsCarousel({ items, offer, initiatives }) {
                         </div>
                         <div className="flex gap-2 h-6">
                           <svg
-                            class="fill-[#6a6a6a]"
+                            className="fill-[#6a6a6a]"
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 512 512"
                           >
@@ -145,7 +143,7 @@ export default function EventsCarousel({ items, offer, initiatives }) {
                         </div>
                         <div className="flex gap-2 h-6">
                           <svg
-                            class="fill-[#6a6a6a]"
+                            className="fill-[#6a6a6a]"
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 384 512"
                           >
@@ -185,19 +183,11 @@ export default function EventsCarousel({ items, offer, initiatives }) {
                         <span className="text-4xl text-[#BD3146] font-sans">
                           £{e.price}
                         </span>
-                        <button class="bg-[#FC6E5C] text-white rounded-3xl px-6 font-sans">
+                        <button className="bg-[#FC6E5C] text-white rounded-3xl px-6 font-sans">
                           Get tickets!
                         </button>
                       </div>
                     ) : null}
-
-                    {initiatives ? (
-                      <>{e.article?.slug?.current && <></>}</>
-                    ) : (
-                      <span className="text-base lg:text-lg 2xl:text-xl leading-none lg:leading-none 2xl:leading-none border-b border-off-black border-opacity-25 inline-block pb-1">
-                        Read More
-                      </span>
-                    )}
                   </div>
                 </ConditionalWrap>
               </div>

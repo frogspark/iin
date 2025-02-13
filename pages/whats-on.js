@@ -22,7 +22,8 @@ import Head from "next/head";
 import SanityImage from "@/components/sanity-image";
 import SanityImageResponsive from "@/components/sanity-image-responsive";
 import EventsCarousel from "@/components/events-carousel";
-
+import MobileVerticalSlider from "@/components/mobileVerticalSlider";
+import Line from "@/icons/line.svg";
 const pageService = new SanityPageService(whatsOnQuery);
 const pageService2 = new SanityPageService(eventsQuery);
 const pageService3 = new SanityPageService(offersQuery);
@@ -232,7 +233,7 @@ export default function WhatsOn(initialData) {
                                   id="Group_421"
                                   data-name="Group 421"
                                   transform="translate(0 0)"
-                                  clip-path="url(#clip-path)"
+                                  clipPath="url(#clip-path)"
                                 >
                                   <g
                                     id="Group_419"
@@ -245,7 +246,7 @@ export default function WhatsOn(initialData) {
                                       d="M153.89,8.407S69.6-33.659,0,70.4"
                                       fill="none"
                                       stroke="currentColor"
-                                      stroke-width="3"
+                                      strokeWidth="3"
                                     />
                                   </g>
                                   <g
@@ -259,7 +260,7 @@ export default function WhatsOn(initialData) {
                                       d="M21.032,16.285,2.374,18.658,0,0"
                                       fill="none"
                                       stroke="currentColor"
-                                      stroke-width="3"
+                                      strokeWidth="3"
                                     />
                                   </g>
                                 </g>
@@ -289,7 +290,7 @@ export default function WhatsOn(initialData) {
                     </div>
                   )}
                   {whatsOn.offerText && (
-                    <div className="absolute w-full max-w-[432px]  lg:mt-64 left-36 z-10 rotate-[-5deg]">
+                    <div className="absolute w-full lg:max-w-[432px] lg:mt-64 lg:left-36 z-10 lg:rotate-[-5deg]">
                       <IconCircle className="w-full text-[#BD3146] mx-5 lg:mx-[8%] absolute inset-0 lg:translate-x-[-20%] translate-y-[-20%] hidden lg:block" />
                       <h2 className="font-display whitespace-nowrap px-5 w-full text-[52px] leading-none  lg:leading-none xl:leading-none 2xl:leading-none mb-[1vw] lg:max-w-[90%] 2xl:max-w-[80%]">
                         <span>{upperText2}</span>
@@ -300,33 +301,42 @@ export default function WhatsOn(initialData) {
                           </>
                         )}
                       </h2>
+                      {isMobile && <Line className="w-full h-full px-5" />}
                     </div>
                   )}
-                  <div className="w-full mt-96 h-auto  overflow-hidden">
+                  <div className="w-full mb-36 mt-48 lg:mt-96 lg:mb-8 h-auto  overflow-hidden">
                     {isMobile ? (
-                      <></>
+                      <MobileVerticalSlider items={offers} offer />
                     ) : (
-                      // <MobileVerticalSlider items={offers} />
                       <EventsCarousel items={offers} offer={true} initiatives />
                     )}
                   </div>
                   {whatsOn.eventText && (
-                    <div className="absolute w-full max-w-[432px]  lg:mt-26 right-0 z-10 rotate-[-5deg]">
+                    <div className="lg:absolute w-full lg:max-w-[432px]  lg:mt-26 lg:right-0 z-10 lg:rotate-[-5deg]">
                       <IconCircle className="w-full text-[#BD3146] mx-5 lg:mx-[13%] absolute inset-0 lg:translate-x-[-20%] translate-y-[-20%] hidden lg:block" />
-                      <h2 className="font-display   px-5 w-full text-[52px] leading-none  mb-[1vw] lg:max-w-[90%] 2xl:max-w-[80%]">
+                      <h2 className="font-display px-5 w-full text-[52px] leading-none  mb-[1vw] ">
                         <span>{upperText}</span>
                         {lowerText && (
                           <>
                             <br />
-                            <p className="text-right">{lowerText}</p>
+                            <span className=" lg:text-right">{lowerText}</span>
                           </>
                         )}
                       </h2>
+                      {isMobile && <Line className="w-full h-full px-5" />}
                     </div>
                   )}
 
-                  <div className="w-full mt-40 h-auto  overflow-hidden">
-                    <EventsCarousel items={events} offer={false} initiatives />
+                  <div className="w-full pb-36 mt-8 lg:mt-40 h-auto  overflow-hidden">
+                    {isMobile ? (
+                      <MobileVerticalSlider items={events} offer={false} />
+                    ) : (
+                      <EventsCarousel
+                        items={events}
+                        offer={false}
+                        initiatives
+                      />
+                    )}
                   </div>
                 </div>
               </div>

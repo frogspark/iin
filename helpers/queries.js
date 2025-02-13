@@ -353,15 +353,20 @@ export const eventsQuery = `
     },
 
     introText,
+    content,
     dateTime,
+    age,
+    slug {
+      current
+    },
+    ticketUrl,
     address,
     price,
   },
 }`;
-export const offersQuery = `
-{
-  "offers": *[_type == "offers"]{
-    title,
+export const eventsSlugQuery = `{
+  "current": *[_type == "events" && slug.current == $slug][0]{
+title,
     mobileHeroImage {
       asset-> {
         ...
@@ -375,6 +380,139 @@ export const offersQuery = `
     },
 
     introText,
+    content,
+    dateTime,
+    age,
+    slug {
+      current
+    },
+    ticketUrl,
+    address,
+    price,
+
+    seo {
+      ...,
+      shareGraphic {
+        asset->
+      }
+    },
+    "more": *[_type == "news" && slug.current != $slug][0..6]{
+      title,
+      category->{
+        title,
+        slug {
+          current
+        }
+      },
+      teaserImage {
+        asset-> {
+          ...
+        },
+        caption,
+        alt,
+        hotspot {
+          x,
+          y
+        },
+      },
+      heroImage {
+        asset-> {
+          ...
+        },
+        caption,
+        alt,
+        hotspot {
+          x,
+          y
+        },
+      },
+      slug {
+        current
+      },
+      seo {
+        ...,
+        shareGraphic {
+          asset->
+        }
+      }
+    },
+    customRelated[]->, 
+    "related": *[_type == "news" && slug.current != $slug][0..2]{
+      title,
+      category->{
+        title,
+        slug {
+          current
+        }
+      },
+      teaserImage {
+        asset-> {
+          ...
+        },
+        caption,
+        alt,
+        hotspot {
+          x,
+          y
+        },
+      },
+      heroImage {
+        asset-> {
+          ...
+        },
+        caption,
+        alt,
+        hotspot {
+          x,
+          y
+        },
+      },
+      slug {
+        current
+      },
+      seo {
+        ...,
+        shareGraphic {
+          asset->
+        }
+      }
+    }
+  },
+  "policies": *[_type == "policies"] {
+    title,
+    slug {
+      current
+    }
+  },
+  "contact": *[_type == "contact"][0] {
+    emailAddress,
+    socials[] {
+      name,
+      url
+    }
+  }
+}`;
+export const offersQuery = `
+{
+  "offers": *[_type == "offers"]{
+    title,
+        slug {
+      current
+    },
+    mobileHeroImage {
+      asset-> {
+        ...
+      },
+      caption,
+      alt,
+      hotspot {
+        x,
+        y
+      },
+    },
+
+    introText,
+    content,
     address,
   },
 }`;
