@@ -110,3 +110,11 @@ iframe {
   right: auto;
   width: 100%;
 }
+
+.content > p a {
+  text-decoration: underline !important;
+}
+
+.content > p > a > * {
+  text-decoration: underline !important;
+}
