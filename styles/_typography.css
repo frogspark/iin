@@ -149,3 +149,7 @@ del {
   @apply font-display;
   text-decoration-line: none!important;
 }
+
+.linkUnset{
+  color: unset!important;
+}
