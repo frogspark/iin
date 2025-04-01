@@ -372,7 +372,6 @@ export const newsQuery = `{
     orderRank,
     category->{
       title,
-      orderRank, 
       slug {
         current
       }
@@ -422,9 +421,8 @@ export const newsQuery = `{
       url
     }
   },
-  "cats": *[_type == "categories"] | order(orderRank asc) {
+  "cats": *[_type == "categories"]{
     title,
-    orderRank,
     slug {
       current
     }
