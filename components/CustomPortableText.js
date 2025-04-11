@@ -46,3 +46,58 @@ const customSerializers = {
 		  }
 
 		  return child;
+		})}
+	  </p>
+	);
+  },
+
+  marks: {
+	anchorLink: ({ mark, children }) => {
+	  if (!mark?.href) return children;
+
+	  return (
+		<a
+		  href={`#${mark.href}`}
+		  onClick={(e) => {
+			e.preventDefault();
+			scrollToAnchor(mark.href);
+		  }}
+		>
+		  {children}
+		</a>
+	  );
+	},
+
+	anchorId: ({ mark, children }) => {
+	  if (!mark?.anchorId) return children;
+
+	  return <span id={mark.anchorId} className="anchor">{children}</span>;
+	},
+
+	link: ({ mark, children }) => {
+	  if (!mark?.href) return children;
+
+	  return mark.blank ? (
+		<a href={mark.href} target="_blank" rel="noopener noreferrer">
+		  {children}
+		</a>
+	  ) : (
+		<a href={mark.href}>{children}</a>
+	  );
+	},
+  },
+};
+
+const CustomPortableText = ({ content, className, serializers }) => {
+  const mergedSerializers = { ...customSerializers, ...serializers };
+
+  return (
+	<PortableText
+	  className={className}
+	  content={content}
+	  serializers={mergedSerializers}
+	/>
+  );
+};
+
+export default CustomPortableText;
