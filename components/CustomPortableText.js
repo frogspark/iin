@@ -10,26 +10,26 @@ const scrollToAnchor = (id) => {
   };
 const customSerializers = {
   block: (props) => {
-    const { nodes, children } = props;
+	const { nodes, children } = props;
 
-    // Extract text and any anchor-related marks from children
-    let anchorId = "";
+	// Extract text and any anchor-related marks from children
+	let anchorId = "";
 	let anchorLink = "";
-    let plainText = "";
+	let plainText = "";
 
-    if (Array.isArray(children)) {
-      children.forEach((child) => {
+	if (Array.isArray(children)) {
+	  children.forEach((child) => {
 	
-        if (typeof child === "string") {
-          plainText += child + " "; // Collect text content
-        } else if (child?.props?.node?.mark?._type === "anchorId") {
-          anchorId = child.props.node.mark.anchorId; 
-        }else if (child?.props?.node?.mark?._type === "anchorLink") {
+		if (typeof child === "string") {
+		  plainText += child + " "; // Collect text content
+		} else if (child?.props?.node?.mark?._type === "anchorId") {
+		  anchorId = child.props.node.mark.anchorId; 
+		}else if (child?.props?.node?.mark?._type === "anchorLink") {
 			anchorLink = child.props.node.mark.href; 
 		  }
-      });
-    }
-    return (
+	  });
+	}
+	return (
 		<p className="scroll-mt-20">
 		  {children.map((child, index) => {
 			if (typeof child === "object" ) {
@@ -65,25 +65,25 @@ const customSerializers = {
 	  );
   },
   marks: {
-    anchorLink: ({ mark, children }) => {
-      return <a href={"#" + mark.href}
+	anchorLink: ({ mark, children }) => {
+	  return <a href={"#" + mark.href}
 	  onClick={(e) => {
 		e.preventDefault();
 		scrollToAnchor(mark.href);
 	  }}>{children}</a>;
-    },
-    anchorId: ({ mark, children }) => {
-      return <span id={anchorId} className="anchor">{children}</span>;
-    },
-    link: ({ mark, children }) => {
-      return mark.blank ? (
-        <a href={mark.href} target="_blank" rel="noopener noreferrer">
-          {children}
-        </a>
-      ) : (
-        <a href={mark.href}>{children}</a>
-      );
-    },
+	},
+	anchorId: ({ mark, children }) => {
+	  return <span id={anchorId} className="anchor">{children}</span>;
+	},
+	link: ({ mark, children }) => {
+	  return mark.blank ? (
+		<a href={mark.href} target="_blank" rel="noopener noreferrer">
+		  {children}
+		</a>
+	  ) : (
+		<a href={mark.href}>{children}</a>
+	  );
+	},
   },
 };
 
