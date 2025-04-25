@@ -30,38 +30,40 @@ const customSerializers = {
       });
     }
     return (
-		<p className="scroll-mt-20">
-		  {children.map((child, index) => {
-			if (typeof child === "object" ) {
-			  const mark = child.props.node.mark;
-			  if (mark._type === "anchorLink") {
-				return (
-				  <a
-					key={index}
-					href={"#" + mark.href}
-					onClick={(e) => {
-					  e.preventDefault();
-					  scrollToAnchor(mark.href);
-					}}
-					className="underline linkUnset"
-				  >
-					{child}
-				  </a>
-				);
-			  }
-  
-			  if (mark._type === "anchorId") {
-				return (
-				  <span key={index} id={mark.anchorId} className="anchor">
-					{child}
-				  </span>
-				);
-			  }
-			}
-  
-			return child;
-		  })}
-		</p>
+<p className="scroll-mt-20">
+  {children.map((child, index) => {
+    if (typeof child === "object") {
+      const mark = child?.props?.node?.mark;
+
+      if (mark && mark._type === "anchorLink") {
+        return (
+          <a
+            key={index}
+            href={"#" + mark.href}
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToAnchor(mark.href);
+            }}
+            className="underline linkUnset"
+          >
+            {child}
+          </a>
+        );
+      }
+
+      if (mark && mark._type === "anchorId") {
+        return (
+          <span key={index} id={mark.anchorId} className="anchor">
+            {child}
+          </span>
+        );
+      }
+    }
+
+    return child;
+  })}
+</p>
+
 	  );
   },
   marks: {
