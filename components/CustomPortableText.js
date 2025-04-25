@@ -6,13 +6,14 @@ const scrollToAnchor = (id) => {
   if (!id) return;
   const element = document.getElementById(id);
   if (element) {
-	element.scrollIntoView({ behavior: "smooth", block: "center" });
+	element.scrollIntoView({ behavior: "smooth"});
   }
 };
 
 const customSerializers = {
   block: (props) => {
-	const { nodes, children } = props;
+	const { children, node} = props;
+  const style = node?.style || "normal";
 
 	let anchorId = "";
 	let anchorLink = "";
@@ -27,11 +28,25 @@ const customSerializers = {
 		} else if (child?.props?.node?.mark?._type === "anchorLink") {
 		  anchorLink = child.props.node.mark.href;
 		}
+ 
+
 	  });
 	}
-
+  const tagMap = {
+    h1: "h1",
+    h2: "h2",
+    h3: "h3",
+    h4: "h4",
+    h5: "h5",
+    h6: "h6",
+    normal: "p",
+    blockquote: "blockquote",
+    };
+  
+    const Tag = tagMap[style] || "p";
+  
 	return (
-	  <p className="scroll-mt-20">
+	  <Tag className="scroll-mt-20" id={anchorId || undefined}>
 		{children.map((child, index) => {
 		  if (
 			typeof child === "object" &&
@@ -58,7 +73,7 @@ const customSerializers = {
 
 			if (mark._type === "anchorId") {
 			  return (
-				<span key={index} id={mark.anchorId} className="anchor">
+				<span key={index} className="anchor">
 				  {child}
 				</span>
 			  );
@@ -67,7 +82,7 @@ const customSerializers = {
 
 		  return child;
 		})}
-	  </p>
+	  </Tag>
 	);
   },
 
