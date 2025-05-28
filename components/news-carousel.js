@@ -41,7 +41,6 @@ export default function NewsCarousel({ items, initiatives }) {
     emblaApi.on('reInit', onSelect)
     emblaApi.on('select', onSelect)
   }, [emblaApi, onInit, onSelect])
-
   return (
     <div className="relative">
       

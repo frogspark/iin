@@ -105,7 +105,7 @@ export const homeQuery = `{
       url
     }
   }
-}`
+}`;
 
 export const aboutQuery = `{
   "about": *[_type == "about"][0]{
@@ -278,9 +278,10 @@ export const aboutQuery = `{
       url
     }
   }
-}`
+}`;
 
-export const whatsOnQuery = `{
+export const whatsOnQuery = `
+{
   "whatsOn": *[_type == "whatsOn"][0]{
     title,
     mobileHeroImage {
@@ -295,6 +296,8 @@ export const whatsOnQuery = `{
       },
     },
     introText,
+    offerText,
+    eventText,
     imageBlocks[] {
       image {
         asset-> {
@@ -310,10 +313,168 @@ export const whatsOnQuery = `{
       },
       captionText
     },
+
     seo {
       ...,
       shareGraphic {
         asset->
+      }
+    }
+  },
+
+  "policies": *[_type == "policies"] {
+    title,
+    slug {
+      current
+    }
+  },
+  "contact": *[_type == "contact"][0] {
+    emailAddress,
+    socials[] {
+      name,
+      url
+    }
+  }
+}`;
+export const eventsQuery = `
+{
+  "events": *[_type == "events"]{
+    title,
+    mobileHeroImage {
+      asset-> {
+        ...
+      },
+      caption,
+      alt,
+      hotspot {
+        x,
+        y
+      },
+    },
+
+    introText,
+    content,
+    dateTime,
+    age,
+    slug {
+      current
+    },
+    ticketUrl,
+    address,
+    price,
+  },
+}`;
+export const eventsSlugQuery = `{
+  "current": *[_type == "events" && slug.current == $slug][0]{
+title,
+    mobileHeroImage {
+      asset-> {
+        ...
+      },
+      caption,
+      alt,
+      hotspot {
+        x,
+        y
+      },
+    },
+
+    introText,
+    content,
+    dateTime,
+    age,
+    slug {
+      current
+    },
+    ticketUrl,
+    address,
+    price,
+
+    seo {
+      ...,
+      shareGraphic {
+        asset->
+      }
+    },
+    "more": *[_type == "news" && slug.current != $slug][0..6]{
+      title,
+      category->{
+        title,
+        slug {
+          current
+        }
+      },
+      teaserImage {
+        asset-> {
+          ...
+        },
+        caption,
+        alt,
+        hotspot {
+          x,
+          y
+        },
+      },
+      heroImage {
+        asset-> {
+          ...
+        },
+        caption,
+        alt,
+        hotspot {
+          x,
+          y
+        },
+      },
+      slug {
+        current
+      },
+      seo {
+        ...,
+        shareGraphic {
+          asset->
+        }
+      }
+    },
+    customRelated[]->, 
+    "related": *[_type == "news" && slug.current != $slug][0..2]{
+      title,
+      category->{
+        title,
+        slug {
+          current
+        }
+      },
+      teaserImage {
+        asset-> {
+          ...
+        },
+        caption,
+        alt,
+        hotspot {
+          x,
+          y
+        },
+      },
+      heroImage {
+        asset-> {
+          ...
+        },
+        caption,
+        alt,
+        hotspot {
+          x,
+          y
+        },
+      },
+      slug {
+        current
+      },
+      seo {
+        ...,
+        shareGraphic {
+          asset->
+        }
       }
     }
   },
@@ -330,8 +491,31 @@ export const whatsOnQuery = `{
       url
     }
   }
-}`
+}`;
+export const offersQuery = `
+{
+  "offers": *[_type == "offers"]{
+    title,
+        slug {
+      current
+    },
+    mobileHeroImage {
+      asset-> {
+        ...
+      },
+      caption,
+      alt,
+      hotspot {
+        x,
+        y
+      },
+    },
 
+    introText,
+    content,
+    address,
+  },
+}`;
 export const contactQuery = `{
   "contact": *[_type == "contact"][0]{
     emailAddresss,
@@ -354,7 +538,7 @@ export const contactQuery = `{
       current
     }
   }
-}`
+}`;
 
 export const newsQuery = `{
   "newsLanding": *[_type == "newsLanding"][0]{
@@ -429,7 +613,7 @@ export const newsQuery = `{
       current
     }
   }
-}`
+}`;
 
 export const catQuery = `{
   "cat": *[_type == "categories" && slug.current == $slug][0]{
@@ -498,7 +682,7 @@ export const catQuery = `{
       url
     }
   }
-}`
+}`;
 
 export const newsSlugQuery = `{
   "current": *[_type == "news" && slug.current == $slug][0]{
@@ -672,7 +856,7 @@ export const newsSlugQuery = `{
       url
     }
   }
-}`
+}`;
 
 export const policiesQuery = `{
   "policies": *[_type == "policies"]{
@@ -687,7 +871,7 @@ export const policiesQuery = `{
       }
     }
   }
-}`
+}`;
 
 export const policiesSlugQuery = `{
   "current": *[_type == "policies" && slug.current == $slug][0]{
@@ -716,4 +900,4 @@ export const policiesSlugQuery = `{
       url
     }
   }
-}`
+}`;
