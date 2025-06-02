@@ -102,7 +102,11 @@ export default function News(initialData) {
                         <li className="mb-1 lg:mb-0 inline-block relative"><Link href="/news">All <span className="border-b border-off-black block w-full"></span></Link></li>
                         {cats.map((e, i) => {
                           return (
-                            <li key={i} className="mb-1 lg:mb-0"><Link className="text-black opacity-20 group lg:hover:opacity-100 " href={`/news/categories/${e.slug.current}`}>{e.title} <span className="border-b border-off-black block w-0 lg:group-hover:w-full"></span></Link></li>
+                            <li key={i} className="mb-1 lg:mb-0">
+                              <Link className="text-black opacity-20 group lg:hover:opacity-100 " href={`/news/categories/${e.slug.current}`}>
+                                {e.title} <span className="border-b border-off-black block w-0 lg:group-hover:w-full"></span>
+                              </Link>
+                            </li>
                           )
                         })}
                       </ul>

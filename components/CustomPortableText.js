@@ -22,6 +22,17 @@ const scrollToAnchor = (id) => {
 };
 
 const customSerializers = {
+	link: (props) => {
+		const { blank, href, children } = props
+		return blank ?
+				<a href={href} target="_blank" rel="noopener">{children}</a>
+				: <a href={href}>{children}</a>
+	},
+	mailToLink: (props) => {
+		const {email, children} = props;
+		const link = `mailto:${email}`;
+		return <a href={ link }>{children}</a>
+	},
   block: (props) => {
     const { children, node } = props;
     const style = node?.style || "normal";
@@ -130,16 +141,17 @@ const customSerializers = {
   },
 };
 
-const CustomPortableText = ({ content, className, serializers }) => {
-  const mergedSerializers = { ...customSerializers, ...serializers };
+const CustomPortableText = ( {content, className, serializers} ) => {
+	const mergedSerializers = { ...customSerializers, ...serializers};
+	console.log(mergedSerializers);
 
-  return (
-    <PortableText
-      className={className}
-      content={content}
-      serializers={mergedSerializers}
-    />
-  );
-};
+	return (
+			<PortableText
+					className={className}
+					content={content}
+					serializers={ mergedSerializers }
+			/>
+	)
+}
 
-export default CustomPortableText;
+export default CustomPortableText
