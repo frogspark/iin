@@ -51,11 +51,17 @@ export default function WhatsOn(initialData) {
   const {
     data: { contact, policies, whatsOn, events, offers },
   } = pageService.getPreviewHook(initialData)();
-  const eventText = whatsOn.eventText;
+  let eventText = whatsOn.eventText;
+  if(!eventText) {
+    eventText = '';
+  }
   const match = eventText.match(/^([A-Z\s]+)(.*)$/);
   const upperText = match ? match[1].trim() : eventText;
   const lowerText = match ? match[2].trim() : "";
-  const offerText = whatsOn.offerText;
+  let offerText = whatsOn.offerText;
+  if(!offerText) {
+    offerText = '';
+  }
   const match2 = offerText.match(/^([A-Z\s]+)(.*)$/);
   const upperText2 = match2 ? match2[1].trim() : offerText;
   const lowerText2 = match2 ? match2[2].trim() : "";
