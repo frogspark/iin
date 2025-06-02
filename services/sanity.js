@@ -1,9 +1,7 @@
 import {
   groq,
   createClient,
-  createImageUrlBuilder,
   createPreviewSubscriptionHook,
-  createCurrentUserHook,
 } from 'next-sanity'
 
 class Sanity {
@@ -25,9 +23,9 @@ class Sanity {
     token: process.env.SANITY_API_TOKEN,
   })
 
-  urlFor = source => createImageUrlBuilder(this.config).image(source)
+  // urlFor = source => createImageUrlBuilder(this.config).image(source)
   
-  useCurrentUser = createCurrentUserHook(this.config)
+  // useCurrentUser = createCurrentUserHook(this.config)
   usePreviewSubscription = createPreviewSubscriptionHook(this.config)
 
   get client() {
