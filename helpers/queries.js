@@ -338,6 +338,16 @@ export const whatsOnQuery = `
 }`;
 export const eventsQuery = `
 {
+	"eventsLanding": *[_type == "eventsLanding"][0]{
+    title,
+    heroText,
+    seo {
+      ...,
+      shareGraphic {
+        asset->
+      }
+    }
+  },
   "events": *[_type == "events"]{
     title,
     mobileHeroImage {

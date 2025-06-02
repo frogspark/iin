@@ -14,7 +14,7 @@ const pageService = new SanityPageService(eventsQuery);
 
 export default function Events(initialData) {
   const {
-    data: { contact, policies, events },
+    data: { contact, policies, events, eventsLanding },
   } = pageService.getPreviewHook(initialData)();
   const [showFilters, setShowFilters] = useState(false);
 
@@ -29,35 +29,35 @@ export default function Events(initialData) {
     <Layout>
       <NextSeo
         title={
-          newsLanding.seo?.metaTitle
-            ? newsLanding.seo?.metaTitle
-            : newsLanding.title
+          eventsLanding.seo?.metaTitle
+            ? eventsLanding.seo?.metaTitle
+            : eventsLanding.title
         }
         canonical={`https://www.itsinnottingham.com/events/`}
         description={
-          newsLanding.seo?.metaDesc ? newsLanding.seo?.metaDesc : null
+          eventsLanding.seo?.metaDesc ? eventsLanding.seo?.metaDesc : null
         }
         openGraph={{
-          title: newsLanding.seo?.metaTitle
-            ? newsLanding.seo?.metaTitle
-            : newsLanding.title,
-          description: newsLanding.seo?.metaDesc
-            ? newsLanding.seo?.metaDesc
+          title: eventsLanding.seo?.metaTitle
+            ? eventsLanding.seo?.metaTitle
+            : eventsLanding.title,
+          description: eventsLanding.seo?.metaDesc
+            ? eventsLanding.seo?.metaDesc
             : null,
-          images: newsLanding.seo?.shareGraphic?.asset
+          images: eventsLanding.seo?.shareGraphic?.asset
             ? [
                 {
-                  url: newsLanding.seo?.shareGraphic?.asset.url
-                    ? newsLanding.seo?.shareGraphic?.asset.url
+                  url: eventsLanding.seo?.shareGraphic?.asset.url
+                    ? eventsLanding.seo?.shareGraphic?.asset.url
                     : null,
-                  width: newsLanding.seo?.shareGraphic?.asset.metadata
+                  width: eventsLanding.seo?.shareGraphic?.asset.metadata
                     .dimensions.width
-                    ? newsLanding.seo?.shareGraphic?.asset.metadata.dimensions
+                    ? eventsLanding.seo?.shareGraphic?.asset.metadata.dimensions
                         .width
                     : null,
-                  height: newsLanding.seo?.shareGraphic?.asset.metadata
+                  height: eventsLanding.seo?.shareGraphic?.asset.metadata
                     .dimensions.height
-                    ? newsLanding.seo?.shareGraphic?.asset.metadata.dimensions
+                    ? eventsLanding.seo?.shareGraphic?.asset.metadata.dimensions
                         .height
                     : null,
                   type: "image/jpeg",
@@ -67,11 +67,11 @@ export default function Events(initialData) {
         }}
       />
 
-      {newsLanding.seo?.jsonLd && (
+      {eventsLanding.seo?.jsonLd && (
         <Head>
           <script
             type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: newsLanding.seo.jsonLd }}
+            dangerouslySetInnerHTML={{ __html: eventsLanding.seo.jsonLd }}
             key="product-jsonld"
           />
         </Head>
@@ -101,9 +101,9 @@ export default function Events(initialData) {
                 <div className="flex flex-wrap justify-center px-5 lg:px-[7.5vw]">
                   <div className="w-full lg:w-9/12 mb-[20vw] lg:mb-[15vw] xl:mb-[12vw]">
                     <div className="content font-display text-off-black text-[20px] lg:text-[24px] 2xl:text-[36px] leading-tight lg:leading-tight 2xl:leading-tight text-center">
-                      {newsLanding.heroText ? (
+                      {eventsLanding.heroText ? (
                         <CustomPortableText
-                          content={newsLanding.heroText}
+                          content={eventsLanding.heroText}
                           className="content"
                         />
                       ) : (
