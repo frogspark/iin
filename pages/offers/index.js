@@ -14,7 +14,7 @@ const pageService = new SanityPageService(newsQuery);
 
 export default function Offers(initialData) {
   const {
-    data: { contact, policies, news, newsLanding },
+    data: { contact, policies, news, newsLanding, cats },
   } = pageService.getPreviewHook(initialData)();
   const [showFilters, setShowFilters] = useState(false);
 
