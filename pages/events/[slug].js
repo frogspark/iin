@@ -2,18 +2,11 @@ import Layout from "@/components/layout";
 import Footer from "@/components/footer";
 import { LazyMotion, domAnimation } from "framer-motion";
 import IconFacebook from "@/icons/facebook.svg";
-import IconInsta from "@/icons/instagram.svg";
 import IconLinkedin from "@/icons/linkedin.svg";
 import IconTwitter from "@/icons/twitter.svg";
-import IconSquiggleUnderline from "@/icons/squiggle-underline.svg";
-import { NextSeo } from "next-seo";
-import Link from "next/link";
 import { eventsSlugQuery } from "@/helpers/queries";
 import SanityPageService from "@/services/sanityPageService";
 import SanityImageResponsive from "@/components/sanity-image-responsive";
-import Blockquote from "@/components/blockquote";
-import Head from "next/head";
-import CustomPortableText from "@/components/CustomPortableText";
 const pageService = new SanityPageService(eventsSlugQuery);
 var slugify = require("slugify");
 
@@ -22,6 +15,11 @@ export default function Events(initialData) {
     data: { contact, policies, current },
   } = pageService.getPreviewHook(initialData)();
   console.log("im in the slug!!", initialData);
+
+  if(!current) {
+    window.location.href = '/';
+    return;
+  }
 
   return (
     <Layout>
