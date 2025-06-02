@@ -14,7 +14,7 @@ const pageService = new SanityPageService(newsQuery);
 
 export default function Offers(initialData) {
   const {
-    data: { contact, policies, events },
+    data: { contact, policies, news, newsLanding },
   } = pageService.getPreviewHook(initialData)();
   const [showFilters, setShowFilters] = useState(false);
 
@@ -173,7 +173,7 @@ export default function Offers(initialData) {
                   </nav>
 
                   <div className="w-full grid grid-cols-4 gap-12 mb-[5vw]">
-                    {events.map((e, i) => {
+                    {news.map((e, i) => {
                       let width = "col-span-4 lg:col-span-1";
                       let imageHeight = "h-[60vw] lg:h-[25vw]";
 
