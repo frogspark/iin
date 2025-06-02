@@ -94,7 +94,7 @@ export default function Header() {
             </a>
         ) }
 
-        <header
+        <header id="site-header"
             className={ `px-5 lg:px-8 p-5 lg:p-6 2xl:p-8 2xl:px-10 pb-0 lg:pb-0 2xl:pb-0 fixed top-0 left-0 right-0 w-full z-[1000] ${ menuOpen ? '' : '' }` }>
           <div className="flex flex-wrap relative">
             <div className="flex-1 flex space-x-6">

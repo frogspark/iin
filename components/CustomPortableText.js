@@ -1,12 +1,23 @@
 import PortableText from "react-portable-text";
-import slugify from "slugify";
-import Link from "next/link";
 
 const scrollToAnchor = (id) => {
-  if (!id) return;
+  if (!id) {
+		return
+	}
+
   const element = document.getElementById(id);
+
   if (element) {
-	element.scrollIntoView({ behavior: "smooth"});
+		element.scrollIntoView({ behavior: "smooth", block: "start" });
+
+		const header = document.getElementById('site-header');
+		var offset = header.offsetHeight + 24;
+
+		const top = element.getBoundingClientRect().top + window.pageYOffset - offset;
+		window.scrollTo({
+			top: top,
+			behavior: 'smooth'
+		});
   }
 };
 
@@ -61,8 +72,8 @@ const customSerializers = {
 				  key={index}
 				  href={"#" + mark.href}
 				  onClick={(e) => {
-					e.preventDefault();
-					scrollToAnchor(mark.href);
+						e.preventDefault();
+						scrollToAnchor(mark.href);
 				  }}
 				  className="underline linkUnset"
 				>
