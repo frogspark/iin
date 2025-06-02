@@ -23,9 +23,6 @@ class Sanity {
     token: process.env.SANITY_API_TOKEN,
   })
 
-  // urlFor = source => createImageUrlBuilder(this.config).image(source)
-  
-  // useCurrentUser = createCurrentUserHook(this.config)
   usePreviewSubscription = createPreviewSubscriptionHook(this.config)
 
   get client() {
