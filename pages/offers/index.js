@@ -96,7 +96,7 @@ export default function Offers(initialData) {
                           imageHeight={imageHeight}
                           heading={e.title}
                           className={width}
-                          href={`/offers/${slug}/`}
+                          href={`/offers/${slug.current}/`}
                         />
                       );
                     })}

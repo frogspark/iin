@@ -395,7 +395,7 @@ export const eventsSlugQuery = `{
         asset->
       }
     },
-    "more": *[_type == "news" && slug.current != $slug][0..6]{
+    "more": *[_type == "events" && slug.current != $slug][0..6]{
       title,
       category->{
         title,
@@ -436,7 +436,7 @@ export const eventsSlugQuery = `{
       }
     },
     customRelated[]->, 
-    "related": *[_type == "news" && slug.current != $slug][0..2]{
+    "related": *[_type == "events" && slug.current != $slug][0..2]{
       title,
       category->{
         title,
@@ -536,6 +536,93 @@ export const offersSlugQuery = `{
     introText,
     content,
     address,
+    seo {
+      ...,
+      shareGraphic {
+        asset->
+      }
+    },
+    "more": *[_type == "offers" && slug.current != $slug][0..6]{
+      title,
+      category->{
+        title,
+        slug {
+          current
+        }
+      },
+      teaserImage {
+        asset-> {
+          ...
+        },
+        caption,
+        alt,
+        hotspot {
+          x,
+          y
+        },
+      },
+      heroImage {
+        asset-> {
+          ...
+        },
+        caption,
+        alt,
+        hotspot {
+          x,
+          y
+        },
+      },
+      slug {
+        current
+      },
+      seo {
+        ...,
+        shareGraphic {
+          asset->
+        }
+      }
+    },
+    customRelated[]->, 
+    "related": *[_type == "offers" && slug.current != $slug][0..2]{
+      title,
+      category->{
+        title,
+        slug {
+          current
+        }
+      },
+      teaserImage {
+        asset-> {
+          ...
+        },
+        caption,
+        alt,
+        hotspot {
+          x,
+          y
+        },
+      },
+      heroImage {
+        asset-> {
+          ...
+        },
+        caption,
+        alt,
+        hotspot {
+          x,
+          y
+        },
+      },
+      slug {
+        current
+      },
+      seo {
+        ...,
+        shareGraphic {
+          asset->
+        }
+      }
+    }
   },
   "policies": *[_type == "policies"] {
     title,

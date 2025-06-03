@@ -10,6 +10,10 @@ import SanityImageResponsive from "@/components/sanity-image-responsive";
 import CustomPortableText from "@/components/CustomPortableText";
 import Blockquote from "@/components/blockquote";
 import Link from "next/link";
+import NewsTeaser from "@/components/news-teaser";
+import IconSquiggleUnderline from "@/icons/squiggle-underline.svg";
+import { NextSeo } from "next-seo";
+import Head from "next/head";
 const pageService = new SanityPageService(eventsSlugQuery);
 var slugify = require("slugify");
 
@@ -18,24 +22,55 @@ export default function Events(initialData) {
     data: { contact, policies, current },
   } = pageService.getPreviewHook(initialData)();
 
-  console.log(current);
-  // return (
-  //     'none'
-  // );
-
   let mainD = new Date(current.dateTime);
   let mainYe = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(mainD);
   let mainMo = new Intl.DateTimeFormat('en', { month: 'short' }).format(mainD);
 
-  if(!current) {
-    // redirect('/');
-    return (
-        <h1>no content</h1>
-    );
-  }
+  let relatedPosts = current.customRelated?.length > 0 ? current.customRelated : current.related;
 
   return (
     <Layout>
+      <NextSeo
+          title={current.seo?.metaTitle ? current.seo?.metaTitle : current.title}
+          canonical={`https://www.itsinnottingham.com/events/${current.slug.current}/`}
+          description={current.seo?.metaDesc ? current.seo?.metaDesc : null}
+          openGraph={{
+            title: current.seo?.metaTitle
+                ? current.seo?.metaTitle
+                : current.title,
+            description: current.seo?.metaDesc ? current.seo?.metaDesc : null,
+            images: current.seo?.shareGraphic?.asset
+                ? [
+                  {
+                    url: current.seo?.shareGraphic?.asset.url
+                        ? current.seo?.shareGraphic?.asset.url
+                        : null,
+                    width: current.seo?.shareGraphic?.asset.metadata.dimensions
+                        .width
+                        ? current.seo?.shareGraphic?.asset.metadata.dimensions.width
+                        : null,
+                    height: current.seo?.shareGraphic?.asset.metadata.dimensions
+                        .height
+                        ? current.seo?.shareGraphic?.asset.metadata.dimensions
+                            .height
+                        : null,
+                    type: "image/jpeg",
+                  },
+                ]
+                : null,
+          }}
+      />
+
+      {current.seo?.jsonLd && (
+          <Head>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: current.seo.jsonLd }}
+                key="product-jsonld"
+            />
+          </Head>
+      )}
+
       <LazyMotion features={domAnimation}>
         <div>
           <main className="">
@@ -74,11 +109,11 @@ export default function Events(initialData) {
               <div className="flex flex-wrap px-5 lg:px-[7.5vw] mb-12 lg:mb-[7.5vw]">
                 <div className="w-full lg:w-[72%] mb-8 lg:mb-0">
                   <div className="w-[95%] lg:w-[80%]">
-                    {/*{current.introText && (*/}
-                    {/*  <p className="font-display text-[5.25vw] lg:text-3xl xl:text-4xl leading-[1.2] lg:leading-[1.2] xl:leading-[1.2] mb-8 lg:mb-12">*/}
-                    {/*    {current.introText}*/}
-                    {/*  </p>*/}
-                    {/*)}*/}
+                    { current.introText && (
+                        <p className="font-display text-[5.25vw] lg:text-3xl xl:text-4xl leading-[1.2] lg:leading-[1.2] xl:leading-[1.2] mb-8 lg:mb-12">
+                          { current.introText }
+                        </p>
+                    ) }
 
                     <p className="text-base lg:text-lg xl:text-xl leading-none lg:leading-none xl:leading-none mb-6 lg:mb-12">
                       <strong>Posted:</strong> { mainMo } { mainYe }
@@ -191,6 +226,69 @@ export default function Events(initialData) {
                     </div>
                   </div>
                 </div>
+
+                <div className="w-full lg:w-[28%]">
+                  <div className="bg-[#EBE8DF] p-5 lg:p-[2vw] lg:pb-6">
+                    <h3 className="text-2xl lg:text-2xl xl:text-3xl block leading-none lg:leading-none xl:leading-none">
+                      Related Events
+                    </h3>
+
+                    { relatedPosts.map((e, i) => {
+                      let width = "w-full";
+                      let imageHeight = "h-[50vw] lg:h-[15vw]";
+
+                      return (
+                          <NewsTeaser
+                              key={ i }
+                              heading={ e.title }
+                              image={ e.teaserImage }
+                              className={ `${ width } mb-12` }
+                              imageHeight={ imageHeight }
+                              href={ `/events/${ e.slug.current }` }
+                          />
+                      );
+                    }) }
+                  </div>
+                </div>
+              </div>
+
+              <div className="w-full mb-20 lg:mb-[7.5vw] px-5 lg:px-[7.5vw]">
+                <div className="mb-8 lg:mb-12">
+                  <h3 className="text-3xl lg:text-4xl xl:text-5xl block leading-none lg:leading-none xl:leading-none mb-2 lg:mb-3 pb-0">
+                    More Events
+                  </h3>
+                  <IconSquiggleUnderline
+                      className="w-[45%] lg:w-[30%] 2xl:w-[24%] -translate-x-2 lg:translate-x-[-8%]"/>
+                </div>
+
+                <div className="grid grid-cols-4 gap-12 mb-12 lg:mb-[5vw]">
+                  { current.more.map((e, i) => {
+                    let width = "col-span-4 lg:col-span-1";
+                    let imageHeight = "h-[60vw] lg:h-[25vw]";
+
+                    i == 0 && (width = "col-span-4 lg:col-span-2");
+                    i == 1 && (imageHeight = "h-[60vw] lg:h-[28vw]");
+                    i == 2 && (imageHeight = "h-[60vw] lg:h-[24vw]");
+                    i == 3 && (imageHeight = "h-[60vw] lg:h-[14vw]");
+                    i == 4 && (imageHeight = "h-[60vw] lg:h-[25vw]");
+                    i == 5 && (imageHeight = "h-[60vw] lg:h-[12.5vw]");
+
+                    return (
+                        <NewsTeaser
+                            key={i}
+                            heading={e.title}
+                            image={e.teaserImage}
+                            className={width}
+                            imageHeight={imageHeight}
+                            href={`/events/${e.slug.current}`}
+                        />
+                    );
+                  })}
+                </div>
+
+                {/* <div className="w-full flex items-center justify-center">
+                  <Link href="/events" className="a11y-focus rounded-full border border-off-black py-4 lg:py-6 2xl:py-8 px-6 lg:px-8 2xl:px-10 inline-block leading-none 2xl:text-2xl 2xl:leading-none">View all stories</Link>
+                </div> */}
               </div>
             </article>
           </main>
