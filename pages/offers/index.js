@@ -1,15 +1,11 @@
 import Layout from "@/components/layout";
 import Footer from "@/components/footer";
 import { LazyMotion, domAnimation, m } from "framer-motion";
-import { NextSeo } from "next-seo";
 import NewsTeaser from "@/components/news-teaser";
-import { newsQuery } from "@/helpers/queries";
+import { offersQuery } from "@/helpers/queries";
 import SanityPageService from "@/services/sanityPageService";
-import Link from "next/link";
 import { reveal } from "@/helpers/transitions";
-import { useState } from "react";
 import CustomPortableText from "@/components/CustomPortableText";
-import Head from "next/head";
 const pageService = new SanityPageService(offersQuery);
 
 export default function Offers(initialData) {
@@ -42,26 +38,28 @@ export default function Offers(initialData) {
 
                 <div className="flex flex-wrap justify-center px-5 lg:px-[7.5vw]">
                   <div className="w-full lg:w-9/12 mb-[20vw] lg:mb-[15vw] xl:mb-[12vw]">
-                    <div className="content font-display text-off-black text-[20px] lg:text-[24px] 2xl:text-[36px] leading-tight lg:leading-tight 2xl:leading-tight text-center">
-                      {offers.heroText ? (
-                        <CustomPortableText
-                          content={offers.heroText}
-                          className="content"
-                        />
-                      ) : (
-                        <p>
-                          Here&apos;s the <em>lowdown</em> on future city centre{" "}
-                          <em>initiatives</em> and <em>events</em>, as well as
-                          the latest on Nottingham&apos;s <em>shops</em> and{" "}
-                          <em>eateries</em> and other important news.
-                        </p>
-                      )}
+                    <div
+                        className="content font-display text-off-black text-[20px] lg:text-[24px] 2xl:text-[36px] leading-tight lg:leading-tight 2xl:leading-tight text-center">
+                      {/*{offers.heroText ? (*/ }
+                      {/*  <CustomPortableText*/ }
+                      {/*    content={offers.heroText}*/ }
+                      {/*    className="content"*/ }
+                      {/*  />*/ }
+                      {/*) : (*/ }
+                      {/*  */ }
+                      {/*)}*/ }
+
+                      <p>
+                        Here&apos;s the <em>lowdown</em> on future city centre{ " " }
+                        <em>initiatives</em> and <em>events</em>, as well as
+                        the latest on Nottingham&apos;s <em>shops</em> and{ " " }
+                        <em>eateries</em> and other important news.
+                      </p>
                     </div>
                   </div>
 
-
                   <div className="w-full grid grid-cols-4 gap-12 mb-[5vw]">
-                    {offers.map((e, i) => {
+                    { offers.map((e, i) => {
                       let width = "col-span-4 lg:col-span-1";
                       let imageHeight = "h-[60vw] lg:h-[25vw]";
 
@@ -86,14 +84,19 @@ export default function Offers(initialData) {
                         ((width = "col-span-4 lg:col-span-2"),
                         (imageHeight = "h-[60vw] lg:h-[27vw]"));
 
+                      let slug = e.slug;
+                      if(!e.slug) {
+                        slug = e.title.replaceAll(' ', '-');
+                        slug = slug.replaceAll('_', '-');
+                      }
                       return (
                         <NewsTeaser
                           key={i}
-                          heading={e.title}
-                          image={e.teaserImage}
-                          className={width}
+                          image={e.mobileHeaderImage}
                           imageHeight={imageHeight}
-                          href={`/news/${e.slug.current}/`}
+                          heading={e.title}
+                          className={width}
+                          href={`/offers/${slug}/`}
                         />
                       );
                     })}

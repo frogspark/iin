@@ -2,7 +2,6 @@ import Layout from "@/components/layout";
 import Footer from "@/components/footer";
 import { LazyMotion, domAnimation } from "framer-motion";
 import IconFacebook from "@/icons/facebook.svg";
-import IconInsta from "@/icons/instagram.svg";
 import IconLinkedin from "@/icons/linkedin.svg";
 import IconTwitter from "@/icons/twitter.svg";
 import IconSquiggleUnderline from "@/icons/squiggle-underline.svg";
@@ -22,7 +21,6 @@ export default function Offers(initialData) {
   const {
     data: { contact, policies, current },
   } = pageService.getPreviewHook(initialData)();
-  console.log(current);
   let mainD = new Date(current.postDate);
   let mainYe = new Intl.DateTimeFormat("en", { year: "numeric" }).format(mainD);
   let mainMo = new Intl.DateTimeFormat("en", { month: "short" }).format(mainD);
