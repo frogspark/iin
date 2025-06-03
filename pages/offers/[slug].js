@@ -8,25 +8,25 @@ import IconSquiggleUnderline from "@/icons/squiggle-underline.svg";
 import { NextSeo } from "next-seo";
 import Link from "next/link";
 import NewsTeaser from "@/components/news-teaser";
-import { newsSlugQuery } from "@/helpers/queries";
+import { offersSlugQuery } from "@/helpers/queries";
 import SanityPageService from "@/services/sanityPageService";
 import SanityImageResponsive from "@/components/sanity-image-responsive";
 import Blockquote from "@/components/blockquote";
 import Head from "next/head";
 import CustomPortableText from "@/components/CustomPortableText";
-const pageService = new SanityPageService(newsSlugQuery);
+const pageService = new SanityPageService(offersSlugQuery);
 var slugify = require("slugify");
 
 export default function Offers(initialData) {
   const {
     data: { contact, policies, current },
   } = pageService.getPreviewHook(initialData)();
-  let mainD = new Date(current.postDate);
+
+  let mainD = new Date(current.dateTime);
   let mainYe = new Intl.DateTimeFormat("en", { year: "numeric" }).format(mainD);
   let mainMo = new Intl.DateTimeFormat("en", { month: "short" }).format(mainD);
 
-  let relatedPosts =
-    current.customRelated?.length > 0 ? current.customRelated : current.related;
+  let relatedPosts = current.customRelated?.length > 0 ? current.customRelated : current.related;
 
   return (
     <Layout>
@@ -332,7 +332,7 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  const paths = await pageService.fetchPaths("news");
+  const paths = await pageService.fetchPaths("offers");
   return {
     paths: paths,
     fallback: false,

@@ -21,9 +21,6 @@ module.exports = async () => {
   `;
 
   const redirects = await getClient().fetch(query);
-  console.log('REDIRECTS');
-  let reds = redirects.filter(item => item.source.includes('offers'));
-  console.log(reds);
 
   // Wildcard/regex matching automated redirects (lower priorty, with specific stuff higher)
   redirects.push({
