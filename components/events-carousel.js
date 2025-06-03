@@ -173,7 +173,7 @@ export default function EventsCarousel({ items, offer, initiatives }) {
                     {offer && (
                       <div>
                         <span className="text-xl color-[#6a6a6a] font-sans">
-                          {e.introText[0]?.children[0]?.text}
+                          {e.introText}
                         </span>
                       </div>
                     )}
