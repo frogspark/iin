@@ -89,7 +89,7 @@ export default function EventsCarousel({ items, offer, initiatives }) {
               minute: "2-digit",
               hour12: false,
             });
-            console.log("desktop", e);
+
             return (
               <div className="w-[560px] pr-4" key={i}>
                 <ConditionalWrap

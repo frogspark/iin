@@ -21,6 +21,9 @@ module.exports = async () => {
   `;
 
   const redirects = await getClient().fetch(query);
+  console.log('REDIRECTS');
+  let reds = redirects.filter(item => item.source.includes('offers'));
+  console.log(reds);
 
   // Wildcard/regex matching automated redirects (lower priorty, with specific stuff higher)
   redirects.push({
@@ -65,14 +68,6 @@ module.exports = async () => {
     destination: '/whats-on',
     permanent: true,
   },{
-    source: '/offers/:slug',
-    destination: '/news/student-discounts-nottingham',
-    permanent: true,
-  },{
-    source: '/offers/:slug/:slug',
-    destination: '/news/student-discounts-nottingham',
-    permanent: true,
-  },{
     source: '/directory/:slug/:slug',
     destination: '/whats-on',
     permanent: true,
@@ -105,3 +100,14 @@ module.exports = async () => {
 
   return redirects;
 };
+
+
+// {
+//   source: '/offers/:slug',
+//   destination: '/news/student-discounts-nottingham',
+//   permanent: true,
+// },{
+//   source: '/offers/:slug/:slug',
+//   destination: '/news/student-discounts-nottingham',
+//   permanent: true,
+// },

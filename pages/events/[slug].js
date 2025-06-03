@@ -7,6 +7,7 @@ import IconTwitter from "@/icons/twitter.svg";
 import { eventsSlugQuery } from "@/helpers/queries";
 import SanityPageService from "@/services/sanityPageService";
 import SanityImageResponsive from "@/components/sanity-image-responsive";
+import { redirect } from "next/navigation";
 const pageService = new SanityPageService(eventsSlugQuery);
 var slugify = require("slugify");
 
@@ -14,11 +15,12 @@ export default function Events(initialData) {
   const {
     data: { contact, policies, current },
   } = pageService.getPreviewHook(initialData)();
-  console.log("im in the slug!!", initialData);
 
   if(!current) {
-    window.location.href = '/';
-    return;
+    // redirect('/');
+    return (
+        <h1>no content</h1>
+    );
   }
 
   return (

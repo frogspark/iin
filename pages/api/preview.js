@@ -3,12 +3,13 @@ import sanity from "@/services/sanity"
 const checkIfAuthorized = async (slug) => {
   if (slug === '/') return true
   const parts = slug.split('/')
-  // console.log(parts)
+
   if (parts.length === 2 && checkIfSlugIsKnown(parts[1])) return true
   if (parts.length === 3 && checkIfSlugIsKnown(parts[1])) {
     const exists = await checkIfPreviewSlugExists(parts[2])
     return exists
   }
+
   return false
 }
 
