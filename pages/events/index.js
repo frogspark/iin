@@ -88,7 +88,7 @@ export default function Events(initialData) {
                           image={e.teaserImage}
                           className={width}
                           imageHeight={imageHeight}
-                          href={`/news/${e.slug.current}/`}
+                          href={`/events/${e.slug.current}/`}
                         />
                       );
                     })}
