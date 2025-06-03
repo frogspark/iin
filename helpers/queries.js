@@ -366,7 +366,7 @@ export const eventsQuery = `
 }`;
 export const eventsSlugQuery = `{
   "current": *[_type == "events" && slug.current == $slug][0]{
-title,
+		title,
     mobileHeroImage {
       asset-> {
         ...
@@ -378,7 +378,6 @@ title,
         y
       },
     },
-
     introText,
     content,
     dateTime,
@@ -496,7 +495,7 @@ export const offersQuery = `
 {
   "offers": *[_type == "offers"]{
     title,
-        slug {
+    slug {
       current
     },
     mobileHeroImage {
@@ -515,6 +514,42 @@ export const offersQuery = `
     content,
     address,
   },
+}`;
+export const offersSlugQuery = `{
+  "current": *[_type == "offers" && slug.current == $slug][0]{
+    title,
+    slug {
+      current
+    },
+    mobileHeroImage {
+      asset-> {
+        ...
+      },
+      caption,
+      alt,
+      hotspot {
+        x,
+        y
+      },
+    },
+
+    introText,
+    content,
+    address,
+  },
+  "policies": *[_type == "policies"] {
+    title,
+    slug {
+      current
+    }
+  },
+  "contact": *[_type == "contact"][0] {
+    emailAddress,
+    socials[] {
+      name,
+      url
+    }
+  }
 }`;
 export const contactQuery = `{
   "contact": *[_type == "contact"][0]{

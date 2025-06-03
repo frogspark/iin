@@ -19,8 +19,6 @@ const pageService = new SanityPageService(newsSlugQuery)
 var slugify = require('slugify')
 
 export default function News(initialData) {
-  console.log('SINGLE NEWS')
-  console.log(initialData)
   const { data: { contact, policies, current }  } = pageService.getPreviewHook(initialData)()
   let mainD = new Date(current.postDate);
   let mainYe = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(mainD);
