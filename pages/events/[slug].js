@@ -12,6 +12,8 @@ const pageService = new SanityPageService(eventsSlugQuery);
 var slugify = require("slugify");
 
 export default function Events(initialData) {
+  console.log('SINGLE EVENT')
+  console.log(initialData)
   const {
     data: { contact, policies, current },
   } = pageService.getPreviewHook(initialData)();
@@ -142,7 +144,7 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  const paths = await pageService.fetchPaths("news");
+  const paths = await pageService.fetchPaths("events");
   return {
     paths: paths,
     fallback: false,

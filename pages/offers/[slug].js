@@ -332,7 +332,7 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  const paths = await pageService.fetchPaths("news");
+  const paths = await pageService.fetchPaths("offers");
   return {
     paths: paths,
     fallback: false,
