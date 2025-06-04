@@ -292,9 +292,8 @@ export default function Offers(initialData) {
                     i == 5 && (imageHeight = "h-[60vw] lg:h-[12.5vw]");
 
                     return (
-                      <newsTeaser
+                      <NewsTeaser
                         key={i}
-                        subHeading={e.category.title}
                         heading={e.title}
                         image={e.teaserImage}
                         className={width}
