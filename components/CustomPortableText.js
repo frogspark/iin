@@ -84,7 +84,7 @@ const customSerializers = {
                     e.preventDefault();
                     scrollToAnchor(mark.href);
                   }}
-                  className="underline linkUnset"
+                  className="underline anchor-link"
                 >
                   {child}
                 </a>

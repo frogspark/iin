@@ -72,7 +72,7 @@ html.lenis {
 
 .lenis.lenis-scrolling iframe {
    pointer-events: none;
-} 
+}
 
 .lenis-scrolling {
   .follow-wrapper {
@@ -117,4 +117,80 @@ iframe {
 
 .content > p > a > * {
   text-decoration: underline !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.content p,
+.content li {
+   a  {
+     color: rgba(60, 0, 181, 1);
+     transition-property: all;
+     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+     transition-duration: 150ms;
+     text-decoration: underline !important;
+
+     span {
+       color: inherit !important
+     }
+
+     &.linkUnset {
+       color: unset !important;
+     }
+
+     &:hover {
+       color: rgba(252, 130, 0,1) !important;
+     }
+  }
+}
+
+h1.text-\[\#F5F1E1\],
+h2.text-\[\#F5F1E1\],
+h3.text-\[\#F5F1E1\],
+h4.text-\[\#F5F1E1\],
+h5.text-\[\#F5F1E1\],
+h6.text-\[\#F5F1E1\],
+.content p.text-\[\#F5F1E1\],
+.content li.text-\[\#F5F1E1\],
+.text-\[\#F5F1E1\] .content p,
+.text-\[\#F5F1E1\] .content li,
+h1.text-white,
+h2.text-white,
+h3.text-white,
+h4.text-white,
+h5.text-white,
+h6.text-white,
+.content p.text-white,
+.content li.text-white,
+.text-white .content p,
+.text-white .content li{
+  a {
+    color: rgba(252, 130, 0,1) !important;
+
+    &:hover {
+      color: white !important;
+    }
+  }
+}
+
+blockquote {
+  color: black;
+  background-color: rgba(252, 130, 0, .2);
+  box-shadow: 0 0 6px 1px rgba(252, 130, 0, .5);
+  border-radius: 4px;
+  font-size: 1.25rem;
+  font-style: italic;
+  padding: .5rem 1rem;
+
+  &:before {
+    content: '"';
+  }
+
+  &:after {
+    content: '"';
+  }
 }
