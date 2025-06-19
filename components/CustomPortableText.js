@@ -74,7 +74,7 @@ const customSerializers = {
             child.props.node.mark._type
           ) {
             const mark = child.props.node.mark;
-            const cleanHref = mark.href.startsWith('#') ? mark.href.slice(1) : mark.href;
+            const cleanHref = mark?.href?.startsWith('#') ? mark?.href?.slice(1) : mark?.href;
 
             if (mark._type === "anchorLink") {
               return (
