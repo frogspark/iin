@@ -169,7 +169,7 @@ h6.text-white,
 .text-white .content p,
 .text-white .content li{
   a {
-    color: rgba(252, 130, 0,1) !important;
+    color: rgba(235, 234, 51, 1) !important;
 
     &:hover {
       color: white !important;
