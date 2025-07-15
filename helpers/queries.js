@@ -361,7 +361,7 @@ export const eventsQuery = `
     },
     ticketUrl,
     address,
-    price,
+    showOnWebsite,
   },
 }`;
 export const eventsSlugQuery = `{
@@ -387,7 +387,7 @@ export const eventsSlugQuery = `{
     },
     ticketUrl,
     address,
-    price,
+    showOnWebsite,
 
     seo {
       ...,
@@ -513,6 +513,7 @@ export const offersQuery = `
     introText,
     content,
     address,
+    showOnWebsite,
   },
 }`;
 export const offersSlugQuery = `{
@@ -536,6 +537,7 @@ export const offersSlugQuery = `{
     introText,
     content,
     address,
+    showOnWebsite,
     seo {
       ...,
       shareGraphic {
