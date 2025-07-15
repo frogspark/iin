@@ -359,6 +359,7 @@ export const eventsQuery = `
     slug {
       current
     },
+    buttonText,
     ticketUrl,
     address,
     showOnWebsite,
@@ -385,6 +386,7 @@ export const eventsSlugQuery = `{
     slug {
       current
     },
+    buttonText,
     ticketUrl,
     address,
     showOnWebsite,

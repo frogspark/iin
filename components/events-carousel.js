@@ -72,7 +72,6 @@ export default function EventsCarousel({ items, offer, initiatives }) {
         } relative mb-12 lg:mb-16 2xl:mb-20`}
         ref={emblaRef}
       >
-        {console.log("@@@@@@@@@",items)}
         <div className="embla__container gap-4">
       {items
             .filter((e) => e.showOnWebsite === true)
@@ -187,7 +186,7 @@ export default function EventsCarousel({ items, offer, initiatives }) {
                           £{e.price}
                         </span> */}
                         <button className="bg-[#FC6E5C] text-white rounded-3xl px-6 font-sans">
-                          Get tickets!
+                          {e.buttonText || "Get tickets!"}
                         </button>
                       </div>
                     ) : null}
