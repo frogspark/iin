@@ -2,17 +2,45 @@ import Layout from "@/components/layout";
 import Footer from "@/components/footer";
 import { LazyMotion, domAnimation, m } from "framer-motion";
 import NewsTeaser from "@/components/news-teaser";
+import { whatsOnQuery } from "@/helpers/queries";
 import { eventsQuery } from "@/helpers/queries";
+import { syncEventsQuery } from "@/helpers/queries";
+
 import SanityPageService from "@/services/sanityPageService";
 import { reveal } from "@/helpers/transitions";
 import CustomPortableText from "@/components/CustomPortableText";
-const pageService = new SanityPageService(eventsQuery);
+const pageService = new SanityPageService(whatsOnQuery);
+const pageService2 = new SanityPageService(eventsQuery);
+const pageService3 = new SanityPageService(syncEventsQuery);
 
 export default function Events(initialData) {
   const {
-    data: { contact, policies, events },
+    data: { contact, policies,whatsOn, events, syncEvents},
   } = pageService.getPreviewHook(initialData)();
-
+const allEvents = [...events, ...syncEvents].sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime));
+const layoutPattern = [
+  // Corresponds to i = 0, 10, 20...
+  { width: "col-span-4 lg:col-span-2", imageHeight: "h-[60vw] lg:h-[25vw]" },
+  // Corresponds to i = 1, 11, 21...
+  { width: "col-span-4 lg:col-span-1", imageHeight: "h-[60vw] lg:h-[28vw]" },
+  // Corresponds to i = 2, 12, 22...
+  { width: "col-span-4 lg:col-span-1", imageHeight: "h-[60vw] lg:h-[24vw]" },
+  // Corresponds to i = 3, 13, 23...
+  { width: "col-span-4 lg:col-span-1", imageHeight: "h-[60vw] lg:h-[14vw]" },
+  // Corresponds to i = 4, 14, 24...
+  { width: "col-span-4 lg:col-span-1", imageHeight: "h-[60vw] lg:h-[25vw]" },
+  // Corresponds to i = 5, 15, 25...
+  { width: "col-span-4 lg:col-span-1", imageHeight: "h-[60vw] lg:h-[12.5vw]" },
+  // Corresponds to i = 6, 16, 26... (Default styles)
+  { width: "col-span-4 lg:col-span-1", imageHeight: "h-[60vw] lg:h-[25vw]" },
+  // Corresponds to i = 7, 17, 27... (Default styles)
+  { width: "col-span-4 lg:col-span-1", imageHeight: "h-[60vw] lg:h-[25vw]" },
+  // Corresponds to i = 8, 18, 28...
+  { width: "col-span-4 lg:col-span-1", imageHeight: "h-[60vw] lg:h-[22vw]" },
+  // Corresponds to i = 9, 19, 29...
+  { width: "col-span-4 lg:col-span-2", imageHeight: "h-[60vw] lg:h-[27vw]" },
+];
+console.log("allEvents", whatsOn);
   return (
     <Layout>
       <LazyMotion features={domAnimation}>
@@ -56,38 +84,18 @@ export default function Events(initialData) {
                   </div>
 
                   <div className="w-full grid grid-cols-4 gap-12 mb-[5vw]">
-                    {events.map((e, i) => {
-                      let width = "col-span-4 lg:col-span-1";
-                      let imageHeight = "h-[60vw] lg:h-[25vw]";
-
-                      i == 0 && (width = "col-span-4 lg:col-span-2");
-                      i == 1 && (imageHeight = "h-[60vw] lg:h-[28vw]");
-                      i == 2 && (imageHeight = "h-[60vw] lg:h-[24vw]");
-                      i == 3 && (imageHeight = "h-[60vw] lg:h-[14vw]");
-                      i == 4 && (imageHeight = "h-[60vw] lg:h-[25vw]");
-                      i == 5 && (imageHeight = "h-[60vw] lg:h-[12.5vw]");
-                      i == 8 && (imageHeight = "h-[60vw] lg:h-[22vw]");
-                      i == 9 &&
-                        ((width = "col-span-4 lg:col-span-2"),
-                        (imageHeight = "h-[60vw] lg:h-[27vw]"));
-                      i == 10 && (width = "col-span-4 lg:col-span-2");
-                      i == 11 && (imageHeight = "h-[60vw] lg:h-[28vw]");
-                      i == 12 && (imageHeight = "h-[60vw] lg:h-[24vw]");
-                      i == 13 && (imageHeight = "h-[60vw] lg:h-[14vw]");
-                      i == 14 && (imageHeight = "h-[60vw] lg:h-[25vw]");
-                      i == 15 && (imageHeight = "h-[60vw] lg:h-[12.5vw]");
-                      i == 18 && (imageHeight = "h-[60vw] lg:h-[22vw]");
-                      i == 19 &&
-                        ((width = "col-span-4 lg:col-span-2"),
-                        (imageHeight = "h-[60vw] lg:h-[27vw]"));
+                    {allEvents.map((e, i) => {
+ 
+                      const currentStyles = layoutPattern[i % layoutPattern.length];
 
                       return (
                         <NewsTeaser
-                          key={i}
+                          // ✨ Bonus: Using a unique ID from your data is better than the index `i`
+                          key={e._id || i}
                           heading={e.title}
-                          image={e.teaserImage}
-                          className={width}
-                          imageHeight={imageHeight}
+                          image={e.mobileHeroImage?.asset?.url || e.teaserImage}
+                          className={currentStyles.width}
+                          imageHeight={currentStyles.imageHeight}
                           href={`/events/${e.slug.current}/`}
                         />
                       );
@@ -106,8 +114,14 @@ export default function Events(initialData) {
 }
 
 export async function getStaticProps(context) {
-  const props = await pageService.fetchQuery(context);
+  const whatsOnData = await pageService.fetchQuery(context);
+  const eventsData = await pageService2.fetchQuery(context);
+  const syncEventData = await pageService3.fetchQuery(context);
   return {
-    props: props,
+    props: {
+      ...whatsOnData,
+      events: eventsData.events || [],
+      syncEvents: syncEventData.syncEvent || [],
+    },
   };
 }

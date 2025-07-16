@@ -92,7 +92,7 @@ export default function Offers(initialData) {
                       return (
                         <NewsTeaser
                           key={i}
-                          image={e.mobileHeaderImage}
+                          image={e.mobileHeroImage.asset.url || e.teaserImage}
                           imageHeight={imageHeight}
                           heading={e.title}
                           className={width}

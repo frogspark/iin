@@ -336,6 +336,37 @@ export const whatsOnQuery = `
     }
   }
 }`;
+
+export const syncEventsQuery = `
+{
+  "syncEvent": *[_type == "syncEvent"]{
+    title,
+    mobileHeroImage {
+      asset-> {
+        ...
+      },
+      caption,
+      alt,
+      hotspot {
+        x,
+        y
+      },
+    },
+
+    introText,
+    content,
+    dateTime,
+    age,
+    slug {
+      current
+    },
+    buttonText,
+    ticketUrl,
+    address,
+    showOnWebsite,
+  },
+}`;
+
 export const eventsQuery = `
 {
   "events": *[_type == "events"]{

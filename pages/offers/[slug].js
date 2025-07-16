@@ -255,7 +255,6 @@ export default function Offers(initialData) {
                     {relatedPosts.map((e, i) => {
                       let width = "w-full";
                       let imageHeight = "h-[50vw] lg:h-[15vw]";
-
                       return (
                         <NewsTeaser
                           key={i}

@@ -98,13 +98,13 @@ export default function Footer({ policies, contact }) {
       </div>
 
       <div className="p-5 pb-[10vw] relative">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className=" grid grid-cols-1 md:grid-cols-1 gap-5">
           <div
-            className="col-span-1 aspect-square bg-[#5F0EFF] selection:text-[#5F0EFF] flex items-center justify-center relative group/main"
+            className="h-[600px] w-[100%] col-span-1 aspect-square bg-[#5F0EFF] selection:text-[#5F0EFF] flex items-center justify-center relative group/main"
             ref={footerRef1}
           >
             <div className="absolute inset-0 flex justify-center items-center pointer-events-none z-0 bg-[#5F0EFF] opacity-0 scale-[0.75] lg:group-hover/main:opacity-100 lg:group-hover/main:scale-[1] transition-all ease-in-out duration-[550ms]">
-              <div className="w-[50%] h-[75%] relative mix-blend-lighten opacity-[25%] bg-off-white overflow-hidden">
+              <div className="w-[100%] h-[50%] relative mix-blend-lighten opacity-[25%] bg-off-white overflow-hidden">
                 <MouseParallax
                   enableOnTouchDevice={false}
                   isAbsolutelyPositioned
@@ -173,133 +173,7 @@ export default function Footer({ policies, contact }) {
             </div>
           </div>
 
-          <div
-            className="col-span-1 aspect-square bg-[#EFF366] selection:text-[#EFF366] flex items-center justify-center relative group/main"
-            ref={footerRef2}
-          >
-            <div className="absolute inset-0 flex justify-center items-center pointer-events-none z-0 bg-[#EFF366] opacity-0 scale-[0.75] lg:group-hover/main:opacity-100 lg:group-hover/main:scale-[1] transition-all ease-in-out duration-[550ms]">
-              <div className="w-[50%] h-[75%] relative mix-blend-darken opacity-[15%] bg-[#EFF366] overflow-hidden">
-                <MouseParallax
-                  enableOnTouchDevice={false}
-                  isAbsolutelyPositioned
-                  lerpEase={0.1}
-                  strength={0.033}
-                  zIndex={20}
-                  parallaxContainerRef={footerRef2}
-                >
-                  <FooterFlick
-                    images={[
-                      "/images/footer-flick2-01.jpg",
-                      "/images/footer-flick2-02.jpg",
-                      "/images/footer-flick2-03.jpg",
-                    ]}
-                  />
-                </MouseParallax>
-              </div>
-            </div>
-
-            <div className="w-11/12 lg:w-10/12 text-center text-off-black relative z-[10]">
-              <span className="block text-[9.5vw] leading-none md:text-[5vw] md:leading-none xl:text-[4.5vw] xl:leading-none mb-10 lg:mb-16">
-                <span className="uppercase relative">Sign up </span>
-                <span className="block font-display">
-                  for{" "}
-                  <span className="uppercase italic relative">
-                    updates{" "}
-                    <IconSquiggleUnderline className="absolute bottom-[-5px] left-[-5%] right-[-5%] w-[110%]" />
-                  </span>
-                </span>
-              </span>
-
-              <p className="mb-12 lg:mb-16 leading-[1.25] xl:text-xl xl:leading-[1.25] max-w-[] md:max-w-[400px] xl:max-w-[500px] mx-auto">
-                No spam, ever. Just occasional news, city updates, and tasty
-                offers direct to your inbox!
-              </p>
-
-              <div id="mc_embed_shell">
-                <div id="mc_embed_signup">
-                  <form
-                    action="https://itsinnottingham.us12.list-manage.com/subscribe/post?u=a2589d6638b3851af61d31af5&amp;id=ab842ef9a9"
-                    method="post"
-                    id="mc-embedded-subscribe-form"
-                    name="mc-embedded-subscribe-form"
-                    target="_blank"
-                    className="relative xl:text-xl xl:leading-none xl:max-w-[720px] mx-auto"
-                  >
-                    <div id="mc_embed_signup_scroll">
-                      <div className="w-full">
-                        {/* <label for="mce-EMAIL">Email Address <span className="asterisk">*</span></label> */}
-                        <input
-                          type="email"
-                          name="EMAIL"
-                          id="mce-EMAIL"
-                          required=""
-                          placeholder="Email address..."
-                          className="appearance-none rounded-full bg-white py-4 lg:py-5 px-6 inline-block leading-none w-full a11y-focus focus-visible:ring-2"
-                        />
-                      </div>
-                      <div id="mce-responses" className="clear">
-                        <div id="mce-error-response" className="hidden"></div>
-                        <div id="mce-success-response" className="hidden"></div>
-                      </div>
-                      <div
-                        aria-hidden="true"
-                        style={{ position: `absolute`, left: `-5000px` }}
-                      >
-                        <input
-                          type="text"
-                          name="b_a2589d6638b3851af61d31af5_ab842ef9a9"
-                          tabIndex="-1"
-                          defaultValue=""
-                        />
-                      </div>
-                      <div className="clear">
-                        <button
-                          type="submit"
-                          name="subscribe"
-                          id="mc-embedded-subscribe"
-                          className="absolute top-0 right-0 w-auto bg-[#FC6E5C] px-8 h-full flex items-center justify-center rounded-full text-white a11y-focus focus-visible:ring-2 focus-visible:ring-black group overflow-hidden leading-[1.1]"
-                        >
-                          <div className="relative z-[1] overflow-hidden">
-                            <span className="block transition-transform ease-out duration-[450ms] translate-y-none group-hover:translate-y-[-105%]">
-                              Sign&nbsp;
-                              <span className="hidden lg:inline">me&nbsp;</span>
-                              up!
-                            </span>
-                            <span className="block absolute inset-0 transition-transform ease-out duration-[450ms] translate-y-[105%] group-hover:translate-y-0">
-                              Sign&nbsp;
-                              <span className="hidden lg:inline">me&nbsp;</span>
-                              up!
-                            </span>
-                          </div>
-
-                          <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-[0] opacity-0 group-hover:opacity-100 group-hover:delay-[0ms] delay-[450ms] transition-opacity ease-out duration-[100ms]">
-                            <div
-                              className={`w-[5px] h-[5px] rounded-full transition-all ease-out duration-[450ms] group-hover:duration-[600ms] group-hover:scale-[50] origin-center bg-black/30`}
-                            ></div>
-                          </div>
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-
-              {/* <form className="relative xl:text-xl xl:leading-none xl:max-w-[720px] mx-auto">
-                <input type="email" placeholder="Email address..." className="appearance-none rounded-full bg-white py-4 lg:py-5 px-6 inline-block leading-none w-full a11y-focus focus-visible:ring-2" />
-
-                <button type="submit" className="absolute top-0 right-0 w-auto bg-[#FC6E5C] px-8 h-full flex items-center justify-center rounded-full text-white a11y-focus focus-visible:ring-2 focus-visible:ring-black group overflow-hidden leading-[1.1]">
-                  <div className="relative z-[1] overflow-hidden">
-                    <span className="block transition-transform ease-out duration-[450ms] translate-y-none group-hover:translate-y-[-105%]">Sign&nbsp;<span className="hidden lg:inline">me&nbsp;</span>up!</span>
-                    <span className="block absolute inset-0 transition-transform ease-out duration-[450ms] translate-y-[105%] group-hover:translate-y-0">Sign&nbsp;<span className="hidden lg:inline">me&nbsp;</span>up!</span>
-                  </div>
-
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-[0] opacity-0 group-hover:opacity-100 group-hover:delay-[0ms] delay-[450ms] transition-opacity ease-out duration-[100ms]">
-                    <div className={`w-[5px] h-[5px] rounded-full transition-all ease-out duration-[450ms] group-hover:duration-[600ms] group-hover:scale-[50] origin-center bg-black/30`}></div>
-                  </div>
-                </button>
-              </form> */}
-            </div>
-          </div>
+          
         </div>
 
         <div className="absolute bottom-[3vw] left-0 right-0 w-full hidden lg:block">

@@ -14,7 +14,7 @@ export default function SanityImage({ image, className, alt, priority, widthOver
   };
 
   // Generate actual URL
-	const imageProps = useNextSanityImage(sanity.config, image.asset, { imageBuilder: myCustomImageBuilder });
+	const imageProps = image || useNextSanityImage(sanity.config, image.asset, { imageBuilder: myCustomImageBuilder });
 
   // Generate attributes for Img component
   const attributes = {};
@@ -72,8 +72,9 @@ export default function SanityImage({ image, className, alt, priority, widthOver
   ): (
     <figure className={`image bg-black/20 ${className} cover-image absolute inset-0 w-full h-full object-cover object-center`}>
 		  <Image
-        src={imageProps.src}
-        loader={imageProps.loader}
+        src={image || imageProps.src}
+        //had to coment this out because it was causing an error, need to fix it tho - raf
+        // loader={imageProps.loader}
         className={`absolute inset-0 w-full h-full object-center object-cover will-change-transform transition-all ease-in-out duration-[1500ms] ${imageIsLoaded ? 'scale-1 opacity-100' : 'scale-[1.05] opacity-0'} ${priority ? 'opacity-100' : ''}`}
         {...(priority ? {
           priority: true} : {}

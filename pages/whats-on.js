@@ -11,6 +11,7 @@ import Image from "next/image";
 import ImageScale from "@/components/image-scale";
 import { whatsOnQuery } from "@/helpers/queries";
 import { eventsQuery } from "@/helpers/queries";
+import { syncEventsQuery } from "@/helpers/queries";
 import { offersQuery } from "@/helpers/queries";
 import useIsMobile from "@/helpers/isMobile";
 import SanityPageService from "@/services/sanityPageService";
@@ -26,6 +27,7 @@ import MobileVerticalSlider from "@/components/mobileVerticalSlider";
 import Line from "@/icons/line.svg";
 const pageService = new SanityPageService(whatsOnQuery);
 const pageService2 = new SanityPageService(eventsQuery);
+const pageService4 = new SanityPageService(syncEventsQuery);
 const pageService3 = new SanityPageService(offersQuery);
 const container = {
   enter: {
@@ -49,7 +51,7 @@ const draw = {
 
 export default function WhatsOn(initialData) {
   const {
-    data: { contact, policies, whatsOn, events, offers },
+    data: { contact, policies, whatsOn, events, offers, syncEvents },
   } = pageService.getPreviewHook(initialData)();
   let eventText = whatsOn.eventText;
   if(!eventText) {
@@ -66,7 +68,7 @@ export default function WhatsOn(initialData) {
   const upperText2 = match2 ? match2[1].trim() : offerText;
   const lowerText2 = match2 ? match2[2].trim() : "";
   const isMobile = useIsMobile();
-
+const allEvents = [...events, ...syncEvents].sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime));
   return (
     <Layout>
       <NextSeo
@@ -338,11 +340,12 @@ export default function WhatsOn(initialData) {
                       <MobileVerticalSlider items={events} offer={false} />
                     ) : (
                       <EventsCarousel
-                        items={events}
+                        items={allEvents}
                         offer={false}
                         initiatives
                       />
                     )}
+
                   </div>
                 </div>
               </div>
@@ -360,12 +363,13 @@ export async function getStaticProps(context) {
   const whatsOnData = await pageService.fetchQuery(context);
   const eventsData = await pageService2.fetchQuery(context);
   const offersData = await pageService3.fetchQuery(context);
-
+  const syncEventData = await pageService4.fetchQuery(context);
   return {
     props: {
       ...whatsOnData,
       events: eventsData.events || [],
       offers: offersData.offers || [],
+      syncEvents: syncEventData.syncEvent || [],
     },
   };
 }
