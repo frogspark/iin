@@ -21,7 +21,22 @@ export default function Offers(initialData) {
   const {
     data: { contact, policies, current },
   } = pageService.getPreviewHook(initialData)();
-
+  if (!current) {
+    return (
+      <Layout>
+        <main className="w-full text-center py-20">
+          <h1 className="text-3xl">404 - Offer Not Found</h1>
+          <p className="mt-4">
+            {"Sorry, we couldn't find the offer you were looking for."}
+          </p>
+          <Link href="/offers" className="mt-8 inline-block underline">
+            Return to all offers
+          </Link>
+        </main>
+        <Footer policies={policies} contact={contact} />
+      </Layout>
+    );
+  }
   let relatedPosts = current.customRelated?.length > 0 ? current.customRelated : current.related;
 
   return (
