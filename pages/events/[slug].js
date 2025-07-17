@@ -7,7 +7,6 @@ import IconTwitter from "@/icons/twitter.svg";
 import { eventsSlugQuery } from "@/helpers/queries";
 import SanityPageService from "@/services/sanityPageService";
 import SanityImageResponsive from "@/components/sanity-image-responsive";
-import CustomPortableText from "@/components/CustomPortableText";
 import Blockquote from "@/components/blockquote";
 import Link from "next/link";
 import NewsTeaser from "@/components/news-teaser";
@@ -15,24 +14,62 @@ import IconSquiggleUnderline from "@/icons/squiggle-underline.svg";
 import { NextSeo } from "next-seo";
 import Head from "next/head";
 const pageService = new SanityPageService(eventsSlugQuery);
-var slugify = require("slugify");
+import slugify from 'slugify';
+import  createClient  from '@sanity/client'; 
+import dynamic from 'next/dynamic'; 
+
+const CustomPortableText = dynamic(() => import('@/components/CustomPortableText'), {
+  ssr: false,
+});
+const sanity = createClient({
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
+  useCdn: true,
+  apiVersion: '2024-06-01',
+});
 
 export default function Events(initialData) {
   const {
     data: { contact, policies, current },
   } = pageService.getPreviewHook(initialData)();
+  if (!current) {
+    return (
+      <Layout>
+        <main className="w-full text-center py-20">
+          <h1 className="text-3xl">404 - Event Not Found</h1>
+          <p className="mt-4">
+            {"Sorry, we couldn't find the event you were looking for."}
+          </p>
+          <Link href="/events" className="mt-8 inline-block underline">
+            Return to all events
+          </Link>
+        </main>
+        <Footer policies={policies} contact={contact} />
+      </Layout>
+    );
+  }
+  let mainD = new Date(current?.dateTime);
+let mainYe = '';
+let mainMo = '';
 
-  let mainD = new Date(current.dateTime);
-  let mainYe = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(mainD);
-  let mainMo = new Intl.DateTimeFormat('en', { month: 'short' }).format(mainD);
-
-  let relatedPosts = current.customRelated?.length > 0 ? current.customRelated : current.related;
+if (!isNaN(mainD)) {
+  mainYe = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(mainD);
+  mainMo = new Intl.DateTimeFormat('en', { month: 'short' }).format(mainD);
+} else {
+  // Optional: Handle the case of an invalid date, e.g., log an error
+  console.error("The date provided is invalid:", current?.dateTime);
+}
+ const relatedPosts = (
+    current.customRelated?.length > 0
+      ? current.customRelated
+      : [...(current.relatedEvents || []), ...(current.relatedSyncEvents || [])]
+  ).slice(0, 3); // Ensure we only take a few
 
   return (
     <Layout>
       <NextSeo
           title={current.seo?.metaTitle ? current.seo?.metaTitle : current.title}
-          canonical={`https://www.itsinnottingham.com/events/${current.slug.current}/`}
+          canonical={`https://www.itsinnottingham.com/events/${current?.slug.current}/`}
           description={current.seo?.metaDesc ? current.seo?.metaDesc : null}
           openGraph={{
             title: current.seo?.metaTitle
@@ -93,12 +130,12 @@ export default function Events(initialData) {
                   </h1>
                 </div>
               </div>
-
               <div className={`w-full relative px-5 lg:px-[7.5vw] mb-[5vw]`}>
-                {current.heroImage && (
+                {console.log("@@@@@@@@",current)}
+                {current.heroImage || current.featuredImage && (
                   <SanityImageResponsive
                     priority
-                    image={current.heroImage}
+                    image={current.heroImage || current.featuredImage}
                     quality={75}
                     className="w-full"
                     sizes={`(max-width: 1024px) 100vw, 89vw`}
@@ -129,7 +166,6 @@ export default function Events(initialData) {
                                 Embed: (props) => <div className="w-full"
                                                        dangerouslySetInnerHTML={ { __html: props.code } }/>,
                                 Image: (props) => {
-
                                   return (
                                       <SanityImageResponsive
                                           image={ props.image }
@@ -241,7 +277,7 @@ export default function Events(initialData) {
                           <NewsTeaser
                               key={ i }
                               heading={ e.title }
-                              image={ e.teaserImage }
+                              image={ e.featuredImage || e.teaserImage }
                               className={ `${ width } mb-12` }
                               imageHeight={ imageHeight }
                               href={ `/events/${ e.slug.current }` }
@@ -262,7 +298,7 @@ export default function Events(initialData) {
                 </div>
 
                 <div className="grid grid-cols-4 gap-12 mb-12 lg:mb-[5vw]">
-                  { current.more.map((e, i) => {
+                  { current?.more?.map((e, i) => {
                     let width = "col-span-4 lg:col-span-1";
                     let imageHeight = "h-[60vw] lg:h-[25vw]";
 
@@ -275,9 +311,9 @@ export default function Events(initialData) {
 
                     return (
                         <NewsTeaser
-                            key={i}
+                            key={e._id || i}
                             heading={e.title}
-                            image={e.teaserImage}
+                            image={e.featuredImage || e.teaserImage}
                             className={width}
                             imageHeight={imageHeight}
                             href={`/events/${e.slug.current}`}
@@ -306,11 +342,17 @@ export async function getStaticProps(context) {
     props: props,
   };
 }
-
 export async function getStaticPaths() {
-  const paths = await pageService.fetchPaths("events");
+  // Fetch all slugs from both 'event' and 'syncEvent' types
+  const allEventSlugs = await sanity.fetch(`*[_type in ["event", "syncEvent"] && defined(slug.current)][].slug.current`);
+  const paths = allEventSlugs.map((slug) => ({
+    params: {
+      slug: slug,
+    },
+  }));
+
   return {
     paths: paths,
-    fallback: false,
+    fallback: 'blocking', // Use 'blocking' or true to handle new events without a rebuild
   };
 }

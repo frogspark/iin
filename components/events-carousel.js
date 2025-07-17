@@ -73,16 +73,18 @@ export default function EventsCarousel({ items, offer, initiatives }) {
         ref={emblaRef}
       >
         <div className="embla__container gap-4">
-          {items.map((e, i) => {
-            const dateObj = new Date(e.dateTime);
-            const datePart = dateObj
-              .toLocaleDateString("en-GB", {
-                weekday: "short",
-                day: "2-digit",
-                month: "short",
-                year: "numeric",
-              })
-              .replace(",", "");
+      {items
+            .filter((e) => e.showOnWebsite === true)
+            .map((e, i) => {
+              const dateObj = new Date(e.dateTime);
+              const datePart = dateObj
+                .toLocaleDateString("en-GB", {
+                  weekday: "short",
+                  day: "2-digit",
+                  month: "short",
+                  year: "numeric",
+                })
+                .replace(",", "");
 
             const timePart = dateObj.toLocaleTimeString("en-GB", {
               hour: "2-digit",
@@ -103,10 +105,10 @@ export default function EventsCarousel({ items, offer, initiatives }) {
                     </Link>
                   )}
                 >
-                  <div className="w-[560px] relative overflow-hidden">
-                    <img
-                      src={e.mobileHeroImage.asset.url}
-                      alt={e.mobileHeroImage?.alt}
+                  <div className="w-[560px] h-[363px] relative overflow-hidden">
+                    <img  className="max-w-full h-full object-cover object-center"
+                      src={e.mobileHeroImage?.asset.url || e.featuredImage || e.teaserImage}
+                      alt={e.mobileHeroImage?.alt || e.featuredImage?.title || e.teaserImage?.alt || "Event Image"}
                     />
                   </div>
 
@@ -180,11 +182,11 @@ export default function EventsCarousel({ items, offer, initiatives }) {
 
                     {!offer ? (
                       <div className="flex justify-between">
-                        <span className="text-4xl text-[#BD3146] font-sans">
+                        {/* <span className="text-4xl text-[#BD3146] font-sans">
                           £{e.price}
-                        </span>
+                        </span> */}
                         <button className="bg-[#FC6E5C] text-white rounded-3xl px-6 font-sans">
-                          Get tickets!
+                          {e.buttonText || "Get tickets!"}
                         </button>
                       </div>
                     ) : null}

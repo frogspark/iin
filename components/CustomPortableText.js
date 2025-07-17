@@ -68,7 +68,10 @@ const customSerializers = {
     return (
       <Tag className="scroll-mt-20" id={anchorId || undefined}>
         {children.map((child, index) => {
-          if (
+			          if (typeof child === 'string') {
+            return <span key={index} dangerouslySetInnerHTML={{ __html: child }} />;
+          }
+          else if (
             typeof child === "object" &&
             child?.props?.node?.mark &&
             child.props.node.mark._type
