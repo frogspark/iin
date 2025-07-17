@@ -40,7 +40,6 @@ const layoutPattern = [
   // Corresponds to i = 9, 19, 29...
   { width: "col-span-4 lg:col-span-2", imageHeight: "h-[60vw] lg:h-[27vw]" },
 ];
-console.log("allEvents", whatsOn);
   return (
     <Layout>
       <LazyMotion features={domAnimation}>
@@ -85,15 +84,13 @@ console.log("allEvents", whatsOn);
 
                   <div className="w-full grid grid-cols-4 gap-12 mb-[5vw]">
                     {allEvents.map((e, i) => {
- 
                       const currentStyles = layoutPattern[i % layoutPattern.length];
-
                       return (
                         <NewsTeaser
                           // ✨ Bonus: Using a unique ID from your data is better than the index `i`
                           key={e._id || i}
                           heading={e.title}
-                          image={e.mobileHeroImage?.asset?.url || e.teaserImage}
+                          image={e.mobileHeroImage?.asset?.url || e.featuredImage || e.teaserImage}
                           className={currentStyles.width}
                           imageHeight={currentStyles.imageHeight}
                           href={`/events/${e.slug.current}/`}

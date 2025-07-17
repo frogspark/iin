@@ -20,7 +20,7 @@ module.exports = {
   },
   trailingSlash: true,
   images: {
-    domains: ['cdn.sanity.io'],
+    domains: ['cdn.sanity.io','nottingham.loqiva.com'],
     deviceSizes: [768, 1024, 1280, 1600, 1920, 2400],
     imageSizes: [32, 64, 96, 128, 256, 350],
   },

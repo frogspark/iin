@@ -341,6 +341,7 @@ export const syncEventsQuery = `
 {
   "syncEvent": *[_type == "syncEvent"]{
     title,
+    featuredImage,
     mobileHeroImage {
       asset-> {
         ...
@@ -397,19 +398,11 @@ export const eventsQuery = `
   },
 }`;
 export const eventsSlugQuery = `{
-  "current": *[_type == "events" && slug.current == $slug][0]{
-		title,
-    mobileHeroImage {
-      asset-> {
-        ...
-      },
-      caption,
-      alt,
-      hotspot {
-        x,
-        y
-      },
-    },
+  "current": *[_type in ["event", "syncEvent"] && slug.current == $slug][0] {
+    _type, // It's useful to know which type we're dealing with
+    title,
+    featuredImage,
+    mobileHeroImage,
     introText,
     content,
     dateTime,
@@ -421,94 +414,43 @@ export const eventsSlugQuery = `{
     ticketUrl,
     address,
     showOnWebsite,
-
     seo {
       ...,
       shareGraphic {
         asset->
       }
     },
-    "more": *[_type == "events" && slug.current != $slug][0..6]{
+    // Manually selected related items
+    customRelated[]->{
+      _type,
       title,
-      category->{
-        title,
-        slug {
-          current
-        }
-      },
-      teaserImage {
-        asset-> {
-          ...
-        },
-        caption,
-        alt,
-        hotspot {
-          x,
-          y
-        },
-      },
-      heroImage {
-        asset-> {
-          ...
-        },
-        caption,
-        alt,
-        hotspot {
-          x,
-          y
-        },
-      },
-      slug {
-        current
-      },
-      seo {
-        ...,
-        shareGraphic {
-          asset->
-        }
-      }
+      slug,
+      teaserImage,
+      featuredImage,
     },
-    customRelated[]->, 
-    "related": *[_type == "events" && slug.current != $slug][0..2]{
+    // Automatically fetched related items from 'event' type
+    "relatedEvents": *[_type == "event" && slug.current != $slug && defined(slug.current)][0..2] {
+      _type,
       title,
-      category->{
-        title,
-        slug {
-          current
-        }
-      },
-      teaserImage {
-        asset-> {
-          ...
-        },
-        caption,
-        alt,
-        hotspot {
-          x,
-          y
-        },
-      },
-      heroImage {
-        asset-> {
-          ...
-        },
-        caption,
-        alt,
-        hotspot {
-          x,
-          y
-        },
-      },
-      slug {
-        current
-      },
-      seo {
-        ...,
-        shareGraphic {
-          asset->
-        }
-      }
+      slug,
+      teaserImage,
+      featuredImage,
+    },
+    // Automatically fetched related items from 'syncEvent' type
+    "relatedSyncEvents": *[_type == "syncEvent" && slug.current != $slug && defined(slug.current)][0..2] {
+      _type,
+      title,
+      slug,
+      teaserImage,
+      featuredImage,
     }
+  },
+  "more": *[_type == "event" || _type == "syncEvent"][0..6] {
+    _type,
+    title,
+    teaserImage,
+    featuredImage,
+    slug
   },
   "policies": *[_type == "policies"] {
     title,
