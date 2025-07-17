@@ -7,7 +7,6 @@ import IconTwitter from "@/icons/twitter.svg";
 import { eventsSlugQuery } from "@/helpers/queries";
 import SanityPageService from "@/services/sanityPageService";
 import SanityImageResponsive from "@/components/sanity-image-responsive";
-import CustomPortableText from "@/components/CustomPortableText";
 import Blockquote from "@/components/blockquote";
 import Link from "next/link";
 import NewsTeaser from "@/components/news-teaser";
@@ -16,13 +15,16 @@ import { NextSeo } from "next-seo";
 import Head from "next/head";
 const pageService = new SanityPageService(eventsSlugQuery);
 var slugify = require("slugify");
-import { createClient } from '@sanity/client'; // 👈 Add this import
+import { createClient } from '@sanity/client'; 
+import dynamic from 'next/dynamic'; 
 
-// 👇 Add this client creation logic
+const CustomPortableText = dynamic(() => import('@/components/CustomPortableText'), {
+  ssr: false,
+});
 const sanity = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
-  useCdn: true, // `true` is fine for public, published data
+  useCdn: true,
   apiVersion: '2024-06-01',
 });
 
@@ -30,13 +32,14 @@ export default function Events(initialData) {
   const {
     data: { contact, policies, current, more },
   } = pageService.getPreviewHook(initialData)();
+
   if (!current) {
     return (
       <Layout>
         <main className="w-full text-center py-20">
           <h1 className="text-3xl">404 - Event Not Found</h1>
           <p className="mt-4">
-            Sorry, we couldn't find the event you were looking for.
+            {"Sorry, we couldn't find the event you were looking for."}
           </p>
           <Link href="/events" className="mt-8 inline-block underline">
             Return to all events
@@ -344,7 +347,6 @@ export async function getStaticProps(context) {
 export async function getStaticPaths() {
   // Fetch all slugs from both 'event' and 'syncEvent' types
   const allEventSlugs = await sanity.fetch(`*[_type in ["event", "syncEvent"] && defined(slug.current)][].slug.current`);
-  console.log("All Event Slugs@@@@@@@", allEventSlugs);
   const paths = allEventSlugs.map((slug) => ({
     params: {
       slug: slug,
@@ -356,10 +358,3 @@ export async function getStaticPaths() {
     fallback: 'blocking', // Use 'blocking' or true to handle new events without a rebuild
   };
 }
-// export async function getStaticPaths() {
-//   const paths = await pageService.fetchPaths("events");
-//   return {
-//     paths: paths,
-//     fallback: false,
-//   };
-// }
