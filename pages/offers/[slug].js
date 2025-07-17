@@ -21,6 +21,7 @@ export default function Offers(initialData) {
   const {
     data: { contact, policies, current },
   } = pageService.getPreviewHook(initialData)();
+  console.log("current", current);
   if (!current) {
     return (
       <Layout>

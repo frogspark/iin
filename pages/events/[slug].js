@@ -30,9 +30,8 @@ const sanity = createClient({
 
 export default function Events(initialData) {
   const {
-    data: { contact, policies, current, more },
+    data: { contact, policies, current },
   } = pageService.getPreviewHook(initialData)();
-
   if (!current) {
     return (
       <Layout>
@@ -131,9 +130,9 @@ if (!isNaN(mainD)) {
                   </h1>
                 </div>
               </div>
-
               <div className={`w-full relative px-5 lg:px-[7.5vw] mb-[5vw]`}>
-                {current.heroImage && (
+                {console.log("@@@@@@@@",current)}
+                {current.heroImage || current.featuredImage && (
                   <SanityImageResponsive
                     priority
                     image={current.heroImage || current.featuredImage}
@@ -167,7 +166,6 @@ if (!isNaN(mainD)) {
                                 Embed: (props) => <div className="w-full"
                                                        dangerouslySetInnerHTML={ { __html: props.code } }/>,
                                 Image: (props) => {
-
                                   return (
                                       <SanityImageResponsive
                                           image={ props.image }

@@ -398,7 +398,7 @@ export const eventsQuery = `
   },
 }`;
 export const eventsSlugQuery = `{
-  "current": *[_type in ["event", "syncEvent"] && slug.current == $slug][0] {
+  "current": *[_type in ["events", "syncEvent"] && slug.current == $slug][0] {
     _type, // It's useful to know which type we're dealing with
     title,
     featuredImage,

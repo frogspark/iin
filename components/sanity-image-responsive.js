@@ -6,12 +6,17 @@ import Link from 'next/link';
 import slugify from 'slugify';
 
 export default function SanityImageResponsive({ image, className, alt, priority, quality, sizes, wrap, customLink }) {
-  const [imageIsLoaded, setImageIsLoaded] = useState(priority ? priority : false)
+  if (!image) {
+    return null;
+  }
+  console.log('Image alt text:', image);
+
+  const [imageIsLoaded, setImageIsLoaded] = useState(!!priority); // Simplified to boolean
   const imageProps = useNextSanityImage(
-		sanity.config,
+
 		image
 	);
-  
+
   let wrapClass = ''
   let internalHref = ''
 
@@ -32,7 +37,7 @@ export default function SanityImageResponsive({ image, className, alt, priority,
     internalHref = `${prefix}${ customLink.internalLink.slug ? customLink.internalLink.slug.current : slugify(customLink.internalLink.title, { lower: true, remove: /[*+~.()'"!:@]/g})}`
   }
 
-  let altText = 'Missing Image Description. Please add one!';
+  let altText =  alt || image.alt || image.asset?.altText || 'Missing Image Description';
 
   // check to see if we have been passed an alt value
   if(alt !== null && alt !== undefined) {
@@ -46,16 +51,15 @@ export default function SanityImageResponsive({ image, className, alt, priority,
   else if (image.asset !== null && Object.hasOwn(image.asset, 'altText')) {
     altText = image.asset.altText
   }
-  
 	return !customLink ? (
     <figure className={`image bg-black/10 ${className} relative overflow-hidden ${wrapClass}`}>
       <Image
-        src={imageProps?.src}
+        src={imageProps?.src || image}
         sizes={sizes ? sizes : `(max-width: 1024px) 100vw,90vw`}
         className={`${className} will-change-transform ${imageIsLoaded ? 'opacity-100 scale-1' : 'opacity-100 scale-[1.05]'} ${priority ? 'opacity-100' : 'transition-all ease-in-out duration-[2000ms]'}`}
         quality={quality ? quality : 75}
-        width={image?.asset.metadata.dimensions.width / 1.5}
-        height={image?.asset.metadata.dimensions.height / 1.5}
+        width={image?.asset?.metadata.dimensions.width / 1.5 || 600}
+        height={image?.asset?.metadata.dimensions.height / 1.5 || 400}
         {...(priority ? {priority: true} : {})}
         alt={altText}
         onLoad={event => {
@@ -77,12 +81,12 @@ export default function SanityImageResponsive({ image, className, alt, priority,
       <Link href={internalHref} className={`${className} ${wrapClass} float`}>
         <figure className={`image bg-black/10 ${className} relative overflow-hidden`}>
           <Image
-            src={imageProps?.src}
+            src={imageProps?.src || image}
             sizes={sizes ? sizes : `(max-width: 1024px) 100vw,90vw`}
             className={`${className} will-change-transform ${imageIsLoaded ? 'opacity-100 scale-1' : 'opacity-100 scale-[1.05]'} ${priority ? 'opacity-100' : 'transition-all ease-in-out duration-[2000ms]'}`}
             quality={quality ? quality : 75}
-            width={image?.asset.metadata.dimensions.width / 1.5}
-            height={image?.asset.metadata.dimensions.height / 1.5}
+            width={image?.asset?.metadata.dimensions.width / 1.5 || 600}
+            height={image?.asset?.metadata.dimensions.height / 1.5 || 400}
             {...(priority ? {priority: true} : {})}
             alt={altText}
             onLoad={event => {
@@ -103,12 +107,12 @@ export default function SanityImageResponsive({ image, className, alt, priority,
         <a href={customLink.externalLink} target="_blank" rel="noopener noreferrer" className={`${className} ${wrapClass} float`}>
         <figure className={`image bg-black/10 ${className} relative overflow-hidden`}>
           <Image
-            src={imageProps?.src}
+            src={imageProps?.src || image}
             sizes={sizes ? sizes : `(max-width: 1024px) 100vw,90vw`}
             className={`${className} will-change-transform ${imageIsLoaded ? 'opacity-100 scale-1' : 'opacity-100 scale-[1.05]'} ${priority ? 'opacity-100' : 'transition-all ease-in-out duration-[2000ms]'}`}
             quality={quality ? quality : 75}
-            width={image?.asset.metadata.dimensions.width / 1.5}
-            height={image?.asset.metadata.dimensions.height / 1.5}
+            width={image?.asset?.metadata.dimensions.width / 1.5 || 600}
+            height={image?.asset?.metadata.dimensions.height / 1.5 || 400}
             {...(priority ? {priority: true} : {})}
             alt={altText}
             onLoad={event => {

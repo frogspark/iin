@@ -106,9 +106,9 @@ export default function EventsCarousel({ items, offer, initiatives }) {
                   )}
                 >
                   <div className="w-[560px] h-[363px] relative overflow-hidden">
-                    <img
-                      src={e.mobileHeroImage.asset.url}
-                      alt={e.mobileHeroImage?.alt}
+                    <img  className="max-w-full h-full object-cover object-center"
+                      src={e.mobileHeroImage?.asset.url || e.featuredImage || e.teaserImage}
+                      alt={e.mobileHeroImage?.alt || e.featuredImage?.title || e.teaserImage?.alt || "Event Image"}
                     />
                   </div>
 
