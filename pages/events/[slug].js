@@ -14,8 +14,8 @@ import IconSquiggleUnderline from "@/icons/squiggle-underline.svg";
 import { NextSeo } from "next-seo";
 import Head from "next/head";
 const pageService = new SanityPageService(eventsSlugQuery);
-var slugify = require("slugify");
-import { createClient } from '@sanity/client'; 
+import slugify from 'slugify';
+import  createClient  from '@sanity/client'; 
 import dynamic from 'next/dynamic'; 
 
 const CustomPortableText = dynamic(() => import('@/components/CustomPortableText'), {
