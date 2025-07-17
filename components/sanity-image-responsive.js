@@ -1,21 +1,18 @@
 import Image from 'next/image'
-import sanity from '@/services/sanity'
 import { useState } from 'react';
 import { useNextSanityImage } from 'next-sanity-image';
 import Link from 'next/link';
 import slugify from 'slugify';
 
 export default function SanityImageResponsive({ image, className, alt, priority, quality, sizes, wrap, customLink }) {
-  if (!image) {
-    return null;
-  }
   console.log('Image alt text:', image);
 
   const [imageIsLoaded, setImageIsLoaded] = useState(!!priority); // Simplified to boolean
-  const imageProps = useNextSanityImage(
+  const imageProps = useNextSanityImage(image || {});
 
-		image
-	);
+  if (!image) {
+    return null;
+  }
 
   let wrapClass = ''
   let internalHref = ''
