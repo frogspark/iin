@@ -65,15 +65,6 @@ module.exports = async () => {
     destination: '/whats-on',
     permanent: true,
   },
-  // {
-  //   source: '/offers/:slug',
-  //   destination: '/news/student-discounts-nottingham',
-  //   permanent: true,
-  // },{
-  //   source: '/offers/:slug/:slug',
-  //   destination: '/news/student-discounts-nottingham',
-  //   permanent: true,
-  // },
   {
     source: '/directory/:slug/:slug',
     destination: '/whats-on',
@@ -106,4 +97,14 @@ module.exports = async () => {
   })
 
   return redirects;
+
+  // {
+  //   source: '/offers/:slug',
+  //   destination: '/news/student-discounts-nottingham',
+  //   permanent: true,
+  // },{
+  //   source: '/offers/:slug/:slug',
+  //   destination: '/news/student-discounts-nottingham',
+  //   permanent: true,
+  // },
 };
