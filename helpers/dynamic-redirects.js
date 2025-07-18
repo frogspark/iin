@@ -64,15 +64,17 @@ module.exports = async () => {
     source: '/whats-on/:slug/:slug',
     destination: '/whats-on',
     permanent: true,
-  },{
-    source: '/offers/:slug',
-    destination: '/news/student-discounts-nottingham',
-    permanent: true,
-  },{
-    source: '/offers/:slug/:slug',
-    destination: '/news/student-discounts-nottingham',
-    permanent: true,
-  },{
+  },
+  // {
+  //   source: '/offers/:slug',
+  //   destination: '/news/student-discounts-nottingham',
+  //   permanent: true,
+  // },{
+  //   source: '/offers/:slug/:slug',
+  //   destination: '/news/student-discounts-nottingham',
+  //   permanent: true,
+  // },
+  {
     source: '/directory/:slug/:slug',
     destination: '/whats-on',
     permanent: true,
