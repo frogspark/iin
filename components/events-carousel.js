@@ -156,40 +156,54 @@ export default function EventsCarousel({ items, offer, initiatives }) {
                         </div>
                       </div>
                     ) : (
-                      <span className="text-2xl text-[#BD3146] font-sans">
-  {e.address && <CustomPortableText content={e.address} />}
-                      </span>
+                        <CustomPortableText
+                          className="text-4xl color-black font-sans"
+                          content={e.address}
+                        />
                     )}
 
                     <div className="flex flex-col gap-2">
-                      <span className="text-4xl color-black font-sans">
-  {e.title && <CustomPortableText content={e.title} />}
-                      </span>
-                      {!offer ? (
-                        <span className="text-xl color-[#6a6a6a] font-sans">
-                     {e.address && <CustomPortableText content={e.address} />}
-
-                        </span>
-                      ) : null}
+               
+                      {!offer &&(
+                        <>
+                          <CustomPortableText
+                            className="text-4xl color-black font-sans"
+                            content={e.title}
+                          />
+                          <CustomPortableText
+                            className="text-2xl color-black font-sans"
+                            content={e.address}
+                          />
+                        </>
+            
+                      )}
                     </div>
                     {offer && (
                       <div>
-                        <span className="text-xl color-[#6a6a6a] font-sans">
-  {e.title && <CustomPortableText content={e.title} />}
-                        </span>
+                        <CustomPortableText
+                          className="text-2xl color-black font-sans"
+                          content={e.title}
+                        />
                       </div>
                     )}
 
-                    {!offer ? (
+                    {!offer && (
                       <div className="flex justify-between">
-                        <span className="text-4xl text-[#BD3146] font-sans">
-                          £{e.price}
-                        </span>
+                        {e.price && (
+                          <>
+                              {'£'}
+                              <CustomPortableText
+                                  className="text-2xl color-black font-sans"
+                                  content={e.price}
+                              />
+                          </>
+                        )}
+              
                         <button className="bg-[#FC6E5C] text-white rounded-3xl px-6 font-sans">
                           Get tickets!
                         </button>
                       </div>
-                    ) : null}
+                    )}
                   </div>
                 </ConditionalWrap>
               </div>

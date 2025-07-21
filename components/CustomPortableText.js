@@ -2,37 +2,41 @@ import PortableText from "react-portable-text";
 
 const scrollToAnchor = (id) => {
   if (!id) {
-		return
-	}
+    return;
+  }
 
   const element = document.getElementById(id);
 
   if (element) {
-		element.scrollIntoView({ behavior: "smooth", block: "start" });
+    element.scrollIntoView({ behavior: "smooth", block: "start" });
 
-		const header = document.getElementById('site-header');
-		var offset = header.offsetHeight + 24;
+    const header = document.getElementById("site-header");
+    var offset = header.offsetHeight + 24;
 
-		const top = element.getBoundingClientRect().top + window.pageYOffset - offset;
-		window.scrollTo({
-			top: top,
-			behavior: 'smooth'
-		});
+    const top = element.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({
+      top: top,
+      behavior: "smooth",
+    });
   }
 };
 
 const customSerializers = {
-	link: (props) => {
-		const { blank, href, children } = props
-		return blank ?
-				<a href={href} target="_blank" rel="noopener">{children}</a>
-				: <a href={href}>{children}</a>
-	},
-	mailToLink: (props) => {
-		const {email, children} = props;
-		const link = `mailto:${email}`;
-		return <a href={ link }>{children}</a>
-	},
+  link: (props) => {
+    const { blank, href, children } = props;
+    return blank ? (
+      <a href={href} target="_blank" rel="noopener">
+        {children}
+      </a>
+    ) : (
+      <a href={href}>{children}</a>
+    );
+  },
+  mailToLink: (props) => {
+    const { email, children } = props;
+    const link = `mailto:${email}`;
+    return <a href={link}>{children}</a>;
+  },
   block: (props) => {
     const { children, node } = props;
     const style = node?.style || "normal";
@@ -141,17 +145,22 @@ const customSerializers = {
   },
 };
 
-const CustomPortableText = ( {content, className, serializers} ) => {
-	const mergedSerializers = { ...customSerializers, ...serializers};
-	console.log(mergedSerializers);
+const CustomPortableText = ({ content, className, serializers }) => {
+  // If content is a simple string, render it directly.
+  if (typeof content === "string") {
+    return <div className={className}>{content}</div>;
+  }
+  
+  // Otherwise, process it as a Portable Text object.
+  const mergedSerializers = { ...customSerializers, ...serializers };
 
-	return (
-			<PortableText
-					className={className}
-					content={content}
-					serializers={ mergedSerializers }
-			/>
-	)
-}
+  return (
+    <PortableText
+      className={className}
+      content={content}
+      serializers={mergedSerializers}
+    />
+  );
+};
 
-export default CustomPortableText
+export default CustomPortableText;
