@@ -22,6 +22,11 @@ export default function Offers(initialData) {
     data: { contact, policies, current },
   } = pageService.getPreviewHook(initialData)();
 
+  // If there is no 'current' data, render nothing or a loading/error state.
+  if (!current) {
+    return null; // Or return a custom <NotFound /> component
+  }
+
   let relatedPosts = current.customRelated?.length > 0 ? current.customRelated : current.related;
 
   return (
@@ -320,8 +325,19 @@ export default function Offers(initialData) {
 
 export async function getStaticProps(context) {
   const props = await pageService.fetchQuery(context);
+
+  // If the query returns no data for the 'current' page,
+  // tell Next.js to render a 404 page instead.
+  if (!props.data?.current) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: props,
+    // Optional: Add revalidate for Incremental Static Regeneration (ISR)
+     revalidate: 60, 
   };
 }
 
