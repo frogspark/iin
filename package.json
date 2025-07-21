@@ -54,7 +54,7 @@
     "slugify": "^1.6.6"
   },
     "engines": {
-    "node": "22.8"
+    "node": "22.x"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.2",
