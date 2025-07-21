@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import SanityImage from "./sanity-image";
 import ConditionalWrap from "conditional-wrap";
+import CustomPortableText from "./CustomPortableText";
 
 export default function EventsCarousel({ items, offer, initiatives }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -156,24 +157,25 @@ export default function EventsCarousel({ items, offer, initiatives }) {
                       </div>
                     ) : (
                       <span className="text-2xl text-[#BD3146] font-sans">
-                        {e.address}
+  {e.address && <CustomPortableText content={e.address} />}
                       </span>
                     )}
 
                     <div className="flex flex-col gap-2">
                       <span className="text-4xl color-black font-sans">
-                        {e.title}
+  {e.title && <CustomPortableText content={e.title} />}
                       </span>
                       {!offer ? (
                         <span className="text-xl color-[#6a6a6a] font-sans">
-                          {e.address}
+                     {e.address && <CustomPortableText content={e.address} />}
+
                         </span>
                       ) : null}
                     </div>
                     {offer && (
                       <div>
                         <span className="text-xl color-[#6a6a6a] font-sans">
-                          {e.introText}
+  {e.title && <CustomPortableText content={e.title} />}
                         </span>
                       </div>
                     )}
