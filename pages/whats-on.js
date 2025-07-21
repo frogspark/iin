@@ -195,10 +195,12 @@ export default function WhatsOn(initialData) {
                   <div className="flex flex-wrap px-5 lg:px-[5vw] max-w-[1800px] mx-auto mb-5 lg:mb-0">
                     <div className="w-full lg:w-[55%]">
                       <div className="text-off-black mb-3 lg:mb-8 lg:max-w-[90%]">
-                        <CustomPortableText
-                          className="content content--whats-on"
-                          content={whatsOn.introText}
-                        />
+                        {whatsOn.introText && (
+                          <CustomPortableText
+                            className="content content--whats-on"
+                            content={whatsOn.introText}
+                          />
+                        )}
                       </div>
 
                       <div className="hidden lg:block">
