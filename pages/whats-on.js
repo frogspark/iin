@@ -25,8 +25,8 @@ import EventsCarousel from "@/components/events-carousel";
 import MobileVerticalSlider from "@/components/mobileVerticalSlider";
 import Line from "@/icons/line.svg";
 const pageService = new SanityPageService(whatsOnQuery);
-// const pageService2 = new SanityPageService(eventsQuery);
-// const pageService3 = new SanityPageService(offersQuery);
+const pageService2 = new SanityPageService(eventsQuery);
+const pageService3 = new SanityPageService(offersQuery);
 const container = {
   enter: {
     transition: {
@@ -358,14 +358,14 @@ export default function WhatsOn(initialData) {
 
 export async function getStaticProps(context) {
   const whatsOnData = await pageService.fetchQuery(context);
-  // const eventsData = await pageService2.fetchQuery(context);
-  // const offersData = await pageService3.fetchQuery(context);
+  const eventsData = await pageService2.fetchQuery(context);
+  const offersData = await pageService3.fetchQuery(context);
 
   return {
     props: {
       ...whatsOnData,
-      // events: eventsData.events || [],
-      // offers: offersData.offers || [],
+      events: eventsData.events || [],
+      offers: offersData.offers || [],
     },
   };
 }
