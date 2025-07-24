@@ -5,9 +5,7 @@ import Link from 'next/link';
 import slugify from 'slugify';
 
 export default function SanityImageResponsive({ image, className, alt, priority, quality, sizes, wrap, customLink }) {
-  console.log('Image alt text:', image);
-
-  const [imageIsLoaded, setImageIsLoaded] = useState(!!priority); // Simplified to boolean
+	const [imageIsLoaded, setImageIsLoaded] = useState(!!priority); // Simplified to boolean
   const imageProps = useNextSanityImage(image || {});
 
   if (!image) {
@@ -51,7 +49,7 @@ export default function SanityImageResponsive({ image, className, alt, priority,
 	return !customLink ? (
     <figure className={`image bg-black/10 ${className} relative overflow-hidden ${wrapClass}`}>
       <Image
-        src={imageProps?.src || image}
+        src={imageProps?.src}
         sizes={sizes ? sizes : `(max-width: 1024px) 100vw,90vw`}
         className={`${className} will-change-transform ${imageIsLoaded ? 'opacity-100 scale-1' : 'opacity-100 scale-[1.05]'} ${priority ? 'opacity-100' : 'transition-all ease-in-out duration-[2000ms]'}`}
         quality={quality ? quality : 75}
@@ -78,7 +76,7 @@ export default function SanityImageResponsive({ image, className, alt, priority,
       <Link href={internalHref} className={`${className} ${wrapClass} float`}>
         <figure className={`image bg-black/10 ${className} relative overflow-hidden`}>
           <Image
-            src={imageProps?.src || image}
+            src={imageProps?.src}
             sizes={sizes ? sizes : `(max-width: 1024px) 100vw,90vw`}
             className={`${className} will-change-transform ${imageIsLoaded ? 'opacity-100 scale-1' : 'opacity-100 scale-[1.05]'} ${priority ? 'opacity-100' : 'transition-all ease-in-out duration-[2000ms]'}`}
             quality={quality ? quality : 75}
@@ -104,7 +102,7 @@ export default function SanityImageResponsive({ image, className, alt, priority,
         <a href={customLink.externalLink} target="_blank" rel="noopener noreferrer" className={`${className} ${wrapClass} float`}>
         <figure className={`image bg-black/10 ${className} relative overflow-hidden`}>
           <Image
-            src={imageProps?.src || image}
+            src={imageProps?.src}
             sizes={sizes ? sizes : `(max-width: 1024px) 100vw,90vw`}
             className={`${className} will-change-transform ${imageIsLoaded ? 'opacity-100 scale-1' : 'opacity-100 scale-[1.05]'} ${priority ? 'opacity-100' : 'transition-all ease-in-out duration-[2000ms]'}`}
             quality={quality ? quality : 75}
