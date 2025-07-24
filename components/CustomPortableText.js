@@ -58,6 +58,9 @@ const customSerializers = {
   Embed: (props) => <div className="w-full" dangerouslySetInnerHTML={{__html: props.code}} />,
 
   Image: (props) => {
+    console.log('image');
+    console.log(props);
+
     return (
         <SanityImageResponsive
             image={props.image}
