@@ -103,34 +103,6 @@ export default function News(initialData) {
                         <CustomPortableText
                           content={current.content}
                           className="content content--news"
-                          serializers={{
-                            Quote: (props) => <Blockquote quote={props.quote} author={props.author} />,
-                            Embed: (props) => <div className="w-full" dangerouslySetInnerHTML={{__html: props.code}} />,
-                            Image: (props) => {
-    
-                              return (
-                                <SanityImageResponsive
-                                  image={props.image}
-                                  wrap={props.wrapText}
-                                  customLink={props.customLink} 
-                                />
-                              )
-                            },
-                            internalLink: (props) => {
-                              const {slug = {}} = props
-                              
-                              // Prefix
-                              let prefix = '/'
-                              props.type == 'categories' && (prefix = '/news/categories/')
-                              props.type == 'news' && (prefix = '/news/')
-                              props.type == 'policies' && (prefix = '/policies/')
-                      
-                              // HREF
-                              const href = `${prefix}${ slug ? slug.current : slugify(JSON.stringify(props.title), { lower: true, remove: /[*+~.()'"!:@]/g})}`
-                      
-                              return <Link href={href}>{props.children}</Link>
-                            }
-                          }}
                         />
                       ) : (
                         <p>Content coming soon!</p>

@@ -335,8 +335,19 @@ export default function Offers(initialData) {
 
 export async function getStaticProps(context) {
   const props = await pageService.fetchQuery(context);
+
+  // If the query returns no data for the 'current' page,
+  // tell Next.js to render a 404 page instead.
+  if (!props.data?.current) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: props,
+    // Optional: Add revalidate for Incremental Static Regeneration (ISR)
+     revalidate: 60,
   };
 }
 

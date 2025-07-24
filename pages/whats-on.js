@@ -53,20 +53,16 @@ export default function WhatsOn(initialData) {
   const {
     data: { contact, policies, whatsOn, events, offers, syncEvents },
   } = pageService.getPreviewHook(initialData)();
-  let eventText = whatsOn.eventText;
-  if(!eventText) {
-    eventText = '';
-  }
-  const match = eventText.match(/^([A-Z\s]+)(.*)$/);
-  const upperText = match ? match[1].trim() : eventText;
-  const lowerText = match ? match[2].trim() : "";
-  let offerText = whatsOn.offerText;
-  if(!offerText) {
-    offerText = '';
-  }
-  const match2 = offerText.match(/^([A-Z\s]+)(.*)$/);
-  const upperText2 = match2 ? match2[1].trim() : offerText;
-  const lowerText2 = match2 ? match2[2].trim() : "";
+const eventText = typeof whatsOn.eventText === "string" ? whatsOn.eventText : "";
+const match = eventText.match(/^([A-Z\s]+)(.*)$/);
+const upperText = match ? match[1].trim() : eventText;
+const lowerText = match ? match[2].trim() : "";
+
+// Safely handle offerText: process only if it's a string.
+const offerText = typeof whatsOn.offerText === "string" ? whatsOn.offerText : "";
+const match2 = offerText.match(/^([A-Z\s]+)(.*)$/);
+const upperText2 = match2 ? match2[1].trim() : offerText;
+const lowerText2 = match2 ? match2[2].trim() : "";
   const isMobile = useIsMobile();
 const allEvents = [...events, ...syncEvents].sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime));
   return (
@@ -197,10 +193,12 @@ const allEvents = [...events, ...syncEvents].sort((a, b) => new Date(b.dateTime)
                   <div className="flex flex-wrap px-5 lg:px-[5vw] max-w-[1800px] mx-auto mb-5 lg:mb-0">
                     <div className="w-full lg:w-[55%]">
                       <div className="text-off-black mb-3 lg:mb-8 lg:max-w-[90%]">
-                        <CustomPortableText
-                          className="content content--whats-on"
-                          content={whatsOn.introText}
-                        />
+                        {whatsOn.introText && (
+                          <CustomPortableText
+                            className="content content--whats-on"
+                            content={whatsOn.introText}
+                          />
+                        )}
                       </div>
 
                       <div className="hidden lg:block">
@@ -312,14 +310,16 @@ const allEvents = [...events, ...syncEvents].sort((a, b) => new Date(b.dateTime)
                       {isMobile && <Line className="w-full h-full px-5" />}
                     </div>
                   )}
-                  <div className="w-full mb-36 mt-48 lg:mt-96 lg:mb-8 h-auto  overflow-hidden">
+                  <br/>     <br/>
+                       <br/>     <br/>
+                  {/* <div className="w-full mb-36 mt-48 lg:mt-96 lg:mb-8 h-auto  overflow-hidden">
                     {isMobile ? (
                       <MobileVerticalSlider items={offers} offer />
                     ) : (
                       <EventsCarousel items={offers} offer={true} initiatives />
                     )}
-                  </div>
-                  {whatsOn.eventText && (
+                  </div> */}
+                  {/* {whatsOn.eventText && (
                     <div className="lg:absolute w-full lg:max-w-[432px]  lg:mt-26 lg:right-0 z-10 lg:rotate-[-5deg]">
                       <IconCircle className="w-full text-[#BD3146] mx-5 lg:mx-[13%] absolute inset-0 lg:translate-x-[-20%] translate-y-[-20%] hidden lg:block" />
                       <h2 className="font-display px-5 w-full text-[52px] leading-none  mb-[1vw] ">
@@ -333,9 +333,9 @@ const allEvents = [...events, ...syncEvents].sort((a, b) => new Date(b.dateTime)
                       </h2>
                       {isMobile && <Line className="w-full h-full px-5" />}
                     </div>
-                  )}
+                  )} */}
 
-                  <div className="w-full pb-36 mt-8 lg:mt-40 h-auto  overflow-hidden">
+                  {/* <div className="w-full pb-36 mt-8 lg:mt-40 h-auto  overflow-hidden">
                     {isMobile ? (
                       <MobileVerticalSlider items={events} offer={false} />
                     ) : (
@@ -345,8 +345,7 @@ const allEvents = [...events, ...syncEvents].sort((a, b) => new Date(b.dateTime)
                         initiatives
                       />
                     )}
-
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </article>

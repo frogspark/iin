@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import SanityImage from "./sanity-image";
 import ConditionalWrap from "conditional-wrap";
+import CustomPortableText from "./CustomPortableText";
 
 export default function EventsCarousel({ items, offer, initiatives }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -157,30 +158,38 @@ export default function EventsCarousel({ items, offer, initiatives }) {
                         </div>
                       </div>
                     ) : (
-                      <span className="text-2xl text-[#BD3146] font-sans">
-                        {e.address}
-                      </span>
+                        <CustomPortableText
+                          className="text-4xl color-black font-sans"
+                          content={e.address}
+                        />
                     )}
 
                     <div className="flex flex-col gap-2">
-                      <span className="text-4xl color-black font-sans">
-                        {e.title}
-                      </span>
-                      {!offer ? (
-                        <span className="text-xl color-[#6a6a6a] font-sans">
-                          {e.address}
-                        </span>
-                      ) : null}
+
+                      {!offer &&(
+                        <>
+                          <CustomPortableText
+                            className="text-4xl color-black font-sans"
+                            content={e.title}
+                          />
+                          <CustomPortableText
+                            className="text-2xl color-black font-sans"
+                            content={e.address}
+                          />
+                        </>
+
+                      )}
                     </div>
                     {offer && (
                       <div>
-                        <span className="text-xl color-[#6a6a6a] font-sans">
-                          {e.introText}
-                        </span>
+                        <CustomPortableText
+                          className="text-2xl color-black font-sans"
+                          content={e.title}
+                        />
                       </div>
                     )}
 
-                    {!offer ? (
+                    {!offer && (
                       <div className="flex justify-between">
                         {/* <span className="text-4xl text-[#BD3146] font-sans">
                           £{e.price}
@@ -189,7 +198,7 @@ export default function EventsCarousel({ items, offer, initiatives }) {
                           {e.buttonText || "Get tickets!"}
                         </button>
                       </div>
-                    ) : null}
+                    )}
                   </div>
                 </ConditionalWrap>
               </div>
