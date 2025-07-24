@@ -103,6 +103,20 @@ export default function News(initialData) {
                         <CustomPortableText
                           content={current.content}
                           className="content content--news"
+                          serializers={{
+                            Image: (props) => {
+                              console.log('image');
+                              console.log(props);
+
+                              return (
+                                  <SanityImageResponsive
+                                      image={props.image}
+                                      wrap={props.wrapText}
+                                      customLink={props.customLink}
+                                  />
+                              )
+                            },
+                          }}
                         />
                       ) : (
                         <p>Content coming soon!</p>
