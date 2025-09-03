@@ -310,14 +310,15 @@ const lowerText2 = match2 ? match2[2].trim() : "";
                   )}
                   <br/>     <br/>
                        <br/>     <br/>
-                  {/* <div className="w-full mb-36 mt-48 lg:mt-96 lg:mb-8 h-auto  overflow-hidden">
+                  {<div className="w-full mb-36 mt-48 lg:mt-96 lg:mb-8 h-auto  overflow-hidden">
                     {isMobile ? (
                       <MobileVerticalSlider items={offers} offer />
                     ) : (
                       <EventsCarousel items={offers} offer={true} initiatives />
                     )}
-                  </div> */}
-                  {/* {whatsOn.eventText && (
+                  </div>}
+
+                  {whatsOn.eventText && (
                     <div className="lg:absolute w-full lg:max-w-[432px]  lg:mt-26 lg:right-0 z-10 lg:rotate-[-5deg]">
                       <IconCircle className="w-full text-[#BD3146] mx-5 lg:mx-[13%] absolute inset-0 lg:translate-x-[-20%] translate-y-[-20%] hidden lg:block" />
                       <h2 className="font-display px-5 w-full text-[52px] leading-none  mb-[1vw] ">
@@ -331,9 +332,9 @@ const lowerText2 = match2 ? match2[2].trim() : "";
                       </h2>
                       {isMobile && <Line className="w-full h-full px-5" />}
                     </div>
-                  )} */}
+                  )}
 
-                  {/* <div className="w-full pb-36 mt-8 lg:mt-40 h-auto  overflow-hidden">
+                  {<div className="w-full pb-36 mt-8 lg:mt-40 h-auto  overflow-hidden">
                     {isMobile ? (
                       <MobileVerticalSlider items={events} offer={false} />
                     ) : (
@@ -343,7 +344,7 @@ const lowerText2 = match2 ? match2[2].trim() : "";
                         initiatives
                       />
                     )}
-                  </div> */}
+                  </div>}
                 </div>
               </div>
             </article>
