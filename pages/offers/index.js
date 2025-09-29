@@ -89,10 +89,11 @@ export default function Offers(initialData) {
                         slug = e.title.replaceAll(' ', '-');
                         slug = slug.replaceAll('_', '-');
                       }
+                      const image = e.mobileHeroImage?.asset?.url || e.teaserImage?.asset?.url || e.mobileHeroImage || e.teaserImage;
                       return (
                         <NewsTeaser
                           key={i}
-                          image={e.mobileHeroImage.asset.url || e.teaserImage}
+                          image={image}
                           imageHeight={imageHeight}
                           heading={e.title}
                           className={width}

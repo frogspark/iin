@@ -21,7 +21,6 @@ export default function Offers(initialData) {
   const {
     data: { contact, policies, current },
   } = pageService.getPreviewHook(initialData)();
-  console.log("current", current);
   if (!current) {
     return (
       <Layout>
@@ -338,7 +337,7 @@ export async function getStaticProps(context) {
 
   // If the query returns no data for the 'current' page,
   // tell Next.js to render a 404 page instead.
-  if (!props.data?.current) {
+  if (!props?.current) {
     return {
       notFound: true,
     };
@@ -352,9 +351,9 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  const paths = await pageService.fetchPaths("offers");
+  const paths = await pageService.fetchPaths("offers", "showOnWebsite == true");
   return {
     paths: paths,
-    fallback: false,
+    fallback: 'blocking',
   };
 }

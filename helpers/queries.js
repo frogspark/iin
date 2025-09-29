@@ -370,7 +370,7 @@ export const syncEventsQuery = `
 
 export const eventsQuery = `
 {
-  "events": *[_type == "events"]{
+  "events": *[_type == "events" && showOnWebsite == true]{
     title,
     mobileHeroImage {
       asset-> {
@@ -398,7 +398,7 @@ export const eventsQuery = `
   },
 }`;
 export const eventsSlugQuery = `{
-  "current": *[_type in ["events", "syncEvent"] && slug.current == $slug][0] {
+  "current": *[_type in ["events", "syncEvent"] && slug.current == $slug && showOnWebsite == true][0] {
     _type, // It's useful to know which type we're dealing with
     title,
     featuredImage,
@@ -429,7 +429,7 @@ export const eventsSlugQuery = `{
       featuredImage,
     },
     // Automatically fetched related items from 'event' type
-    "relatedEvents": *[_type == "event" && slug.current != $slug && defined(slug.current)][0..2] {
+    "relatedEvents": *[_type == "events" && slug.current != $slug && defined(slug.current) && showOnWebsite == true][0..2] {
       _type,
       title,
       slug,
@@ -437,7 +437,7 @@ export const eventsSlugQuery = `{
       featuredImage,
     },
     // Automatically fetched related items from 'syncEvent' type
-    "relatedSyncEvents": *[_type == "syncEvent" && slug.current != $slug && defined(slug.current)][0..2] {
+    "relatedSyncEvents": *[_type == "syncEvent" && slug.current != $slug && defined(slug.current) && showOnWebsite == true][0..2] {
       _type,
       title,
       slug,
@@ -445,7 +445,7 @@ export const eventsSlugQuery = `{
       featuredImage,
     }
   },
-  "more": *[_type == "event" || _type == "syncEvent"][0..6] {
+  "more": *[(_type == "events" || _type == "syncEvent") && showOnWebsite == true][0..6] {
     _type,
     title,
     teaserImage,
@@ -468,7 +468,7 @@ export const eventsSlugQuery = `{
 }`;
 export const offersQuery = `
 {
-  "offers": *[_type == "offers"]{
+  "offers": *[_type == "offers" && showOnWebsite == true]{
     title,
     slug {
       current
@@ -484,7 +484,17 @@ export const offersQuery = `
         y
       },
     },
-
+    teaserImage {
+      asset-> {
+        ...
+      },
+      caption,
+      alt,
+      hotspot {
+        x,
+        y
+      },
+    },
     introText,
     content,
     address,
@@ -492,10 +502,21 @@ export const offersQuery = `
   },
 }`;
 export const offersSlugQuery = `{
-  "current": *[_type == "offers" && slug.current == $slug][0]{
+  "current": *[_type == "offers" && slug.current == $slug && showOnWebsite == true][0]{
     title,
     slug {
       current
+    },
+    heroImage {
+      asset-> {
+        ...
+      },
+      caption,
+      alt,
+      hotspot {
+        x,
+        y
+      },
     },
     mobileHeroImage {
       asset-> {
@@ -508,7 +529,6 @@ export const offersSlugQuery = `{
         y
       },
     },
-
     introText,
     content,
     address,
@@ -519,7 +539,7 @@ export const offersSlugQuery = `{
         asset->
       }
     },
-    "more": *[_type == "offers" && slug.current != $slug][0..6]{
+    "more": *[_type == "offers" && slug.current != $slug && showOnWebsite == true][0..6]{
       title,
       category->{
         title,
@@ -559,8 +579,8 @@ export const offersSlugQuery = `{
         }
       }
     },
-    customRelated[]->, 
-    "related": *[_type == "offers" && slug.current != $slug][0..2]{
+    customRelated[]->,
+    "related": *[_type == "offers" && slug.current != $slug && showOnWebsite == true][0..2]{
       title,
       category->{
         title,

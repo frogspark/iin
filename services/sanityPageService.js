@@ -23,8 +23,9 @@ export default class SanityPageService {
     return res
   }
 
-  fetchPaths(schemaType) {
-    const query = `*[_type == "${schemaType}" && defined(slug.current)]{
+  fetchPaths(schemaType, filter = '') {
+    const filterClause = filter ? ` && ${filter}` : '';
+    const query = `*[_type == "${schemaType}" && defined(slug.current)${filterClause}]{
       "params": {
         "slug": slug.current
       }
