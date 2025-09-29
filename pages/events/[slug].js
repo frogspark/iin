@@ -131,15 +131,29 @@ if (!isNaN(mainD)) {
                 </div>
               </div>
               <div className={`w-full relative px-5 lg:px-[7.5vw] mb-[5vw]`}>
-                {console.log("@@@@@@@@",current)}
-                {current.heroImage || current.featuredImage && (
-                  <SanityImageResponsive
-                    priority
-                    image={current.heroImage || current.featuredImage}
-                    quality={75}
-                    className="w-full"
-                    sizes={`(max-width: 1024px) 100vw, 89vw`}
-                  />
+                {(current.heroImage || current.featuredImage || current.mobileHeroImage) && (
+                  <>
+                    {/* Handle Sanity image objects (from events type) */}
+                    {(current.heroImage?.asset || current.mobileHeroImage?.asset) && (
+                      <SanityImageResponsive
+                        priority
+                        image={current.heroImage || current.mobileHeroImage}
+                        quality={75}
+                        className="w-full"
+                        sizes={`(max-width: 1024px) 100vw, 89vw`}
+                      />
+                    )}
+
+                    {/* Handle string URLs (from syncEvent type) */}
+                    {current.featuredImage && typeof current.featuredImage === 'string' && !current.heroImage?.asset && !current.mobileHeroImage?.asset && (
+                      <img
+                        src={current.featuredImage}
+                        alt={current.title || 'Event image'}
+                        className="w-full"
+                        loading="eager"
+                      />
+                    )}
+                  </>
                 )}
               </div>
 
@@ -273,11 +287,14 @@ if (!isNaN(mainD)) {
                       let width = "w-full";
                       let imageHeight = "h-[50vw] lg:h-[15vw]";
 
+                      // Handle different image types - prioritize Sanity images for NewsTeaser
+                      let imageToUse = e.teaserImage || e.mobileHeroImage;
+
                       return (
                           <NewsTeaser
                               key={ i }
                               heading={ e.title }
-                              image={ e.featuredImage || e.teaserImage }
+                              image={ imageToUse }
                               className={ `${ width } mb-12` }
                               imageHeight={ imageHeight }
                               href={ `/events/${ e.slug.current }` }
@@ -309,11 +326,14 @@ if (!isNaN(mainD)) {
                     i == 4 && (imageHeight = "h-[60vw] lg:h-[25vw]");
                     i == 5 && (imageHeight = "h-[60vw] lg:h-[12.5vw]");
 
+                    // Handle different image types - prioritize Sanity images for NewsTeaser
+                    let imageToUse = e.teaserImage || e.mobileHeroImage;
+
                     return (
                         <NewsTeaser
                             key={e._id || i}
                             heading={e.title}
-                            image={e.featuredImage || e.teaserImage}
+                            image={imageToUse}
                             className={width}
                             imageHeight={imageHeight}
                             href={`/events/${e.slug.current}`}
