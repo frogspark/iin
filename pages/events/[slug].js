@@ -344,7 +344,7 @@ export async function getStaticProps(context) {
 }
 export async function getStaticPaths() {
   // Fetch all slugs from both 'event' and 'syncEvent' types where showOnWebsite is true
-  const allEventSlugs = await sanity.fetch(`*[_type in ["events", "syncEvent"] && defined(slug.current) && showOnWebsite == true][].slug.current`);
+  const allEventSlugs = await sanity.fetch(`*[_type in ["events", "syncEvent"] && defined(slug.current) && showOnWebsite == true && deleted != true][].slug.current`);
   const paths = allEventSlugs.map((slug) => ({
     params: {
       slug: slug,
