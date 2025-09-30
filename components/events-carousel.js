@@ -106,18 +106,19 @@ export default function EventsCarousel({ items, offer, initiatives }) {
                     </Link>
                   )}
                 >
-                  <div className="w-[560px] h-[363px] relative overflow-hidden">
-                    <img  className="max-w-full h-full object-cover object-center"
-                      src={e.mobileHeroImage?.asset.url || e.featuredImage || e.teaserImage}
-                      alt={e.mobileHeroImage?.alt || e.featuredImage?.title || e.teaserImage?.alt || "Event Image"}
-                    />
-                  </div>
+                  <div className="w-[560px] bg-white flex flex-col overflow-hidden">
+                    <div className="w-full h-[363px] relative overflow-hidden flex-shrink-0">
+                      <img className="w-full h-full object-cover object-center"
+                        src={e.mobileHeroImage?.asset.url || e.featuredImage || e.teaserImage}
+                        alt={e.mobileHeroImage?.alt || e.featuredImage?.title || e.teaserImage?.alt || "Event Image"}
+                      />
+                    </div>
 
-                  <div
-                    className={`w-[560px] bg-white h-64 p-6 flex flex-col ${
-                      offer ? "gap-5" : "justify-between"
-                    }`}
-                  >
+                    <div
+                      className={`w-full p-6 flex flex-col ${
+                        offer ? "gap-5" : "justify-between"
+                      } min-h-[256px]`}
+                    >
                     {!offer ? (
                       <div className="flex justify-between">
                         <div className="flex gap-2 h-6">
@@ -199,6 +200,7 @@ export default function EventsCarousel({ items, offer, initiatives }) {
                         </button>
                       </div>
                     )}
+                    </div>
                   </div>
                 </ConditionalWrap>
               </div>
