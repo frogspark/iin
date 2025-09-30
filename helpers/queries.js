@@ -425,7 +425,28 @@ export const eventsSlugQuery = `{
       _type,
       title,
       slug,
-      teaserImage,
+      teaserImage {
+        asset-> {
+          ...
+        },
+        caption,
+        alt,
+        hotspot {
+          x,
+          y
+        },
+      },
+      mobileHeroImage {
+        asset-> {
+          ...
+        },
+        caption,
+        alt,
+        hotspot {
+          x,
+          y
+        },
+      },
       featuredImage,
     },
     // Automatically fetched related items from 'event' type
@@ -433,7 +454,28 @@ export const eventsSlugQuery = `{
       _type,
       title,
       slug,
-      teaserImage,
+      teaserImage {
+        asset-> {
+          ...
+        },
+        caption,
+        alt,
+        hotspot {
+          x,
+          y
+        },
+      },
+      mobileHeroImage {
+        asset-> {
+          ...
+        },
+        caption,
+        alt,
+        hotspot {
+          x,
+          y
+        },
+      },
       featuredImage,
     },
     // Automatically fetched related items from 'syncEvent' type
@@ -441,14 +483,56 @@ export const eventsSlugQuery = `{
       _type,
       title,
       slug,
-      teaserImage,
+      teaserImage {
+        asset-> {
+          ...
+        },
+        caption,
+        alt,
+        hotspot {
+          x,
+          y
+        },
+      },
+      mobileHeroImage {
+        asset-> {
+          ...
+        },
+        caption,
+        alt,
+        hotspot {
+          x,
+          y
+        },
+      },
       featuredImage,
     }
   },
   "more": *[(_type == "events" || _type == "syncEvent") && showOnWebsite == true && deleted != true][0..6] {
     _type,
     title,
-    teaserImage,
+    teaserImage {
+      asset-> {
+        ...
+      },
+      caption,
+      alt,
+      hotspot {
+        x,
+        y
+      },
+    },
+    mobileHeroImage {
+      asset-> {
+        ...
+      },
+      caption,
+      alt,
+      hotspot {
+        x,
+        y
+      },
+    },
     featuredImage,
     slug
   },
@@ -569,6 +653,17 @@ export const offersSlugQuery = `{
           y
         },
       },
+      mobileHeroImage {
+        asset-> {
+          ...
+        },
+        caption,
+        alt,
+        hotspot {
+          x,
+          y
+        },
+      },
       slug {
         current
       },
@@ -579,7 +674,57 @@ export const offersSlugQuery = `{
         }
       }
     },
-    customRelated[]->,
+    customRelated[]->{
+      title,
+      category->{
+        title,
+        slug {
+          current
+        }
+      },
+      teaserImage {
+        asset-> {
+          ...
+        },
+        caption,
+        alt,
+        hotspot {
+          x,
+          y
+        },
+      },
+      heroImage {
+        asset-> {
+          ...
+        },
+        caption,
+        alt,
+        hotspot {
+          x,
+          y
+        },
+      },
+      mobileHeroImage {
+        asset-> {
+          ...
+        },
+        caption,
+        alt,
+        hotspot {
+          x,
+          y
+        },
+      },
+      slug {
+        current
+      },
+      seo {
+        ...,
+        shareGraphic {
+          asset->
+        }
+      }
+    },
     "related": *[_type == "offers" && slug.current != $slug && showOnWebsite == true][0..2]{
       title,
       category->{
@@ -600,6 +745,17 @@ export const offersSlugQuery = `{
         },
       },
       heroImage {
+        asset-> {
+          ...
+        },
+        caption,
+        alt,
+        hotspot {
+          x,
+          y
+        },
+      },
+      mobileHeroImage {
         asset-> {
           ...
         },

@@ -106,11 +106,11 @@ export default function Offers(initialData) {
               </div>
 
               <div className={`w-full relative px-5 lg:px-[7.5vw] mb-[5vw]`}>
-                {current.heroImage && (
+                {(current.heroImage?.asset || current.mobileHeroImage?.asset) && (
                   <SanityImageResponsive
                     priority
                     quality={75}
-                    image={current.heroImage}
+                    image={current.heroImage || current.mobileHeroImage}
                     className="w-full"
                     sizes={`(max-width: 1024px) 100vw, 89vw`}
                   />
@@ -274,7 +274,7 @@ export default function Offers(initialData) {
                         <NewsTeaser
                           key={i}
                           heading={e.title}
-                          image={e.teaserImage}
+                          image={e.teaserImage || e.heroImage || e.mobileHeroImage}
                           className={`${width} mb-12`}
                           imageHeight={imageHeight}
                           href={`/offers/${e.slug.current}`}
@@ -309,7 +309,7 @@ export default function Offers(initialData) {
                       <NewsTeaser
                         key={i}
                         heading={e.title}
-                        image={e.teaserImage}
+                        image={e.teaserImage || e.heroImage || e.mobileHeroImage}
                         className={width}
                         imageHeight={imageHeight}
                         href={`/offers/${e.slug.current}`}

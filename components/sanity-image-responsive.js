@@ -3,10 +3,11 @@ import { useState } from 'react';
 import { useNextSanityImage } from 'next-sanity-image';
 import Link from 'next/link';
 import slugify from 'slugify';
+import sanity from '@/services/sanity';
 
 export default function SanityImageResponsive({ image, className, alt, priority, quality, sizes, wrap, customLink }) {
 	const [imageIsLoaded, setImageIsLoaded] = useState(!!priority); // Simplified to boolean
-  const imageProps = useNextSanityImage(image || {});
+  const imageProps = useNextSanityImage(sanity.config, image);
 
   if (!image || !image.asset || !imageProps?.src) {
     return null;

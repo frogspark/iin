@@ -16,7 +16,7 @@ export default function SanityImage({ image, className, alt, priority, widthOver
 
   const imageProps = useNextSanityImage(
     sanity.config,
-    (image?._type === 'image' && image.asset) ? image : null,
+    (image?.asset) ? image : null,
     { imageBuilder: myCustomImageBuilder }
   );
 
