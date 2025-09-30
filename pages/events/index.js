@@ -17,7 +17,7 @@ export default function Events(initialData) {
   const {
     data: { contact, policies,whatsOn, events, syncEvents},
   } = pageService.getPreviewHook(initialData)();
-const allEvents = [...events, ...syncEvents].sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime));
+const allEvents = [...events, ...syncEvents].sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime));
 const layoutPattern = [
   // Corresponds to i = 0, 10, 20...
   { width: "col-span-4 lg:col-span-2", imageHeight: "h-[60vw] lg:h-[25vw]" },
@@ -85,11 +85,21 @@ const layoutPattern = [
                   <div className="w-full grid grid-cols-4 gap-12 mb-[5vw]">
                     {allEvents.map((e, i) => {
                       const currentStyles = layoutPattern[i % layoutPattern.length];
+                      // Format date for recurring events
+                      const eventDate = e.dateTime ? new Date(e.dateTime).toLocaleDateString('en-GB', {
+                        day: 'numeric',
+                        month: 'short'
+                      }) : '';
+                      // Add date suffix for recurring events
+                      const displayTitle = e.recurringEventId && eventDate
+                        ? `${e.title} - ${eventDate}`
+                        : e.title;
+
                       return (
                         <NewsTeaser
                           // ✨ Bonus: Using a unique ID from your data is better than the index `i`
                           key={e._id || i}
-                          heading={e.title}
+                          heading={displayTitle}
                           image={e.mobileHeroImage?.asset?.url || e.featuredImage || e.teaserImage}
                           className={currentStyles.width}
                           imageHeight={currentStyles.imageHeight}

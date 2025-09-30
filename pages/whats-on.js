@@ -64,7 +64,7 @@ const match2 = offerText.match(/^([A-Z\s]+)(.*)$/);
 const upperText2 = match2 ? match2[1].trim() : offerText;
 const lowerText2 = match2 ? match2[2].trim() : "";
   const isMobile = useIsMobile();
-const allEvents = [...events, ...syncEvents].sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime));
+const allEvents = [...events, ...syncEvents].sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime));
   return (
     <Layout>
       <NextSeo

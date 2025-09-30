@@ -339,7 +339,7 @@ export const whatsOnQuery = `
 
 export const syncEventsQuery = `
 {
-  "syncEvent": *[_type == "syncEvent" && deleted != true]{
+  "syncEvent": *[_type == "syncEvent" && deleted != true && dateTime > now()] | order(dateTime asc){
     title,
     featuredImage,
     mobileHeroImage {
@@ -365,12 +365,14 @@ export const syncEventsQuery = `
     ticketUrl,
     address,
     showOnWebsite,
+    recurringEventId,
+    eventInstanceId,
   },
 }`;
 
 export const eventsQuery = `
 {
-  "events": *[_type == "events" && showOnWebsite == true && deleted != true]{
+  "events": *[_type == "events" && showOnWebsite == true && deleted != true && dateTime > now()] | order(dateTime asc){
     title,
     mobileHeroImage {
       asset-> {
@@ -395,6 +397,8 @@ export const eventsQuery = `
     ticketUrl,
     address,
     showOnWebsite,
+    recurringEventId,
+    eventInstanceId,
   },
 }`;
 export const eventsSlugQuery = `{
@@ -450,7 +454,7 @@ export const eventsSlugQuery = `{
       featuredImage,
     },
     // Automatically fetched related items from 'event' type
-    "relatedEvents": *[_type == "events" && slug.current != $slug && defined(slug.current) && showOnWebsite == true && deleted != true][0..2] {
+    "relatedEvents": *[_type == "events" && slug.current != $slug && defined(slug.current) && showOnWebsite == true && deleted != true && dateTime > now()] | order(dateTime asc) [0..2] {
       _type,
       title,
       slug,
@@ -479,7 +483,7 @@ export const eventsSlugQuery = `{
       featuredImage,
     },
     // Automatically fetched related items from 'syncEvent' type
-    "relatedSyncEvents": *[_type == "syncEvent" && slug.current != $slug && defined(slug.current) && showOnWebsite == true && deleted != true][0..2] {
+    "relatedSyncEvents": *[_type == "syncEvent" && slug.current != $slug && defined(slug.current) && showOnWebsite == true && deleted != true && dateTime > now()] | order(dateTime asc) [0..2] {
       _type,
       title,
       slug,
@@ -508,7 +512,7 @@ export const eventsSlugQuery = `{
       featuredImage,
     }
   },
-  "more": *[(_type == "events" || _type == "syncEvent") && showOnWebsite == true && deleted != true][0..6] {
+  "more": *[(_type == "events" || _type == "syncEvent") && showOnWebsite == true && deleted != true && dateTime > now()] | order(dateTime asc) [0..6] {
     _type,
     title,
     teaserImage {
