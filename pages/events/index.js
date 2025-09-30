@@ -95,12 +95,15 @@ const layoutPattern = [
                         ? `${e.title} - ${eventDate}`
                         : e.title;
 
+                      // Use largeImage if available, otherwise fall back to other images
+                      const imageToUse = e.largeImage || e.mobileHeroImage?.asset?.url || e.featuredImage || e.teaserImage;
+
                       return (
                         <NewsTeaser
                           // ✨ Bonus: Using a unique ID from your data is better than the index `i`
                           key={e._id || i}
                           heading={displayTitle}
-                          image={e.mobileHeroImage?.asset?.url || e.featuredImage || e.teaserImage}
+                          image={imageToUse}
                           className={currentStyles.width}
                           imageHeight={currentStyles.imageHeight}
                           href={`/events/${e.slug.current}/`}

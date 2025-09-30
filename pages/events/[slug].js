@@ -287,8 +287,8 @@ if (!isNaN(mainD)) {
                       let width = "w-full";
                       let imageHeight = "h-[50vw] lg:h-[15vw]";
 
-                      // Handle different image types - prioritize Sanity images, fallback to URL strings
-                      let imageToUse = e.teaserImage || e.mobileHeroImage || e.featuredImage;
+                      // Use largeImage if available, otherwise fall back to other images
+                      let imageToUse = e.largeImage || e.teaserImage || e.mobileHeroImage || e.featuredImage;
 
                       return (
                           <NewsTeaser
@@ -326,8 +326,8 @@ if (!isNaN(mainD)) {
                     i == 4 && (imageHeight = "h-[60vw] lg:h-[25vw]");
                     i == 5 && (imageHeight = "h-[60vw] lg:h-[12.5vw]");
 
-                    // Handle different image types - prioritize Sanity images, fallback to URL strings
-                    let imageToUse = e.teaserImage || e.mobileHeroImage || e.featuredImage;
+                    // Use largeImage if available, otherwise fall back to other images
+                    let imageToUse = e.largeImage || e.teaserImage || e.mobileHeroImage || e.featuredImage;
 
                     return (
                         <NewsTeaser

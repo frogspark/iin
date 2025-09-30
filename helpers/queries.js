@@ -342,6 +342,7 @@ export const syncEventsQuery = `
   "syncEvent": *[_type == "syncEvent" && deleted != true && dateTime > now()] | order(dateTime asc){
     title,
     featuredImage,
+    largeImage,
     mobileHeroImage {
       asset-> {
         ...
@@ -406,6 +407,7 @@ export const eventsSlugQuery = `{
     _type, // It's useful to know which type we're dealing with
     title,
     featuredImage,
+    largeImage,
     mobileHeroImage,
     introText,
     content,
@@ -481,6 +483,7 @@ export const eventsSlugQuery = `{
         },
       },
       featuredImage,
+      largeImage,
     },
     // Automatically fetched related items from 'syncEvent' type
     "relatedSyncEvents": *[_type == "syncEvent" && slug.current != $slug && defined(slug.current) && showOnWebsite == true && deleted != true && dateTime > now()] | order(dateTime asc) [0..2] {
@@ -510,6 +513,7 @@ export const eventsSlugQuery = `{
         },
       },
       featuredImage,
+      largeImage,
     }
   },
   "more": *[(_type == "events" || _type == "syncEvent") && showOnWebsite == true && deleted != true && dateTime > now()] | order(dateTime asc) [0..6] {
@@ -538,6 +542,7 @@ export const eventsSlugQuery = `{
       },
     },
     featuredImage,
+    largeImage,
     slug
   },
   "policies": *[_type == "policies"] {
