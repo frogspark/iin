@@ -160,7 +160,7 @@ export default function EventsCarousel({ items, offer, initiatives }) {
                       </div>
                     ) : (
                         <CustomPortableText
-                          className="text-4xl color-black font-sans"
+                          className="text-4xl color-black font-sans line-clamp-2"
                           content={e.address}
                         />
                     )}
@@ -170,11 +170,11 @@ export default function EventsCarousel({ items, offer, initiatives }) {
                       {!offer &&(
                         <>
                           <CustomPortableText
-                            className="text-4xl color-black font-sans"
+                            className="text-4xl color-black font-sans line-clamp-2"
                             content={e.title}
                           />
                           <CustomPortableText
-                            className="text-2xl color-black font-sans"
+                            className="text-2xl color-black font-sans line-clamp-2"
                             content={e.address}
                           />
                         </>
@@ -184,7 +184,7 @@ export default function EventsCarousel({ items, offer, initiatives }) {
                     {offer && (
                       <div>
                         <CustomPortableText
-                          className="text-2xl color-black font-sans"
+                          className="text-2xl color-black font-sans line-clamp-3"
                           content={e.title}
                         />
                       </div>
