@@ -170,6 +170,19 @@ if (!isNaN(mainD)) {
                       <strong>Posted:</strong> { mainMo } { mainYe }
                     </p>
 
+                    {current.ticketUrl && (
+                      <div className="mb-6 lg:mb-12">
+                        <a
+                          href={current.ticketUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-[#FC6E5C] text-white rounded-3xl px-8 py-4 font-sans inline-flex items-center text-lg lg:text-xl transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                        >
+                          {current.buttonText || "Get tickets!"}
+                        </a>
+                      </div>
+                    )}
+
                     <div className="mb-6 lg:mb-12">
                       { current.content ? (
                           <CustomPortableText

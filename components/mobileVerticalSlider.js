@@ -145,9 +145,24 @@ export default function MobileVerticalSlider({ items, offer, initiatives }) {
                       <span className="text-3xl text-[#BD3146] font-sans">
                         £{e.price}
                       </span>
-                      <button className="bg-[#FC6E5C] text-white rounded-3xl px-6 font-sans">
-                        Get tickets!
-                      </button>
+                      {e.ticketUrl ? (
+                        <a
+                          href={e.ticketUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-[#FC6E5C] text-white rounded-3xl px-6 font-sans inline-flex items-center transition-all duration-300 active:scale-95 active:shadow-lg"
+                          onClick={(event) => event.stopPropagation()}
+                        >
+                          {e.buttonText || "Get tickets!"}
+                        </a>
+                      ) : (
+                        <button
+                          className="bg-[#FC6E5C] text-white rounded-3xl px-6 font-sans transition-all duration-300 active:scale-95 active:shadow-lg"
+                          onClick={(event) => event.stopPropagation()}
+                        >
+                          {e.buttonText || "Get tickets!"}
+                        </button>
+                      )}
                     </div>
                   ) : null}
                 </div>

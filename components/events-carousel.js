@@ -195,9 +195,24 @@ export default function EventsCarousel({ items, offer, initiatives }) {
                         {/* <span className="text-4xl text-[#BD3146] font-sans">
                           £{e.price}
                         </span> */}
-                        <button className="bg-[#FC6E5C] text-white rounded-3xl px-6 font-sans">
-                          {e.buttonText || "Get tickets!"}
-                        </button>
+                        {e.ticketUrl ? (
+                          <a
+                            href={e.ticketUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-[#FC6E5C] text-white rounded-3xl px-6 font-sans inline-flex items-center transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                            onClick={(event) => event.stopPropagation()}
+                          >
+                            {e.buttonText || "Get tickets!"}
+                          </a>
+                        ) : (
+                          <button
+                            className="bg-[#FC6E5C] text-white rounded-3xl px-6 font-sans transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                            onClick={(event) => event.stopPropagation()}
+                          >
+                            {e.buttonText || "Get tickets!"}
+                          </button>
+                        )}
                       </div>
                     )}
                     </div>
