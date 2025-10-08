@@ -57,7 +57,7 @@ export default function MobileVerticalSlider({ items, offer, initiatives }) {
                 wrap={(children) => (
                   <Link
                     className="block group"
-                    href={`/events/${e?.slug?.current}`}
+                    href={`${offer ? '/offers' : '/events'}/${e?.slug?.current}`}
                   >
                     {children}
                   </Link>

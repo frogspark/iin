@@ -100,7 +100,7 @@ export default function EventsCarousel({ items, offer, initiatives }) {
                   wrap={(children) => (
                     <Link
                       className="block group"
-                      href={`/events/${e?.slug?.current}`}
+                      href={`${offer ? '/offers' : '/events'}/${e?.slug?.current}`}
                     >
                       {children}
                     </Link>
