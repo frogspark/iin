@@ -84,6 +84,45 @@ const customSerializers = {
   },
 
   Quote: (props) => <Blockquote quote={props.quote} author={props.author} />,
+
+  Image: (props) => {
+    const { image, wrapText, customLink } = props;
+
+    // Determine layout classes
+    let wrapClass = '';
+    if (wrapText === 'wrapleft') {
+      wrapClass = 'float-left mr-6 mb-4 max-w-[50%]';
+    } else if (wrapText === 'wrapright') {
+      wrapClass = 'float-right ml-6 mb-4 max-w-[50%]';
+    } else {
+      wrapClass = 'w-full my-8';
+    }
+
+    const imageElement = (
+      <div className={wrapClass}>
+        <SanityImageResponsive image={image} />
+      </div>
+    );
+
+    // Handle linking if configured
+    if (customLink?.linkToggle) {
+      if (customLink.internal && customLink.internalLink?.slug?.current) {
+        return (
+          <Link href={`/${customLink.internalLink.slug.current}`}>
+            {imageElement}
+          </Link>
+        );
+      } else if (!customLink.internal && customLink.externalLink) {
+        return (
+          <a href={customLink.externalLink} target="_blank" rel="noopener noreferrer">
+            {imageElement}
+          </a>
+        );
+      }
+    }
+
+    return imageElement;
+  },
 };
 
 const CustomPortableText = ({ content, className, serializers }) => {

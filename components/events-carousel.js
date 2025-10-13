@@ -44,6 +44,40 @@ export default function EventsCarousel({ items, offer, initiatives }) {
     emblaApi.on("reInit", onSelect);
     emblaApi.on("select", onSelect);
   }, [emblaApi, onInit, onSelect]);
+
+  // Filter recurring events: for events (not offers), show only the closest upcoming event for each title
+  const getUniqueEvents = (eventList) => {
+    if (offer) return eventList; // Don't filter offers
+
+    const now = new Date();
+    const eventsByTitle = {};
+
+    // Group events by title
+    eventList.forEach((event) => {
+      const title = event.title?.[0]?.children?.[0]?.text || event.title || '';
+      const eventDate = new Date(event.dateTime);
+
+      if (!eventsByTitle[title]) {
+        eventsByTitle[title] = [];
+      }
+      eventsByTitle[title].push({ ...event, parsedDate: eventDate });
+    });
+
+    // For each title, find the closest upcoming event
+    const uniqueEvents = Object.values(eventsByTitle).map((events) => {
+      // Sort by date (ascending)
+      const sortedEvents = events.sort((a, b) => a.parsedDate - b.parsedDate);
+
+      // Find the first upcoming event (date >= now) or the most recent past event
+      const upcomingEvent = sortedEvents.find((e) => e.parsedDate >= now);
+      return upcomingEvent || sortedEvents[sortedEvents.length - 1]; // Return last event if all are past
+    });
+
+    return uniqueEvents;
+  };
+
+  const filteredItems = getUniqueEvents(items.filter((e) => e.showOnWebsite === true));
+
   return (
     <div className="relative">
       {/* <button
@@ -73,8 +107,7 @@ export default function EventsCarousel({ items, offer, initiatives }) {
         ref={emblaRef}
       >
         <div className="embla__container gap-4">
-      {items
-            .filter((e) => e.showOnWebsite === true)
+      {filteredItems
             .map((e, i) => {
               const dateObj = new Date(e.dateTime);
               const datePart = dateObj
