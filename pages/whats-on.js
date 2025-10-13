@@ -295,10 +295,38 @@ const allEvents = [...events, ...syncEvents].sort((a, b) => new Date(a.dateTime)
                       </div>
                     </div>
                   )}
-                  {whatsOn.offerText && (
-                    <div className="absolute w-full lg:max-w-[432px] lg:mt-64 lg:left-36 z-10 lg:rotate-[-5deg]">
+                  {whatsOn.eventText && (
+                    <div className="w-full lg:max-w-[432px] lg:ml-[5vw] mt-20 lg:mt-32 mb-6 z-10 lg:rotate-[-2deg]">
                       <IconCircle className="w-full text-[#BD3146] mx-5 lg:mx-[8%] absolute inset-0 lg:translate-x-[-20%] translate-y-[-20%] hidden lg:block" />
-                      <h2 className="font-display whitespace-nowrap px-5 w-full text-[52px] leading-none  lg:leading-none xl:leading-none 2xl:leading-none mb-[1vw] lg:max-w-[90%] 2xl:max-w-[80%]">
+                      <h2 className="font-display px-5 w-full text-[52px] leading-none mb-[1vw]">
+                        <span>{upperText}</span>
+                        {lowerText && (
+                          <>
+                            <br />
+                            <span>{lowerText}</span>
+                          </>
+                        )}
+                      </h2>
+                      {isMobile && <Line className="w-full h-full px-5" />}
+                    </div>
+                  )}
+
+                  {<div className="w-full pb-12 lg:pb-10 h-auto overflow-hidden">
+                    {isMobile ? (
+                      <MobileVerticalSlider items={events} offer={false} />
+                    ) : (
+                      <EventsCarousel
+                        items={allEvents}
+                        offer={false}
+                        initiatives
+                      />
+                    )}
+                  </div>}
+
+                  {whatsOn.offerText && (
+                    <div className="w-full lg:max-w-[432px] lg:ml-auto lg:mr-[5vw] mt-12 lg:mt-0 mb-6 z-10 lg:rotate-[2deg]">
+                      <IconCircle className="w-full text-[#BD3146] mx-5 lg:mx-[8%] absolute inset-0 lg:translate-x-[-20%] translate-y-[-20%] hidden lg:block" />
+                      <h2 className="font-display whitespace-nowrap px-5 w-full text-[52px] leading-none lg:leading-none xl:leading-none 2xl:leading-none mb-[1vw] lg:max-w-[90%] 2xl:max-w-[80%]">
                         <span>{upperText2}</span>
                         {lowerText2 && (
                           <>
@@ -310,9 +338,8 @@ const allEvents = [...events, ...syncEvents].sort((a, b) => new Date(a.dateTime)
                       {isMobile && <Line className="w-full h-full px-5" />}
                     </div>
                   )}
-                  <br/>     <br/>
-                       <br/>     <br/>
-                  {<div className="w-full mb-36 mt-48 lg:mt-96 lg:mb-8 h-auto  overflow-hidden">
+
+                  {<div className="w-full mb-12 lg:mb-20 h-auto overflow-hidden">
                     {isMobile ? (
                       <MobileVerticalSlider items={offers} offer />
                     ) : (
@@ -320,33 +347,13 @@ const allEvents = [...events, ...syncEvents].sort((a, b) => new Date(a.dateTime)
                     )}
                   </div>}
 
-                  {whatsOn.eventText && (
-                    <div className="lg:absolute w-full lg:max-w-[432px]  lg:mt-26 lg:right-0 z-10 lg:rotate-[-5deg]">
-                      <IconCircle className="w-full text-[#BD3146] mx-5 lg:mx-[13%] absolute inset-0 lg:translate-x-[-20%] translate-y-[-20%] hidden lg:block" />
-                      <h2 className="font-display px-5 w-full text-[52px] leading-none  mb-[1vw] ">
-                        <span>{upperText}</span>
-                        {lowerText && (
-                          <>
-                            <br />
-                            <span className=" lg:text-right">{lowerText}</span>
-                          </>
-                        )}
-                      </h2>
-                      {isMobile && <Line className="w-full h-full px-5" />}
+                  {whatsOn.content && whatsOn.content.length > 0 && (
+                    <div className="w-full px-5 lg:px-[5vw] max-w-[1800px] mx-auto py-12 lg:py-20">
+                      <div className="content max-w-[900px] mx-auto">
+                        <CustomPortableText content={whatsOn.content} />
+                      </div>
                     </div>
                   )}
-
-                  {<div className="w-full pb-36 mt-8 lg:mt-40 h-auto  overflow-hidden">
-                    {isMobile ? (
-                      <MobileVerticalSlider items={events} offer={false} />
-                    ) : (
-                      <EventsCarousel
-                        items={allEvents}
-                        offer={false}
-                        initiatives
-                      />
-                    )}
-                  </div>}
                 </div>
               </div>
             </article>

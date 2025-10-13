@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import SanityImage from "./sanity-image";
-import ConditionalWrap from "conditional-wrap";
 import CustomPortableText from "./CustomPortableText";
 
 export default function EventsCarousel({ items, offer, initiatives }) {
@@ -93,20 +92,8 @@ export default function EventsCarousel({ items, offer, initiatives }) {
               hour12: false,
             });
 
-            return (
-              <div className="w-[560px] pr-4" key={i}>
-                <ConditionalWrap
-                  condition={e?.slug?.current}
-                  wrap={(children) => (
-                    <Link
-                      className="block group"
-                      href={`${offer ? '/offers' : '/events'}/${e?.slug?.current}`}
-                    >
-                      {children}
-                    </Link>
-                  )}
-                >
-                  <div className="w-[560px] bg-white flex flex-col overflow-hidden">
+            const cardContent = (
+              <div className="w-[560px] bg-white flex flex-col overflow-hidden">
                     <div className="w-full h-[363px] relative overflow-hidden flex-shrink-0">
                       <img className="w-full h-full object-cover object-center"
                         src={e.mobileHeroImage?.asset.url || e.featuredImage || e.teaserImage}
@@ -117,7 +104,7 @@ export default function EventsCarousel({ items, offer, initiatives }) {
                     <div
                       className={`w-full p-6 flex flex-col ${
                         offer ? "gap-5" : "justify-between"
-                      } min-h-[256px]`}
+                      } h-[256px]`}
                     >
                     {!offer ? (
                       <div className="flex justify-between">
@@ -195,29 +182,36 @@ export default function EventsCarousel({ items, offer, initiatives }) {
                         {/* <span className="text-4xl text-[#BD3146] font-sans">
                           £{e.price}
                         </span> */}
-                        {e.ticketUrl ? (
-                          <a
-                            href={e.ticketUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="bg-[#FC6E5C] text-white rounded-3xl px-6 font-sans inline-flex items-center transition-all duration-300 hover:scale-105 hover:shadow-lg"
-                            onClick={(event) => event.stopPropagation()}
-                          >
-                            {e.buttonText || "Get tickets!"}
-                          </a>
-                        ) : (
-                          <button
-                            className="bg-[#FC6E5C] text-white rounded-3xl px-6 font-sans transition-all duration-300 hover:scale-105 hover:shadow-lg"
-                            onClick={(event) => event.stopPropagation()}
-                          >
-                            {e.buttonText || "Get tickets!"}
-                          </button>
-                        )}
+                        <span className="bg-[#FC6E5C] text-white rounded-3xl px-6 font-sans inline-flex items-center transition-all duration-300">
+                          {e.buttonText || "Get tickets!"}
+                        </span>
                       </div>
                     )}
                     </div>
                   </div>
-                </ConditionalWrap>
+            );
+
+            return (
+              <div className="w-[560px] pr-4" key={i}>
+                {e?.ticketUrl ? (
+                  <a
+                    className="block group"
+                    href={e.ticketUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {cardContent}
+                  </a>
+                ) : e?.slug?.current ? (
+                  <Link
+                    className="block group"
+                    href={`${offer ? '/offers' : '/events'}/${e?.slug?.current}`}
+                  >
+                    {cardContent}
+                  </Link>
+                ) : (
+                  cardContent
+                )}
               </div>
             );
           })}

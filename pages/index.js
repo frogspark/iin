@@ -201,9 +201,9 @@ export default function Home(initialData) {
                       </clipPath>
                     </defs>
                     <g data-name="Group 565">
-                      <g clip-path="url(#a)" data-name="Group 564">
+                      <g clipPath="url(#a)" data-name="Group 564">
                         <g data-name="Group 563">
-                          <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M331.786.881S138.656 2.527 19.558 13.068c-31.5 2.787-13.2-4.083-15.959-4" data-name="Path 1259"/>
+                          <path fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="M331.786.881S138.656 2.527 19.558 13.068c-31.5 2.787-13.2-4.083-15.959-4" data-name="Path 1259"/>
                         </g>
                       </g>
                     </g>
@@ -263,12 +263,12 @@ export default function Home(initialData) {
                             </clipPath>
                           </defs>
                           <g id="Group_422" data-name="Group 422" transform="translate(63.496) rotate(61)">
-                            <g id="Group_421" data-name="Group 421" transform="translate(0 0)" clip-path="url(#clip-path)">
+                            <g id="Group_421" data-name="Group 421" transform="translate(0 0)" clipPath="url(#clip-path)">
                               <g id="Group_419" data-name="Group 419" transform="translate(3.725 0.831)">
-                                <path id="Path_1179" data-name="Path 1179" d="M153.89,8.407S69.6-33.659,0,70.4" fill="none" stroke="#ebea33" stroke-width="3"/>
+                                <path id="Path_1179" data-name="Path 1179" d="M153.89,8.407S69.6-33.659,0,70.4" fill="none" stroke="#ebea33" strokeWidth="3"/>
                               </g>
                               <g id="Group_420" data-name="Group 420" transform="translate(0.822 53.01)">
-                                <path id="Path_1180" data-name="Path 1180" d="M21.032,16.285,2.374,18.658,0,0" fill="none" stroke="#ebea33" stroke-width="3"/>
+                                <path id="Path_1180" data-name="Path 1180" d="M21.032,16.285,2.374,18.658,0,0" fill="none" stroke="#ebea33" strokeWidth="3"/>
                               </g>
                             </g>
                           </g>

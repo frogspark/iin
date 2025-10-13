@@ -271,9 +271,9 @@ export default function AboutUs(initialData) {
                       </clipPath>
                     </defs>
                     <g data-name="Group 565">
-                      <g clip-path="url(#a)" data-name="Group 564">
+                      <g clipPath="url(#a)" data-name="Group 564">
                         <g data-name="Group 563">
-                          <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M331.786.881S138.656 2.527 19.558 13.068c-31.5 2.787-13.2-4.083-15.959-4" data-name="Path 1259"/>
+                          <path fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="M331.786.881S138.656 2.527 19.558 13.068c-31.5 2.787-13.2-4.083-15.959-4" data-name="Path 1259"/>
                         </g>
                       </g>
                     </g>

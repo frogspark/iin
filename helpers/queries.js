@@ -313,7 +313,52 @@ export const whatsOnQuery = `
       },
       captionText
     },
-
+    content[] {
+      ...,
+      customLink {
+        internalLink->{
+          _type,
+          title,
+          slug {
+            current
+          }
+        },
+        externalLink,
+        external
+      },
+      embed {
+        ...
+      },
+      markDefs[]{
+        ...,
+        _type == "internalLink" => {
+          "slug": @.reference->slug,
+          "type": @.reference->_type,
+          "title": @.reference->title
+        }
+      },
+      image{
+        asset-> {
+          ...
+        },
+        wrapText,
+        customLink {
+          internalLink->{
+            slug {
+              current
+            }
+          },
+          externalLink,
+          external
+        },
+        caption,
+        alt,
+        hotspot {
+          x,
+          y
+        },
+      }
+    },
     seo {
       ...,
       shareGraphic {
@@ -592,6 +637,7 @@ export const offersQuery = `
     content,
     address,
     showOnWebsite,
+    ticketUrl,
   },
 }`;
 export const offersSlugQuery = `{
