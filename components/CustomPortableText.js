@@ -91,11 +91,11 @@ const customSerializers = {
     // Determine layout classes
     let wrapClass = '';
     if (wrapText === 'wrapleft') {
-      wrapClass = 'float-left mr-6 mb-4 max-w-[50%]';
+      wrapClass = 'portable-image float-left mr-4 sm:mr-6 mb-4 max-w-[100%] sm:max-w-[50%]';
     } else if (wrapText === 'wrapright') {
-      wrapClass = 'float-right ml-6 mb-4 max-w-[50%]';
+      wrapClass = 'portable-image float-right ml-4 sm:ml-6 mb-4 max-w-[100%] sm:max-w-[50%]';
     } else {
-      wrapClass = 'w-full my-8';
+      wrapClass = 'portable-image w-full my-6 sm:my-8';
     }
 
     const imageElement = (

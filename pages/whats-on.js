@@ -339,18 +339,55 @@ const allEvents = [...events, ...syncEvents].sort((a, b) => new Date(a.dateTime)
                     </div>
                   )}
 
-                  {<div className="w-full mb-12 lg:mb-20 h-auto overflow-hidden">
-                    {isMobile ? (
-                      <MobileVerticalSlider items={offers} offer />
-                    ) : (
-                      <EventsCarousel items={offers} offer={true} initiatives />
-                    )}
-                  </div>}
+                  <div className="w-full mb-12 lg:mb-0 h-auto overflow-hidden relative">
+                    <div className="relative">
+                      {isMobile ? (
+                        <MobileVerticalSlider items={offers} offer />
+                      ) : (
+                        <EventsCarousel items={offers} offer={true} initiatives />
+                      )}
+                    </div>
+                  </div>
+
+                  <svg
+                    className="mb-20 text-[#BD3146] w-full relative"
+                    style={{ zIndex: 999999999 }}
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 1519.962 29.772"
+                  >
+                    <defs>
+                      <clipPath id="content-divider">
+                        <path
+                          fill="none"
+                          d="M0 29.772h1519.962V0H0Z"
+                          data-name="Path 1258"
+                        />
+                      </clipPath>
+                    </defs>
+                    <g data-name="Group 562">
+                      <g data-name="Group 561">
+                        <g clipPath="url(#content-divider)" data-name="Group 560">
+                          <path
+                            fill="none"
+                            stroke="currentColor"
+                            strokeMiterlimit="120"
+                            strokeWidth="5"
+                            d="m2.182 4.398 20.949 20.949L43.557 4.398l20.949 20.949L85.454 4.398l20.428 20.949 20.947-20.949 20.953 20.949 20.423-20.949 20.949 20.949 20.949-20.949 20.423 20.949 20.95-20.949 20.949 20.949 20.426-20.949L313.8 25.347l20.949-20.949 20.426 20.949 20.949-20.949 20.949 20.949 20.948-20.949 20.434 20.949 20.433-20.949 20.949 20.949 20.945-20.949 20.39 20.949 20.386-20.949 20.949 20.949 20.948-20.949 20.427 20.949L624.83 4.398l20.952 20.949 20.423-20.949 20.949 20.949 20.949-20.949 20.424 20.949 20.949-20.949 20.949 20.949L790.85 4.398l20.949 20.949L832.75 4.398l20.426 20.949 20.949-20.949 20.949 20.949 20.948-20.949 20.434 20.949 20.433-20.949 20.949 20.949 20.949-20.949 20.5 20.949 21.025-20.949 20.426 20.949 20.944-20.949 20.846 20.947 20.326-20.947 20.949 20.949 20.949-20.949 20.43 20.949 20.944-20.949 20.949 20.949 20.426-20.949 20.949 20.949 20.949-20.949 20.424 20.949 20.949-20.949 20.949 20.949 20.426-20.949 20.949 20.949 20.95-20.949 20.426 20.949 20.949-20.949 20.949 20.949 20.949-20.949 20.434 20.949"
+                            data-name="Path 1257"
+                          />
+                        </g>
+                      </g>
+                    </g>
+                  </svg>
 
                   {whatsOn.content && whatsOn.content.length > 0 && (
-                    <div className="w-full px-5 lg:px-[5vw] max-w-[1800px] mx-auto py-12 lg:py-20">
-                      <div className="content max-w-[900px] mx-auto">
-                        <CustomPortableText content={whatsOn.content} />
+                    <div className="w-full bg-[#ffc3d6] text-off-black px-5 lg:px-[5vw] pb-8 lg:pb-16 selection:bg-off-black selection:text-[#ffc3d6]">
+                      <div className="max-w-[1800px] mx-auto">
+                        <div className="bg-white shadow-lg px-5 sm:px-8 lg:px-12 py-8 lg:py-12 pt-12 lg:pt-16">
+                          <div className="content content--whats-on max-w-[900px] mx-auto">
+                            <CustomPortableText content={whatsOn.content} />
+                          </div>
+                        </div>
                       </div>
                     </div>
                   )}
