@@ -191,7 +191,7 @@
 .content--whats-on {
   & > h1, & > h2 {
     font-family: var(--font-nantes), Helvetica Neue, Helvetica, Arial;
-    @apply text-[28px] sm:text-[32px] lg:text-[40px] 2xl:text-[48px] leading-[1.15] mb-4 sm:mb-6 lg:mb-8 mt-0 font-normal;
+    @apply text-[40px] leading-[1.15] mb-4 sm:mb-6 lg:mb-8 mt-0 font-normal;
 
     em, i {
       @apply italic;
