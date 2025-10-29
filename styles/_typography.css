@@ -189,9 +189,9 @@
 }
 
 .content--whats-on {
-  & > h1, & > h2 {
+  h1 {
     font-family: var(--font-nantes), Helvetica Neue, Helvetica, Arial;
-    @apply text-[40px] leading-[1.15] mb-4 sm:mb-6 lg:mb-8 mt-0 font-normal;
+    @apply text-[2.5rem] lg:text-[4rem] leading-[1.15] mb-4 sm:mb-6 lg:mb-8 mt-0 font-normal;
 
     em, i {
       @apply italic;
@@ -204,9 +204,9 @@
     }
   }
 
-  & > h3 {
+  h2 {
     font-family: var(--font-nantes), Helvetica Neue, Helvetica, Arial;
-    @apply text-[22px] sm:text-[24px] lg:text-[32px] 2xl:text-[40px] leading-[1.15] mb-4 sm:mb-5 lg:mb-6 mt-6 sm:mt-8 lg:mt-10 font-normal;
+    @apply text-[2.25rem] lg:text-[3.5rem] leading-[1.15] mb-4 sm:mb-6 lg:mb-8 mt-0 font-normal;
 
     em, i {
       @apply italic;
@@ -219,12 +219,72 @@
     }
   }
 
-  & > p {
-    @apply text-[15px] sm:text-base lg:text-xl 2xl:text-2xl leading-relaxed sm:leading-tight lg:leading-tight 2xl:leading-tight max-w-full mb-4 sm:mb-5 lg:mb-6 last-of-type:mb-0;
+  h3 {
+    font-family: var(--font-nantes), Helvetica Neue, Helvetica, Arial;
+    @apply text-[2rem] lg:text-[3rem] leading-[1.15] mb-4 sm:mb-5 lg:mb-6 mt-6 sm:mt-8 lg:mt-10 font-normal;
+
+    em, i {
+      @apply italic;
+      font-family: var(--font-nantes), Helvetica Neue, Helvetica, Arial;
+    }
+
+    del {
+      font-family: var(--font-nantes), Helvetica Neue, Helvetica, Arial;
+      text-decoration-line: none !important;
+    }
+  }
+
+  h4 {
+    font-family: var(--font-nantes), Helvetica Neue, Helvetica, Arial;
+    @apply text-[1.75rem] lg:text-[2.5rem] leading-[1.15] mb-4 sm:mb-5 lg:mb-6 mt-6 sm:mt-8 lg:mt-10 font-normal;
+
+    em, i {
+      @apply italic;
+      font-family: var(--font-nantes), Helvetica Neue, Helvetica, Arial;
+    }
+
+    del {
+      font-family: var(--font-nantes), Helvetica Neue, Helvetica, Arial;
+      text-decoration-line: none !important;
+    }
+  }
+
+  h5 {
+    font-family: var(--font-nantes), Helvetica Neue, Helvetica, Arial;
+    @apply text-[1.5rem] lg:text-[2rem] leading-[1.15] mb-4 sm:mb-5 lg:mb-6 mt-6 sm:mt-8 lg:mt-10 font-normal;
+
+    em, i {
+      @apply italic;
+      font-family: var(--font-nantes), Helvetica Neue, Helvetica, Arial;
+    }
+
+    del {
+      font-family: var(--font-nantes), Helvetica Neue, Helvetica, Arial;
+      text-decoration-line: none !important;
+    }
+  }
+
+  h6 {
+    font-family: var(--font-nantes), Helvetica Neue, Helvetica, Arial;
+    @apply text-[1.25rem] lg:text-[1.5rem] leading-[1.15] mb-4 sm:mb-5 lg:mb-6 mt-6 sm:mt-8 lg:mt-10 font-normal;
+
+    em, i {
+      @apply italic;
+      font-family: var(--font-nantes), Helvetica Neue, Helvetica, Arial;
+    }
+
+    del {
+      font-family: var(--font-nantes), Helvetica Neue, Helvetica, Arial;
+      text-decoration-line: none !important;
+    }
+  }
+
+  p {
+    @apply text-[15px] sm:text-base lg:text-lg 2xl:text-xl leading-relaxed sm:leading-relaxed lg:leading-relaxed 2xl:leading-relaxed max-w-full mb-4 sm:mb-5 lg:mb-6 last-of-type:mb-0;
 
     &:first-of-type {
       font-family: var(--font-nantes), Helvetica Neue, Helvetica, Arial;
-      @apply text-[20px] sm:text-[24px] lg:text-[32px] 2xl:text-[40px] leading-[1.25] lg:leading-[1.15] 2xl:leading-[1.15] max-w-[100%];
+      @apply text-base sm:text-[18px] lg:text-[22px] 2xl:text-[24px] leading-[1.4] lg:leading-[1.4] 2xl:leading-[1.4] max-w-[100%];
     }
 
     em, i {
@@ -237,11 +297,11 @@
     }
   }
 
-  & > p > a {
+  p a {
     @apply break-words;
   }
 
-  & > .portable-image img {
+  .portable-image img {
     @apply w-full h-auto;
   }
 }

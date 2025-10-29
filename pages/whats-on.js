@@ -381,9 +381,9 @@ const allEvents = [...events, ...syncEvents].sort((a, b) => new Date(a.dateTime)
                   </svg>
 
                   {whatsOn.content && whatsOn.content.length > 0 && (
-                    <div className="w-full bg-[#ffc3d6] text-off-black px-5 lg:px-[5vw] pb-8 lg:pb-16 selection:bg-off-black selection:text-[#ffc3d6]">
+                    <div className="w-full bg-[#ffc3d6] text-off-black px-5 lg:px-[5vw] pb-12 lg:pb-20 selection:bg-off-black selection:text-[#ffc3d6]">
                       <div className="max-w-[1800px] mx-auto">
-                        <div className="bg-white shadow-lg px-5 sm:px-8 lg:px-12 py-8 lg:py-12 pt-12 lg:pt-16">
+                        <div className="bg-white  px-6 sm:px-10 lg:px-16 xl:px-20 py-10 lg:py-16 pt-14 lg:pt-20 shadow-[4px_4px_0px_0px_rgba(189,49,70,0.3)]">
                           <div className="content content--whats-on max-w-[900px] mx-auto">
                             <CustomPortableText content={whatsOn.content} />
                           </div>
