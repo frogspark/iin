@@ -193,6 +193,10 @@
     font-family: var(--font-nantes), Helvetica Neue, Helvetica, Arial;
     @apply text-[2.5rem] lg:text-[4rem] leading-[1.15] mb-4 sm:mb-6 lg:mb-8 mt-0 font-normal;
 
+    strong, b {
+      @apply font-bold;
+    }
+
     em, i {
       @apply italic;
       font-family: var(--font-nantes), Helvetica Neue, Helvetica, Arial;
@@ -208,6 +212,10 @@
     font-family: var(--font-nantes), Helvetica Neue, Helvetica, Arial;
     @apply text-[2.25rem] lg:text-[3.5rem] leading-[1.15] mb-4 sm:mb-6 lg:mb-8 mt-0 font-normal;
 
+    strong, b {
+      @apply font-bold;
+    }
+
     em, i {
       @apply italic;
       font-family: var(--font-nantes), Helvetica Neue, Helvetica, Arial;
@@ -222,6 +230,10 @@
   h3 {
     font-family: var(--font-nantes), Helvetica Neue, Helvetica, Arial;
     @apply text-[2rem] lg:text-[3rem] leading-[1.15] mb-4 sm:mb-5 lg:mb-6 mt-6 sm:mt-8 lg:mt-10 font-normal;
+
+    strong, b {
+      @apply font-bold;
+    }
 
     em, i {
       @apply italic;
